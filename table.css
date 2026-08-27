@@ -1,0 +1,43 @@
+/*TASK 7: TABLE STYLING*/
+
+.table-container {
+    width: 100%;
+    overflow-x: auto;
+    margin: 20px 0;
+}
+
+.styled-table {
+    width: 100%;
+    border-collapse: collapse; 
+    font-family: Arial, sans-serif;
+    font-size: 0.95em;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.styled-table thead tr {
+    background-color: #1a365d;
+    color: #ffffff;
+    font-weight: bold;
+}
+
+.styled-table th, 
+.styled-table td {
+    padding: 14px 18px;
+    border: 1px solid #cbd5e0;
+    text-align: center;
+}
+
+.styled-table tbody tr:nth-child(even) {
+    background-color: #f8fafc;
+}
+
+.styled-table tbody tr:nth-child(odd) {
+    background-color: #ffffff;
+}
+
+.styled-table tbody tr:hover {
+    background-color: #edf2f7;
+    transition: background-color 0.2s ease-in-out;
+}

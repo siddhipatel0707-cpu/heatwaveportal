@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Sources & Stakeholders | Heatwave Intelligence Portal</title>
+</head>
+<body id="sources-page" style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #ffff; color: #333; min-height: 100vh; display: flex; flex-direction: column;">
+
+
+    <!-- Main Header with Shared Navigation -->
+    <header id="main-header" style="background-color: #ffff; color: #000; padding: 20px 30px; ">
+        <h1 id="system-title" style="margin: 0 0 8px 0; font-size: 1.8em;">
+            Heatwave Intelligence System
+        </h1>
+       
+        <p id="monitoring-season" style="font-size: 0.9em; background-color: #ffffff; display: inline-block; padding: 4px 10px; margin: 0 0 15px 0; border-radius: 3px;">
+            Current Monitoring Season: <strong>Monsoon 2026</strong>
+        </p>
+
+
+        <!-- Navigation Menu -->
+        <nav id="primary-navigation">
+            <ul style="list-style-type: none; margin: 0; padding: 0; display: flex; gap: 20px; flex-wrap: wrap;">
+                <li><a href="homepage.html" style="color: #000; text-decoration: none;">Home</a></li>
+                <li><a href="alert.html" style="color: #000; text-decoration: none;">Alert Details</a></li>
+                <li><a href="about-system.html" style="color: #000; text-decoration: none;">About System</a></li>
+                <li><a href="sources.html" style="color: #63b3ed; text-decoration: none; font-weight: bold;">Sources & Stakeholders</a></li>
+                <li><a href="navigation.html" style="color: #000; text-decoration: none;">Portal Directory</a></li>
+                <li><a href="hotspot-map.html" style="color: #000; text-decoration: none;">Hotspot Map</a></li>
+                <li><a href="forecast.html" style="color: #000; text-decoration: none;">Forecast Summary</a></li>
+                <li><a href="subscribe.html" style="color: #000; text-decoration: none;">Subscribe</a></li>
+                <li><a href="media.html" style="color: #000; text-decoration: none; font-weight: bold;">Media & Awareness</a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+    <!-- Main Content Container -->
+    <main id="main-content" style="max-width: 1100px; width: 90%; margin: 25px auto; flex-grow: 1;">
+
+
+        <h2 style="margin: 0 0 20px 0; color: #2c3e50; border-bottom: 2px solid #cbd5e0; padding-bottom: 10px;">
+            System Data Sources & Stakeholder Hierarchy
+        </h2>
+
+
+        <!-- REQUIREMENT 1: Ordered List (<ol>) for Workflow Steps -->
+        <section id="workflow-section" style="background: #ffffff; border: 1px solid #cbd5e0; padding: 25px; border-radius: 5px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+            <h3 style="margin-top: 0; color: #000;">Forecast & Alert Workflow Sequence</h3>
+            <p style="color: #4a5568; margin-bottom: 15px;">Automated pipeline followed by KJS-CES-01 from raw telemetry ingestion to emergency public dispatch:</p>
+           
+            <ol style="line-height: 1.8; color: #2d3748; padding-left: 20px;">
+                <li>Continuous atmospheric observation and sensor data collection.</li>
+                <li>Data ingestion, quality control, and heat-index calculation.</li>
+                <li>Severity assessment against regional meteorological thresholds.</li>
+                <li>Automated bulletin generation and alert verification.</li>
+                <li>Multi-channel alert dissemination to civic authorities and citizens.</li>
+            </ol>
+        </section>
+
+
+        <!-- REQUIREMENT 2: Unordered List (<ul>) for Data Sources -->
+        <section id="sources-section" style="background: #ffffff; border: 1px solid #cbd5e0; padding: 25px; border-radius: 5px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+            <h3 style="margin-top: 0; color: #000;">Primary Telemetry & Data Sources</h3>
+            <p style="color: #4a5568; margin-bottom: 15px;">Real-time climate streams integrated into our predictive platform:</p>
+
+
+            <ul style="line-height: 1.8; color: #2d3748; padding-left: 20px;">
+                <li>Ground-level telemetry from terrestrial <strong>Automatic Weather Station (AWS)</strong> networks.</li>
+                <li>Historical temperature baseline datasets from the <strong>India Meteorological Department (IMD)</strong> database.</li>
+                <li>High-resolution thermal infrared feeds from <strong>geostationary satellite platforms</strong>.</li>
+            </ul>
+        </section>
+
+
+        <!-- REQUIREMENT 3: Nested List (<ul> inside <ul>) for Stakeholder Roles & Actions -->
+        <section id="stakeholders-section" style="background: #ffffff; border: 1px solid #cbd5e0; padding: 25px; border-radius: 5px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+            <h3 style="margin-top: 0; color: #2c3e50;">Stakeholders & Operational Capabilities</h3>
+            <p style="color: #4a5568; margin-bottom: 15px;">Permitted actions and platform access levels mapped by user role:</p>
+
+
+            <ul style="line-height: 1.8; color: #2d3748; padding-left: 20px;">
+                <li><strong>Meteorologists & Technical Analysts</strong>
+                    <ul style="margin-top: 5px; margin-bottom: 10px; color: #4a5568;">
+                        <li>Override automated heat-index calculations when atmospheric anomalies occur.</li>
+                        <li>Issue raw meteorological advisory bulletins and risk reports.</li>
+                    </ul>
+                </li>
+                <li><strong>Disaster Management Officers</strong>
+                    <ul style="margin-top: 5px; margin-bottom: 10px; color: #4a5568;">
+                        <li>Trigger regional broadcast sirens and emergency broadcast SMS channels.</li>
+                        <li>Coordinate municipal cooling center deployments and water supply distribution.</li>
+                    </ul>
+                </li>
+                <li><strong>General Public & Citizens</strong>
+                    <ul style="margin-top: 5px; color: #4a5568;">
+                        <li>View live hotspot risk overlays and city forecast tables.</li>
+                        <li>Subscribe to location-based SMS and email warning notifications.</li>
+                    </ul>
+                </li>
+            </ul>
+        </section>
+
+
+        <!-- REQUIREMENT 4: Description List (<dl>) for Abbreviations -->
+        <section id="abbreviations-section" style="background: #ffff; ; border-left-width: 4px; padding: 25px; border-radius: 5px; margin-bottom: 25px; ">
+            <h3 style="margin-top: 0; color: #c05621;">Technical Acronym Directory</h3>
+           
+            <dl style="line-height: 1.6; margin: 0;">
+                <dt style="font-weight: bold; color: #2c3e50; margin-top: 10px;">AWS</dt>
+                <dd style="margin-left: 20px; color: #4a5568;">Automatic Weather Station — An automated observation post equipped with digital instruments for measuring temperature, humidity, and atmospheric pressure.</dd>
+
+
+                <dt style="font-weight: bold; color: #2c3e50; margin-top: 10px;">IMD</dt>
+                <dd style="margin-left: 20px; color: #4a5568;">India Meteorological Department — The principal government agency responsible for meteorological observations, weather forecasting, and seismology.</dd>
+
+
+                <dt style="font-weight: bold; color: #2c3e50; margin-top: 10px;">HW</dt>
+                <dd style="margin-left: 20px; color: #4a5568;">Heatwave — A period of abnormally hot weather where maximum temperatures depart significantly from normal statistical baselines.</dd>
+
+
+                <dt style="font-weight: bold; color: #2c3e50; margin-top: 10px;">SHW</dt>
+                <dd style="margin-left: 20px; color: #4a5568;">Severe Heatwave — An extreme heat event characterized by temperature departures exceeding normal baselines by 6.5°C or higher.</dd>
+            </dl>
+        </section>
+
+
+    </main>
+
+
+    <!-- Page Footer -->
+    <footer id="main-footer" style="background-color: #ffff; color: #cbd5e0; text-align: center; padding: 15px; font-size: 0.85em;">
+        <p style="margin: 0;">
+            &copy; 2026 Department of Computer Engineering, K. J. Somaiya School of Engineering (Somaiya Vidyavihar University).
+        </p>
+    </footer>
+
+
+</body>
+</html>
+
+

@@ -1,0 +1,276 @@
+/* ==========================================================================
+   TASK 9: HOMEPAGE LAYOUT USING CSS FLEXBOX (homepage.css)
+   ========================================================================== */
+
+/* 1. Global Reset & Body Flex Layout */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f8fafc;
+    color: #333333;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* 2. Main Header Styling */
+#main-header {
+    background-color: #1a365d;
+    color: #ffffff;
+    padding: 25px 30px;
+    border-bottom: 4px solid #e53e3e;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+#system-title {
+    color: #63b3ed;
+    text-align: center;
+    margin: 0 0 8px 0;
+    font-size: 2em;
+    letter-spacing: -0.5px;
+}
+
+#monitoring-season {
+    color: #fbd38d;
+    text-align: center;
+    font-size: 1em;
+    margin: 0 0 20px 0;
+    font-weight: bold;
+}
+
+/* Header Navigation Bar */
+#primary-navigation ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+#primary-navigation a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 0.92em;
+    transition: color 0.2s ease;
+}
+
+#primary-navigation a:hover,
+#primary-navigation a.active {
+    color: #63b3ed;
+    font-weight: bold;
+}
+
+/* 3. TASK 9 LAYOUT CONTAINER (Sidebar Left, Content Right) */
+.page-layout-container {
+    display: flex;             /* Flexbox for side-by-side alignment */
+    max-width: 1100px;
+    width: 90%;
+    margin: 25px auto;
+    gap: 25px;                 /* Spacing between left sidebar & right content */
+    flex-grow: 1;              /* Pushes footer down */
+    box-sizing: border-box;
+}
+
+/* Left Sidebar (Positioned Left) */
+.sidebar {
+    width: 260px;              /* Sidebar width */
+    flex-shrink: 0;
+    background-color: #ffffff;
+    border: 1px solid #cbd5e0;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    height: fit-content;
+}
+
+.sidebar h3 {
+    margin-top: 0;
+    color: #2c3e50;
+    font-size: 1.1em;
+    border-bottom: 2px solid #cbd5e0;
+    padding-bottom: 8px;
+}
+
+.sidebar-menu {
+    list-style-type: none;
+    padding: 0;
+    margin: 12px 0 0 0;
+}
+
+.sidebar-menu li {
+    margin-bottom: 10px;
+}
+
+.sidebar-menu a {
+    color: #2b6cb0;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9em;
+    display: block;
+    padding: 6px 8px;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
+}
+
+.sidebar-menu a:hover {
+    background-color: #ebf8ff;
+}
+
+/* Main Content Area (Positioned Right) */
+.main-content-area {
+    flex-grow: 1;              /* Occupies remaining space to the right */
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Status Banner */
+#status-banner {
+    border: 1px solid #e53e3e;
+    background-color: #fff5f5;
+    color: #9b2c2c;
+    padding: 15px 20px;
+    border-radius: 4px;
+}
+
+#status-banner h2 {
+    margin: 0 0 5px 0;
+    font-size: 1.2em;
+}
+
+#status-banner p {
+    margin: 0;
+    font-size: 0.95em;
+}
+
+/* KPI Overview Cards */
+.kpi-grid {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.kpi-card {
+    flex: 1;
+    min-width: 240px;
+    background: #ffffff;
+    border: 1px solid #cbd5e0;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.kpi-card h4 {
+    margin: 0 0 8px 0;
+    color: #2c3e50;
+}
+
+.kpi-card .kpi-value-red {
+    font-size: 1.8em;
+    color: #c0392b;
+    font-weight: bold;
+    margin: 0 0 8px 0;
+}
+
+.kpi-card .kpi-value-orange {
+    font-size: 1.3em;
+    color: #d35400;
+    font-weight: bold;
+    margin: 0 0 8px 0;
+}
+
+.kpi-card .kpi-subtext {
+    font-size: 0.85em;
+    color: #7f8c8d;
+    margin: 0;
+}
+
+/* Decision Support Cards */
+.features-grid {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.feature-card {
+    flex: 1;
+    min-width: 260px;
+    background: #ffffff;
+    border: 1px solid #cbd5e0;
+    padding: 20px;
+    border-radius: 3px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.feature-card.officer-card {
+    border-left: 4px solid #3498db;
+}
+
+.feature-card.public-card {
+    border-left: 4px solid #2ecc71;
+}
+
+.feature-card h4 {
+    margin: 0 0 10px 0;
+    color: #2c3e50;
+}
+
+.feature-card p {
+    margin: 0 0 15px 0;
+    line-height: 1.5;
+    font-size: 0.95em;
+    color: #4a5568;
+}
+
+.feature-card a {
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9em;
+}
+
+.feature-card.officer-card a {
+    color: #3498db;
+}
+
+.feature-card.public-card a {
+    color: #2ecc71;
+}
+
+/* Section Headings */
+.section-heading {
+    margin: 0 0 15px 0;
+    border-bottom: 2px solid #cbd5e0;
+    padding-bottom: 8px;
+    color: #2c3e50;
+}
+
+/* 4. Footer Styling (Positioned at Bottom) */
+#main-footer {
+    background-color: #1a365d;
+    color: #cbd5e0;
+    text-align: center;
+    padding: 15px;
+    font-size: 0.85em;
+    margin-top: auto;          /* Pushes footer to bottom */
+}
+
+#main-footer p {
+    margin: 0;
+}
+
+/* Responsive collapse for small screens */
+@media (max-width: 768px) {
+    .page-layout-container {
+        flex-direction: column;
+    }
+    .sidebar {
+        width: 100%;
+    }
+}

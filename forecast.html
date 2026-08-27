@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Forecast Summary | Heatwave Intelligence System</title>
+    <link rel="stylesheet" href="table.css">
+</head>
+<body id="forecast-page" style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #ffff; color: #333; min-height: 100vh; display: flex; flex-direction: column;">
+
+    <!-- Main Header with Shared Navigation -->
+    <header id="main-header" style="background-color: #1a365d; color: #ffffff; padding: 25px 30px; border-bottom: 4px solid #e53e3e; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
+        
+        <!-- Met: Changed text color of System Name & Center Aligned -->
+        <h1 id="system-title" style="color: #63b3ed; text-align: center; margin: 0 0 8px 0; font-size: 2em; letter-spacing: -0.5px;">
+            Heatwave Intelligence System
+        </h1>
+        
+        <!-- Met: Center Aligned Slogan / Season Text & Color -->
+        <p id="monitoring-season" style="color: #fbd38d; text-align: center; font-size: 1em; margin: 0 0 20px 0; font-weight: bold;">
+            Current Monitoring Season: Monsoon 2026
+        </p>
+
+        <!-- Navigation Links -->
+        <nav id="primary-navigation">
+            <ul style="list-style-type: none; margin: 0; padding: 0; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+                <li><a href="homepage.html" style="color: #63b3ed; text-decoration: none; font-weight: bold;">Home</a></li>
+                <li><a href="alert-details.html" style="color: #ffffff; text-decoration: none;">Alert Details</a></li>
+                <li><a href="about-system.html" style="color: #ffffff; text-decoration: none;">About System</a></li>
+                <li><a href="sources.html" style="color: #ffffff; text-decoration: none;">Sources & Stakeholders</a></li>
+                <li><a href="navigation.html" style="color: #ffffff; text-decoration: none;">Portal Directory</a></li>
+                <li><a href="hotspot-map.html" style="color: #ffffff; text-decoration: none;">Hotspot Map</a></li>
+                <li><a href="forecast.html" style="color: #ffffff; text-decoration: none;">Forecast Summary</a></li>
+                <li><a href="subscribe.html" style="color: #ffffff; text-decoration: none;">Subscribe</a></li>
+                <li><a href="media.html" style="color: #ffffff; text-decoration: none; font-weight: bold;">Media & Awareness</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content Container -->
+    <main id="main-content" style="max-width: 1100px; width: 90%; margin: 25px auto; flex-grow: 1;">
+
+        <h2 style="margin: 0 0 10px 0; color: #2c3e50; border-bottom: 2px solid #cbd5e0; padding-bottom: 10px;">
+            Region-Wise Temperature & Forecast Summary
+        </h2>
+
+        <p style="color: #4a5568; margin-bottom: 20px; line-height: 1.5;">
+            Granular observations collected across terrestrial station networks. Severity levels are categorized based on baseline temperature departures.
+        </p>
+
+        <!-- Forecast Data Table Container -->
+        <section id="table-container" style="background: #ffffff; border: 1px solid #cbd5e0; padding: 25px; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); overflow-x: auto;">
+            
+            <table border="1" style="width: 100%; border-collapse: collapse; text-align: left; border-color: #cbd5e0;">
+                
+                <!-- REQUIREMENT: <caption> -->
+                <caption style="font-weight: bold; margin-bottom: 15px; color: #2c3e50; font-size: 1.05em;">
+                    Table 1: 24-Hour Regional Temperature Observations & Risk Severity Metrics
+                </caption>
+
+                <!-- REQUIREMENT: <thead> with merged header using colspan -->
+                <thead style="background-color: #2c3e50; color: #ffffff;">
+                    <tr>
+                        <th rowspan="2" style="padding: 12px; border: 1px solid #4a5568;">Region Zone</th>
+                        <th rowspan="2" style="padding: 12px; border: 1px solid #4a5568;">Monitoring Station</th>
+                        <!-- colspan merging 2 columns for "Temperature Metrics" -->
+                        <th colspan="2" style="padding: 12px; border: 1px solid #4a5568; text-align: center;">Temperature Metrics (°C)</th>
+                        <th rowspan="2" style="padding: 12px; border: 1px solid #4a5568;">Severity Level</th>
+                    </tr>
+                    <tr>
+                        <th style="padding: 10px; border: 1px solid #4a5568; background-color: #34495e;">Current Max</th>
+                        <th style="padding: 10px; border: 1px solid #4a5568; background-color: #34495e;">24h Forecast</th>
+                    </tr>
+                </thead>
+
+                <!-- REQUIREMENT: <tbody> -->
+                <tbody style="color: #2d3748;">
+                    <!-- Region A: North Zone (Targets anchor from hotspot-map.html) -->
+                    <tr id="north-zone" style="background-color: #fff5f5;">
+                        <td style="padding: 12px; border: 1px solid #e2e8f0; font-weight: bold; color: #c53030;">North Zone</td>
+                        <td style="padding: 12px; border: 1px solid #e2e8f0;">AWS-102 (Palam Station)</td>
+                        <td style="padding: 12px; border: 1px solid #e2e8f0; font-weight: bold;">44.8 °C</td>
+                        <td style="padding: 12px; border: 1px solid #e2e8f0; font-weight: bold; color: #c53030;">46.8 °C</td>
+                        <td style="padding: 12px; border: 1px solid #e2e8f0;">
+                            <span style="background-color: #e53e3e; color: #ffffff; padding: 4px 8px; border-radius: 3px; font-size: 0.85em; font-weight: bold;">Severe Heatwave</span>
+                        </td>
+                    </tr>
+
+                    <!-- Region B: Central Zone (Targets anchor from hotspot-map.html) -->
+                    <tr id="central-zone" style="background-color: #fffaf0;">
+                        <td style="padding: 12px; border: 1px solid #e2e8f0; font-weight: bold; color: #c05621;">Central Zone</td>
+                        <td style="padding: 12px; border: 1px solid #e2e8f0;">AWS-204 (Nagpur Station)</td>
+                        <td style="padding: 12px; border: 1px solid #e2e8f0; font-weight: bold;">42.5 °C</td>
+                        <td style="padding: 12px; border: 1px solid #e2e8f0; font-weight: bold; color: #dd6b20;">44.1 °C</td>
+                        <td style="padding: 12px; border: 1px solid #e2e8f0;">
+                            <span style="background-color: #dd6b20; color: #ffffff; padding: 4px 8px; border-radius: 3px; font-size: 0.85em; font-weight: bold;">Heatwave</span>
+                        </td>
+                    </tr>
+
+                    <!-- Coastal Zone -->
+                    <tr id="coastal-zone">
+                        <td style="padding: 12px; border: 1px solid #e2e8f0; font-weight: bold; color: #2b6cb0;">Coastal Zone</td>
+                        <td style="padding: 12px; border: 1px solid #e2e8f0;">AWS-309 (Colaba Station)</td>
+                        <td style="padding: 12px; border: 1px solid #e2e8f0; font-weight: bold;">34.2 °C</td>
+                        <td style="padding: 12px; border: 1px solid #e2e8f0; font-weight: bold; color: #319795;">35.0 °C</td>
+                        <td style="padding: 12px; border: 1px solid #e2e8f0;">
+                            <span style="background-color: #319795; color: #ffffff; padding: 4px 8px; border-radius: 3px; font-size: 0.85em; font-weight: bold;">Normal / Humid</span>
+                        </td>
+                    </tr>
+                </tbody>
+
+                <!-- REQUIREMENT: <tfoot> -->
+                <tfoot style="background-color: #edf2f7; color: #4a5568; font-size: 0.85em;">
+                    <tr>
+                        <td colspan="5" style="padding: 10px 12px; border: 1px solid #cbd5e0;">
+                            <strong>Data Quality Note:</strong> Telemetry updated every 15 minutes from IMD database feeds. Forecast metrics reflect peak anticipated dry bulb ambient values.
+                        </td>
+                    </tr>
+                </tfoot>
+
+            </table>
+
+        </section>
+
+    </main>
+
+    <!-- Page Footer -->
+    <footer id="main-footer" style="background-color: #ffff; color: #cbd5e0; text-align: center; padding: 15px; font-size: 0.85em;">
+        <p style="margin: 0;">
+            &copy; 2026 Department of Computer Engineering, K. J. Somaiya School of Engineering (Somaiya Vidyavihar University).
+        </p>
+    </footer>
+
+</body>
+</html>

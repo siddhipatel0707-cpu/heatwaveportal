@@ -1,0 +1,236 @@
+/* ==========================================================================
+   GLOBAL PAGE & TYPOGRAPHY STYLES
+   ========================================================================== */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8fafc;
+    color: #2d3748;
+    line-height: 1.6;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* ==========================================================================
+   HEADER & NAVIGATION BAR STYLING
+   ========================================================================== */
+#main-header {
+    background-color: #2c3e50;
+    color: #ffffff;
+    padding: 20px 30px;
+    border-bottom: 1px solid #e2e8f0;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+#system-title {
+    margin: 0 0 8px 0;
+    font-size: 1.8em;
+    color: #ffffff;
+}
+
+#monitoring-season {
+    font-size: 0.88em;
+    background-color: #edf2f7;
+    color: #2d3748;
+    display: inline-block;
+    padding: 4px 10px;
+    margin: 0 0 15px 0;
+    border-radius: 4px;
+}
+
+/* Horizontal Navigation List */
+#primary-navigation ul {
+    list-style-type: none;
+    margin: 10px 0 0 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+#primary-navigation li {
+    display: inline-block;
+}
+
+#primary-navigation a {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    font-weight: 500;
+    transition: background-color 0.2s ease-in-out;
+}
+
+#primary-navigation a:hover {
+    background-color: #2b6cb0;
+}
+
+#primary-navigation a.active {
+    background-color: #2b6cb0;
+    font-weight: bold;
+}
+
+/* ==========================================================================
+   MAIN CONTENT CONTAINER
+   ========================================================================== */
+#main-content {
+    max-width: 1050px;
+    width: 90%;
+    margin: 30px auto;
+    flex-grow: 1;
+}
+
+/* ==========================================================================
+   PRIORITY RED HAZARD BULLETIN (TASK 10 GLOWING ANIMATED BOX)
+   ========================================================================== */
+.alert-offer-box {
+    background-color: #7f1d1d;
+    color: #ffffff;
+    border: 2px solid #ef4444;
+    border-radius: 8px;
+    padding: 20px 25px;
+    text-align: center;
+    margin-bottom: 30px;
+    animation: alertGlowPulse 2s infinite ease-in-out;
+}
+
+.alert-offer-box .offer-title {
+    font-size: 1.4em;
+    font-weight: 800;
+    margin: 0 0 8px 0;
+    color: #fef2f2;
+    text-shadow: 0 0 8px rgba(239, 68, 68, 0.8);
+}
+
+.alert-offer-box .offer-description {
+    font-size: 1.05em;
+    font-weight: 600;
+    margin: 0 0 12px 0;
+    color: #fee2e2;
+}
+
+.alert-offer-box .offer-badge {
+    display: inline-block;
+    padding: 6px 16px;
+    background-color: #dc2626;
+    color: #ffffff;
+    font-size: 0.88em;
+    font-weight: bold;
+    border-radius: 20px;
+    border: 1px solid #fca5a5;
+    animation: badgeBlink 1.2s infinite ease-in-out;
+}
+
+/* ==========================================================================
+   OFFICIAL WEATHER BULLETIN CARD
+   ========================================================================== */
+.bulletin-card {
+    background: #ffffff;
+    border: 1px solid #cbd5e0;
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.bulletin-card h2 {
+    font-size: 1.8em;
+    color: #1a365d;
+    margin-top: 0;
+    margin-bottom: 10px;
+}
+
+/* Target Region Badge Highlight */
+.region-badge {
+    background-color: #fef08a;
+    color: #854d0e;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 0.95em;
+}
+
+.bulletin-meta {
+    font-size: 0.88em;
+    color: #64748b;
+    border-bottom: 1px solid #e2e8f0;
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.bulletin-card h3 {
+    color: #2c3e50;
+    font-size: 1.2em;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+/* Callout Box for Actionable Advisory */
+.advisory-callout {
+    background-color: #f8fafc;
+    border-left: 4px solid #2b6cb0;
+    padding: 16px 20px;
+    margin: 22px 0;
+    border-radius: 0 6px 6px 0;
+}
+
+.advisory-callout strong {
+    color: #1a365d;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.advisory-callout p {
+    margin: 0;
+    font-style: italic;
+    color: #334155;
+    font-size: 0.95em;
+}
+
+/* Card Footer Disclaimer */
+.bulletin-disclaimer {
+    font-size: 0.8em;
+    color: #94a3b8;
+    border-top: 1px solid #f1f5f9;
+    padding-top: 15px;
+    margin-top: 25px;
+    margin-bottom: 0;
+}
+
+/* ==========================================================================
+   FOOTER STYLING
+   ========================================================================== */
+#main-footer {
+    background-color: #1a365d;
+    color: #cbd5e0;
+    text-align: center;
+    padding: 15px;
+    font-size: 0.85em;
+    margin-top: auto;
+}
+
+/* ==========================================================================
+   ANIMATION KEYFRAMES
+   ========================================================================== */
+@keyframes alertGlowPulse {
+    0% {
+        box-shadow: 0 0 8px rgba(239, 68, 68, 0.4);
+    }
+    50% {
+        box-shadow: 0 0 20px rgba(239, 68, 68, 0.8);
+    }
+    100% {
+        box-shadow: 0 0 8px rgba(239, 68, 68, 0.4);
+    }
+}
+
+@keyframes badgeBlink {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.4;
+    }
+}

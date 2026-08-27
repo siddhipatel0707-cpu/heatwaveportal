@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Regional Hotspot Map | Heatwave Intelligence System</title>
+</head>
+<body id="hotspot-page" style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #ffff; color: #333; min-height: 100vh; display: flex; flex-direction: column;">
+
+
+    <!-- Main Header with Shared Navigation -->
+    <header id="main-header" style="background-color: #ffff; color: #000; padding: 20px 30px;">
+        <h1 id="system-title" style="margin: 0 0 8px 0; font-size: 1.8em;">
+            Heatwave Intelligence System
+        </h1>
+       
+        <p id="monitoring-season" style="font-size: 0.9em; background-color: #ffff; display: inline-block; padding: 4px 10px; margin: 0 0 15px 0; border-radius: 3px;">
+            Current Monitoring Season: <strong>Monsoon 2026</strong>
+        </p>
+
+
+        <!-- Primary Navigation Menu -->
+        <nav id="primary-navigation">
+            <ul style="list-style-type: none; margin: 0; padding: 0; display: flex; gap: 20px; flex-wrap: wrap;">
+                <li><a href="homepage.html" style="color: #000; text-decoration: none;">Home</a></li>
+                <li><a href="alert-details.html" style="color: #000; text-decoration: none;">Alert Details</a></li>
+                <li><a href="about-system.html" style="color: #000; text-decoration: none;">About System</a></li>
+                <li><a href="sources.html" style="color: #000; text-decoration: none;">Sources & Stakeholders</a></li>
+                <li><a href="navigation.html" style="color: #000; text-decoration: none;">Portal Directory</a></li>
+                <li><a href="hotspot-map.html" style="color: #63b3ed; text-decoration: none; font-weight: bold;">Hotspot Map</a></li>
+                <li><a href="forecast.html" style="color: #000; text-decoration: none;">Forecast Summary</a></li>
+                <li><a href="subscribe.html" style="color: #000; text-decoration: none;">Subscribe</a></li>
+                <li><a href="media.html" style="color: #000; text-decoration: none; font-weight: bold;">Media & Awareness</a></li>
+            </ul>
+        </nav>
+    </header>
+
+
+    <!-- Main Content Container -->
+    <main id="main-content" style="max-width: 1100px; width: 90%; margin: 25px auto; flex-grow: 1;">
+
+
+        <h2 style="margin: 0 0 10px 0; color: #2c3e50; border-bottom: 2px solid #cbd5e0; padding-bottom: 10px;">
+            Interactive Regional Heatwave Hotspot Map
+        </h2>
+
+
+        <p style="color: #4a5568; margin-bottom: 20px; line-height: 1.5;">
+            Click on any highlighted region on the telemetry map below to view localized atmospheric readings, active risk assessments, and forecast summary parameters.
+        </p>
+
+
+        <!-- Interactive Hotspot Map Container -->
+        <section id="map-container" style="background: #ffffff; border: 1px solid #cbd5e0; padding: 25px; border-radius: 5px; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+           
+            <!-- Map Image bound to #heatwave-zones using usemap -->
+            <img src="https://www.climate.gov/sites/default/files/styles/full_width_620_alternate_image/public/India_heat_wave_610.png?itok=ouFmvGc7"
+                 alt="Regional Heatwave Hotspot Observation Map"
+                 usemap="#heatwave-zones"
+                 width="800"
+                 height="400"
+                 style="max-width: 100%; height: auto; border: 2px solid #cbd5e0; border-radius: 4px; display: block; margin: 0 auto;">
+
+
+            <!-- HTML5 Image Map Definition -->
+            <map name="heatwave-zones">
+                <!-- Region A: North Zone (Left Rectangular Area: x1=0, y1=0, x2=400, y2=400) -->
+                <area shape="rect"
+                      coords="0,0,400,400"
+                      href="forecast.html#north-zone"
+                      alt="North Zone Heatwave Telemetry"
+                      title="North Zone — Click to view detailed forecast telemetry">
+
+
+                <!-- Region B: Central Zone (Right Rectangular Area: x1=401, y1=0, x2=800, y2=400) -->
+                <area shape="rect"
+                      coords="401,0,800,400"
+                      href="forecast.html#central-zone"
+                      alt="Central Zone Heatwave Telemetry"
+                      title="Central Zone — Click to view detailed forecast telemetry">
+            </map>
+
+
+            <div style="margin-top: 20px; display: flex; justify-content: center; gap: 30px; font-size: 0.9em;">
+                <span style="display: flex; align-items: center; gap: 8px;">
+                    <span style="display: inline-block; width: 15px; height: 15px; background-color: #e53e3e; border-radius: 3px;"></span>
+                    <strong>Region A (Left Half):</strong> North Zone (Red Alert)
+                </span>
+                <span style="display: flex; align-items: center; gap: 8px;">
+                    <span style="display: inline-block; width: 15px; height: 15px; background-color: #dd6b20; border-radius: 3px;"></span>
+                    <strong>Region B (Right Half):</strong> Central Zone (Orange Alert)
+                </span>
+            </div>
+
+
+        </section>
+
+
+    </main>
+
+
+    <!-- Page Footer -->
+    <footer id="main-footer" style=" color: #cbd5e0; text-align: center; padding: 15px; font-size: 0.85em;">
+        <p style="margin: 0;">
+            &copy; 2026 Department of Computer Engineering, K. J. Somaiya School of Engineering (Somaiya Vidyavihar University).
+        </p>
+    </footer>
+
+
+</body>
+</html>

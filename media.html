@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Media & Awareness | Heatwave Intelligence System</title>
+</head>
+<body id="media-page" style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #ffff; color: #333; min-height: 100vh; display: flex; flex-direction: column;">
+
+    <!-- Main Header with Shared Navigation -->
+    <header id="main-header" style="background-color: #ffff; color: #000; padding: 20px 30px;">
+        <h1 id="system-title" style="margin: 0 0 8px 0; font-size: 1.8em;">
+            Heatwave Intelligence System
+        </h1>
+        
+        <p id="monitoring-season" style="font-size: 0.9em;color:#000; background-color: #ffff; display: inline-block; padding: 4px 10px; margin: 0 0 15px 0; border-radius: 3px;">
+            Current Monitoring Season: <strong>Monsoon 2026</strong>
+        </p>
+
+        <!-- Primary Navigation Menu -->
+        <nav id="primary-navigation">
+            <ul style="list-style-type: none; margin: 0; padding: 0; display: flex; gap: 20px; flex-wrap: wrap;">
+                <li><a href="homepage.html" style="color: #000; text-decoration: none;">Home</a></li>
+                <li><a href="alert-details.html" style="color: #000; text-decoration: none;">Alert Details</a></li>
+                <li><a href="about-system.html" style="color: #000; text-decoration: none;">About System</a></li>
+                <li><a href="sources.html" style="color: #000; text-decoration: none;">Sources & Stakeholders</a></li>
+                <li><a href="navigation.html" style="color: #000; text-decoration: none;">Portal Directory</a></li>
+                <li><a href="hotspot-map.html" style="color: #000; text-decoration: none;">Hotspot Map</a></li>
+                <li><a href="forecast.html" style="color: #000; text-decoration: none;">Forecast Summary</a></li>
+                <li><a href="subscribe.html" style="color: #000; text-decoration: none;">Subscribe</a></li>
+                <li><a href="media.html" style="color: #63b3ed; text-decoration: none;">Media & Awareness</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content Container -->
+    <main id="main-content" style="max-width: 1100px; width: 90%; margin: 25px auto; flex-grow: 1;">
+
+        <h2 style="margin: 0 0 10px 0; color: #2c3e50; border-bottom: 2px solid #cbd5e0; padding-bottom: 10px;">
+            Heatwave Awareness & External Live Telemetry
+        </h2>
+
+        <p style="color: #4a5568; margin-bottom: 20px; line-height: 1.5;">
+            Access instructional public safety videos, regional audio briefings, and live external meteorological feeds.
+        </p>
+
+        <!-- REQUIREMENT 4: <noscript> Fallback Warning -->
+        <noscript>
+            <div style="background-color: #fff5f5; border-left: 4px solid #e53e3e; border: 1px solid #feb2b2; border-left-width: 4px; padding: 15px; border-radius: 4px; margin-bottom: 20px; color: #9b2c2c;">
+                <strong>JavaScript Disabled Notice:</strong> Your web browser currently has JavaScript disabled. While static HTML text and embedded video/audio controls remain functional, live interactive mapping streams inside embedded frames may require JavaScript enabled.
+            </div>
+        </noscript>
+
+        <!-- REQUIREMENT 1: Video Awareness Section (<video>) -->
+        <section id="video-section" style="background: #ffffff; border: 1px solid #cbd5e0; padding: 25px; border-radius: 5px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+            <h3 style="margin-top: 0; color: #2b6cb0;">Public Safety Awareness Broadcast</h3>
+            <p style="color: #4a5568; margin-bottom: 15px;">Watch key guidelines on recognizing heat exhaustion signs and immediate first-aid protocols:</p>
+
+            <div style="text-align: center;">
+                <video controls width="100%" style="max-width: 700px; height: auto; border: 1px solid #cbd5e0; border-radius: 4px;">
+                    <source src="heatwave-awareness.mp4" type="video/mp4">
+                    <source src="heatwave-awareness.webm" type="video/webm">
+                    Your browser does not support the HTML5 video element.
+                </video>
+            </div>
+        </section>
+
+        <!-- REQUIREMENT 2: Audio Advisory Section (<audio>) -->
+        <section id="audio-section" style="background: #ffffff; border: 1px solid #cbd5e0; padding: 25px; border-radius: 5px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+            <h3 style="margin-top: 0; color: #c05621;">Background Radio Audio Advisory</h3>
+            <p style="color: #4a5568; margin-bottom: 15px;">Listen to the official regional bulletin audio clip broadcast across disaster management stations:</p>
+
+            <div style="background-color: #ffff;  padding: 15px; border-radius: 0 4px 4px 0;">
+                <p style="margin: 0 0 10px 0; font-weight: bold; ">Official Audio Briefing (Bulletin v2.1):</p>
+                <audio controls style="width: 100%; max-width: 500px;">
+                    <source src="audio-advisory.mp3" type="audio/mpeg">
+                    <source src="audio-advisory.ogg" type="audio/ogg">
+                    Your browser does not support the HTML5 audio element.
+                </audio>
+            </div>
+        </section>
+
+        <!-- REQUIREMENT 3: Frame Section (<iframe>) -->
+        <section id="iframe-section" style="background: #ffffff; border: 1px solid #cbd5e0; padding: 25px; border-radius: 5px; margin-bottom: 25px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+            <h3 style="margin-top: 0; color: #2c3e50;">Live IMD National Weather Portal Frame</h3>
+            <p style="color: #4a5568; margin-bottom: 15px;">Direct portal integration displaying live radar observations and national meteorological bulletins:</p>
+
+            <div style="border: 1px solid #cbd5e0; border-radius: 4px; overflow: hidden;">
+                <iframe src="https://mausam.imd.gov.in/" 
+                        title="India Meteorological Department Live Data Feed" 
+                        width="100%" 
+                        height="450" 
+                        style="border: none;" 
+                        loading="lazy">
+                    Your browser does not support inline frames (iframes). <a href="https://mausam.imd.gov.in/" target="_blank">Click here to visit the IMD site directly.</a>
+                </iframe>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Page Footer -->
+    <footer id="main-footer" style="background-color: #ffff; color: #cbd5e0; text-align: center; padding: 15px; font-size: 0.85em;">
+        <p style="margin: 0;">
+            &copy; 2026 Department of Computer Engineering, K. J. Somaiya School of Engineering (Somaiya Vidyavihar University).
+        </p>
+    </footer>
+
+</body>
+</html>

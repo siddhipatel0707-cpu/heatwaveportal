@@ -1,0 +1,93 @@
+/*Task 2*/
+#primary-navigation ul {
+    list-style-type: none;
+    margin: 10px 0 0 0;
+    padding: 0;
+}
+
+#primary-navigation li {
+    display: inline-block;
+    margin-right: 15px;
+    margin-bottom: 8px;
+}
+
+#primary-navigation a {
+    color: #ffffff;
+    text-decoration: none;
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+}
+
+#primary-navigation a:hover {
+    color: #ffffff;
+    background-color: #2b6cb0;
+    text-decoration: none;
+}
+
+#primary-navigation a.active {
+    color: #ffffff;
+    background-color: #2b6cb0;
+    font-weight: bold;
+}
+
+
+/*Task 6*/
+
+.gallery-section {
+    background-color: #ffffff;
+    border: 1px solid #cbd5e0;
+    padding: 25px;
+    border-radius: 5px;
+    margin-bottom: 25px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.gallery-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.gallery-item {
+    flex: 1;
+    min-width: 280px; 
+    border: 2px solid #cbd5e0;
+    border-radius: 6px;
+    overflow: hidden;
+    background-color: #f8fafc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    text-align: center;
+}
+
+.gallery-item img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.3s ease-in-out;
+}
+
+.gallery-item:hover img {
+    transform: scale(1.08);
+}
+
+.gallery-caption {
+    padding: 12px;
+    font-size: 0.9em;
+    font-weight: bold;
+    color: #2c3e50;
+    background-color: #ffffff;
+    border-top: 1px solid #e2e8f0;
+}
+
+.gallery-subtext {
+    display: block;
+    font-size: 0.8em;
+    font-weight: normal;
+    color: #718096;
+    margin-top: 4px;
+}

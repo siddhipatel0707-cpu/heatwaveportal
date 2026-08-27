@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergency Alerts & Registration | Heatwave Intelligence System</title>
+    
+    <!-- External Site Theme & Navigation Stylesheets -->
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="nav.css">
+    
+    <!-- TASK 8 DELIVERABLE: FORM UI STYLING -->
+    <link rel="stylesheet" href="form.css">
+</head>
+<body id="subscribe-page">
+
+    <!-- Shared Header with Primary Navigation -->
+    <header id="main-header">
+        <h1 id="system-title">Heatwave Intelligence System</h1>
+        
+        <p id="monitoring-season">
+            Current Monitoring Season: <strong>Monsoon 2026</strong>
+        </p>
+
+        <nav id="primary-navigation">
+            <ul>
+                <li><a href="homepage.html">Home</a></li>
+                <li><a href="alert.html">Alert Details</a></li>
+                <li><a href="about-system.html">About System</a></li>
+                <li><a href="sources.html">Sources & Stakeholders</a></li>
+                <li><a href="navigation.html">Portal Directory</a></li>
+                <li><a href="hotspot-map.html">Hotspot Map</a></li>
+                <li><a href="forecast.html">Forecast Summary</a></li>
+                <li><a href="subscribe.html" class="active">Subscribe</a></li>
+                <li><a href="media.html">Media & Awareness</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Main Content Wrapper -->
+    <main id="main-content">
+
+        <!-- TASK 8: FORM CONTAINER CARD -->
+        <div class="form-container">
+            
+            <h2 style="margin-top: 0; color: #1a365d; border-bottom: 2px solid #cbd5e0; padding-bottom: 10px;">
+                Emergency Advisory & SMS Registration
+            </h2>
+
+            <p style="color: #4a5568; font-size: 0.92em; margin-bottom: 20px; line-height: 1.5;">
+                Register your contact details to receive instant severe weather bulletins, regional heatwave advisories, and hydration protocol warnings directly to your mobile device.
+            </p>
+
+            <form action="#" method="post" id="registration-form">
+                
+                <!-- FIELDSET 1: CITIZEN CONTACT DETAILS -->
+                <fieldset>
+                    <legend>1. Citizen Contact Details</legend>
+                    
+                    <div class="form-group">
+                        <label for="fullname">Full Name *</label>
+                        <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email Address *</label>
+                        <input type="email" id="email" name="email" placeholder="name@example.com" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="mobile">Mobile Number (SMS Alerts) *</label>
+                        <input type="tel" id="mobile" name="mobile" placeholder="10-digit mobile number" required>
+                    </div>
+                </fieldset>
+
+                <!-- FIELDSET 2: MONITORING & CHANNEL PREFERENCES -->
+                <fieldset>
+                    <legend>2. Advisory Preferences</legend>
+                    
+                    <div class="form-group">
+                        <label for="region">Primary Monitoring District *</label>
+                        <select id="region" name="region" required>
+                            <option value="">-- Select District / Zone --</option>
+                            <option value="north_zone">North Zone (Urban Belt & Palam)</option>
+                            <option value="central_zone">Central Zone (Plains & Nagpur)</option>
+                            <option value="coastal_zone">Coastal Zone (Mumbai Urban Belt)</option>
+                            <option value="southern_zone">Southern Plateau Zone</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Notification Dispatch Channels *</label>
+                        <label class="checkbox-option">
+                            <input type="checkbox" name="channels" value="sms" checked> SMS Emergency Broadcasts
+                        </label>
+                        <label class="checkbox-option">
+                            <input type="checkbox" name="channels" value="email"> Daily Email Meteorological Bulletins
+                        </label>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Preferred Advisory Language *</label>
+                        <label class="radio-option">
+                            <input type="radio" name="language" value="english" checked> English
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="language" value="hindi"> Hindi (हिंदी)
+                        </label>
+                        <label class="radio-option">
+                            <input type="radio" name="language" value="marathi"> Marathi (मराठी)
+                        </label>
+                    </div>
+                </fieldset>
+
+                <!-- ACTION BUTTONS -->
+                <div class="button-group">
+                    <input type="submit" value="Register for Alerts">
+                    <input type="reset" value="Reset Fields">
+                </div>
+
+            </form>
+        </div>
+
+    </main>
+
+    <!-- Global Footer -->
+    <footer id="main-footer">
+        <p>&copy; 2026 Department of Computer Engineering, K. J. Somaiya School of Engineering (Somaiya Vidyavihar University).</p>
+    </footer>
+
+</body>
+</html>
