@@ -3,29 +3,334 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emergency Alerts & Registration | Heatwave Intelligence System</title>
-    
-    <!-- External Site Theme & Navigation Stylesheets -->
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="nav.css">
-    
-    <!-- TASK 8 DELIVERABLE: FORM UI STYLING -->
-    <link rel="stylesheet" href="form.css">
-</head>
-<body id="subscribe-page">
+    <title>Advisory Subscription | Heatwave Intelligence System</title>
+    <style>
+        /* --- Base & Typography --- */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #0f172a; /* Matching the dark navy background of the new design */
+            color: #f8fafc;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
 
-    <!-- Shared Header with Primary Navigation -->
-    <header id="main-header">
-        <h1 id="system-title">Heatwave Intelligence System</h1>
+        /* --- Header & Navigation (Consistent with other pages) --- */
+#main-header {
+    background-color: #0f172a; 
+    color: #ffffff;
+    padding: 30px 40px 0 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    /* Added depth and border */
+    border-bottom: 1px solid #334155; 
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+    position: relative;
+    z-index: 10;
+}
+
+        .system-branding h1 {
+            margin: 0 0 5px 0;
+            font-size: 2.2em;
+            color: #f8fafc;
+            letter-spacing: -0.5px;
+        }
+
+        .system-branding p {
+            color: #94a3b8;
+            margin: 0 0 25px 0;
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+        }
+
+        .system-branding span {
+            color: #e2e8f0;
+        }
+
+        #primary-nav {
+            width: 100%;
+            border-top: 1px solid #1e293b;
+            padding: 20px 0;
+            border-bottom: 1px solid #1e293b; /* Added bottom border to separate nav from content */
+        }
+
+        #primary-nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 25px;
+        }
+
+        #primary-nav a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.95em;
+            font-weight: 500;
+            padding-bottom: 6px;
+            border-bottom: 2px solid transparent;
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+
+        #primary-nav a:hover, #primary-nav a.active {
+            color: #38bdf8;
+            border-bottom: 2px solid #38bdf8;
+        }
+
+        /* --- SPLIT SCREEN LAYOUT --- */
+        .split-container {
+            max-width: 1200px;
+            margin: 60px auto;
+            padding: 0 40px;
+            display: flex;
+            gap: 60px;
+            align-items: center; /* Center items vertically */
+            flex-grow: 1;
+        }
+
+        /* Left Side: Promotional Text */
+        .promo-text {
+            flex: 1;
+        }
+
+        .service-tag {
+            color: #94a3b8;
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .service-tag::before {
+            content: "";
+            display: block;
+            width: 40px;
+            height: 2px;
+            background-color: #ef4444; /* Red accent line */
+        }
+
+        .promo-text h2 {
+            font-size: 3.5em;
+            font-weight: 700;
+            line-height: 1.1;
+            margin: 0 0 20px 0;
+            color: #ffffff;
+            letter-spacing: -1px;
+        }
+
+        .promo-text h2 .highlight {
+            color: #ef4444; /* Red highlighted text */
+        }
+
+        .promo-text p {
+            font-size: 1.2em;
+            color: #cbd5e1;
+            margin: 0 0 40px 0;
+            max-width: 90%;
+        }
+
+        .features-list {
+            display: flex;
+            gap: 30px;
+            color: #f8fafc;
+            font-weight: 500;
+            font-size: 0.95em;
+        }
+
+        .features-list span {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Right Side: Form Card */
+        .form-card {
+            flex: 1;
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+            color: #334155;
+            max-width: 500px;
+        }
+
+        .form-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 30px;
+            border-bottom: 1px solid #e2e8f0;
+            padding-bottom: 15px;
+        }
+
+        .form-header h3 {
+            margin: 0;
+            font-size: 1.4em;
+            color: #0f172a;
+        }
+
+        .form-header span {
+            font-size: 0.85em;
+            color: #64748b;
+        }
+
+        /* Form Inputs */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #0f172a;
+            font-size: 0.95em;
+        }
+
+        .form-group input[type="text"],
+        .form-group input[type="email"],
+        .form-group input[type="tel"],
+        .form-group select {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #cbd5e1;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 1em;
+            color: #334155;
+            transition: border-color 0.2s, box-shadow 0.2s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #38bdf8;
+            box-shadow: 0 0 0 3px rgba(56, 189, 248, 0.2);
+        }
+
+        .form-group .hint {
+            display: block;
+            font-size: 0.8em;
+            color: #94a3b8;
+            margin-top: 6px;
+        }
+
+        /* Checkboxes & Radios */
+        .options-group {
+            margin-bottom: 15px;
+        }
         
-        <p id="monitoring-season">
-            Current Monitoring Season: <strong>Monsoon 2026</strong>
-        </p>
+        .options-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 10px;
+            color: #0f172a;
+            font-size: 0.95em;
+        }
 
-        <nav id="primary-navigation">
+        .radio-inline {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .radio-inline label, .checkbox-list label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95em;
+            color: #475569;
+            cursor: pointer;
+        }
+
+        .checkbox-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            margin-bottom: 25px;
+        }
+
+        /* Submit Button */
+        .btn-submit {
+            width: 100%;
+            background-color: #c53030; /* Matching the red button from the design */
+            color: #ffffff;
+            border: none;
+            padding: 14px;
+            font-size: 1.05em;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-submit:hover {
+            background-color: #9b2c2c;
+        }
+
+        .form-footer {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 0.75em;
+            color: #94a3b8;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #0f172a;
+            color: #64748b;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.85em;
+            border-top: 1px solid #1e293b;
+            margin-top: auto;
+        }
+
+        /* Responsive Layout */
+        @media (max-width: 900px) {
+            .split-container {
+                flex-direction: column;
+                text-align: center;
+                gap: 40px;
+            }
+            .service-tag {
+                justify-content: center;
+            }
+            .service-tag::before { display: none; }
+            .features-list { justify-content: center; }
+            .promo-text p { margin: 0 auto 30px auto; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header & Navigation -->
+    <header id="main-header">
+        <div class="system-branding">
+            <h1 title="Comprehensive Heatwave Monitoring & Early Warning Platform">Heatwave Intelligence System</h1>
+            <p>Current Monitoring Season: <span>Monsoon 2026</span></p>
+        </div>
+        <nav id="primary-nav">
             <ul>
                 <li><a href="homepage.html">Home</a></li>
-                <li><a href="alert.html">Alert Details</a></li>
+                <li><a href="alert-details.html">Alert Details</a></li>
                 <li><a href="about-system.html">About System</a></li>
                 <li><a href="sources.html">Sources & Stakeholders</a></li>
                 <li><a href="navigation.html">Portal Directory</a></li>
@@ -37,95 +342,99 @@
         </nav>
     </header>
 
-    <!-- Main Content Wrapper -->
-    <main id="main-content">
-
-        <!-- TASK 8: FORM CONTAINER CARD -->
-        <div class="form-container">
+    <!-- Split Screen Content -->
+    <main class="split-container">
+        
+        <!-- Left Side: Promotional Copy -->
+        <div class="promo-text">
+            <div class="service-tag">Public Safety Service</div>
+            <h2>Stay ahead of<br><span class="highlight">the next alert.</span></h2>
+            <p>Receive location-aware SMS and email advisories when heat risk severity changes in your area.</p>
             
-            <h2 style="margin-top: 0; color: #1a365d; border-bottom: 2px solid #cbd5e0; padding-bottom: 10px;">
-                Emergency Advisory & SMS Registration
-            </h2>
+            <div class="features-list">
+                <span>
+                    <!-- Simple Check Icon SVG -->
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                    Verified advisories
+                </span>
+                <span>
+                    <!-- Simple Map Pin Icon SVG -->
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                    Localised to your district
+                </span>
+            </div>
+        </div>
 
-            <p style="color: #4a5568; font-size: 0.92em; margin-bottom: 20px; line-height: 1.5;">
-                Register your contact details to receive instant severe weather bulletins, regional heatwave advisories, and hydration protocol warnings directly to your mobile device.
-            </p>
+        <!-- Right Side: Form Card -->
+        <div class="form-card">
+            <div class="form-header">
+                <h3>Register for alerts</h3>
+            </div>
 
-            <form action="#" method="post" id="registration-form">
+            <form action="#" method="post" id="advisory-form">
                 
-                <!-- FIELDSET 1: CITIZEN CONTACT DETAILS -->
-                <fieldset>
-                    <legend>1. Citizen Contact Details</legend>
-                    
-                    <div class="form-group">
-                        <label for="fullname">Full Name *</label>
-                        <input type="text" id="fullname" name="fullname" placeholder="Enter your full name" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="email">Email Address *</label>
-                        <input type="email" id="email" name="email" placeholder="name@example.com" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label for="mobile">Mobile Number (SMS Alerts) *</label>
-                        <input type="tel" id="mobile" name="mobile" placeholder="10-digit mobile number" required>
-                    </div>
-                </fieldset>
-
-                <!-- FIELDSET 2: MONITORING & CHANNEL PREFERENCES -->
-                <fieldset>
-                    <legend>2. Advisory Preferences</legend>
-                    
-                    <div class="form-group">
-                        <label for="region">Primary Monitoring District *</label>
-                        <select id="region" name="region" required>
-                            <option value="">-- Select District / Zone --</option>
-                            <option value="north_zone">North Zone (Urban Belt & Palam)</option>
-                            <option value="central_zone">Central Zone (Plains & Nagpur)</option>
-                            <option value="coastal_zone">Coastal Zone (Mumbai Urban Belt)</option>
-                            <option value="southern_zone">Southern Plateau Zone</option>
-                        </select>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Notification Dispatch Channels *</label>
-                        <label class="checkbox-option">
-                            <input type="checkbox" name="channels" value="sms" checked> SMS Emergency Broadcasts
-                        </label>
-                        <label class="checkbox-option">
-                            <input type="checkbox" name="channels" value="email"> Daily Email Meteorological Bulletins
-                        </label>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Preferred Advisory Language *</label>
-                        <label class="radio-option">
-                            <input type="radio" name="language" value="english" checked> English
-                        </label>
-                        <label class="radio-option">
-                            <input type="radio" name="language" value="hindi"> Hindi (हिंदी)
-                        </label>
-                        <label class="radio-option">
-                            <input type="radio" name="language" value="marathi"> Marathi (मराठी)
-                        </label>
-                    </div>
-                </fieldset>
-
-                <!-- ACTION BUTTONS -->
-                <div class="button-group">
-                    <input type="submit" value="Register for Alerts">
-                    <input type="reset" value="Reset Fields">
+                <div class="form-group">
+                    <label for="fullname">Full name</label>
+                    <input type="text" id="fullname" name="fullname" placeholder="e.g. Aditi Sharma" required>
                 </div>
 
+                <div class="form-group">
+                    <label for="email">Email address</label>
+                    <input type="email" id="email" name="email" placeholder="you@example.com" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="mobile">Mobile Phone Number</label>
+                    <input type="tel" id="mobile" name="mobile" pattern="[0-9]{10}" placeholder="10-digit mobile number" required>
+                    <span class="hint">Format: 10 digits without country code (e.g., 9876543210)</span>
+                </div>
+
+                <div class="form-group">
+                    <label for="region">Monitoring region</label>
+                    <select id="region" name="region" required>
+                        <option value="">Select your region</option>
+                        <option value="north_zone">North Zone (e.g., Palam, Urban Belt)</option>
+                        <option value="central_zone">Central Zone (e.g., Nagpur, Central Plains)</option>
+                        <option value="coastal_zone">Coastal Zone (e.g., Mumbai Metropolitan Area)</option>
+                        <option value="south_zone">South Zone (Peninsular Sector)</option>
+                    </select>
+                </div>
+
+                <!-- Combined Preferences Section -->
+                <div class="options-group">
+                    <span class="options-label">Preferred Language</span>
+                    <div class="radio-inline">
+                        <label><input type="radio" name="language" value="english" checked> English</label>
+                        <label><input type="radio" name="language" value="hindi"> Hindi (हिंदी)</label>
+                        <label><input type="radio" name="language" value="marathi"> Marathi (मराठी)</label>
+                    </div>
+                </div>
+
+                <div class="options-group">
+                    <span class="options-label">Alert Categories</span>
+                    <div class="checkbox-list">
+                        <label><input type="checkbox" name="alert_type" value="sms_emergency" checked> SMS Emergency Warnings (Red Alert triggers)</label>
+                        <label><input type="checkbox" name="alert_type" value="email_bulletins"> Daily Email Advisory Bulletins</label>
+                        <label><input type="checkbox" name="alert_type" value="whatsapp_broadcast"> WhatsApp Public Advisory Broadcasts</label>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-submit">
+                    <!-- Bell Icon SVG -->
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"></path><path d="M13.73 21a2 2 0 0 1-3.46 0"></path></svg>
+                    Register for alerts
+                </button>
+                <div class="form-footer">
+                    By registering, you agree to receive critical public safety communications.
+                </div>
             </form>
         </div>
 
     </main>
 
-    <!-- Global Footer -->
-    <footer id="main-footer">
-        <p>&copy; 2026 Department of Computer Engineering, K. J. Somaiya School of Engineering (Somaiya Vidyavihar University).</p>
+    <!-- Footer -->
+    <footer>
+        &copy; 2026 Department of Computer Engineering, K. J. Somaiya School of Engineering (Somaiya Vidyavihar University).
     </footer>
 
 </body>

@@ -4,108 +4,359 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Regional Hotspot Map | Heatwave Intelligence System</title>
+    <style>
+        /* --- Base & Typography --- */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f8fafc;
+            color: #334155;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- Header & Navigation --- */
+        #main-header {
+            background-color: #0f172a; 
+            color: #ffffff;
+            padding: 30px 40px 0 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .system-branding h1 {
+            margin: 0 0 5px 0;
+            font-size: 2.2em;
+            color: #f8fafc;
+            letter-spacing: -0.5px;
+        }
+
+        .system-branding p {
+            color: #94a3b8;
+            margin: 0 0 25px 0;
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+        }
+
+        .system-branding span { color: #e2e8f0; }
+
+        #primary-nav {
+            width: 100%;
+            border-top: 1px solid #1e293b;
+            padding: 20px 0;
+        }
+
+        #primary-nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 25px;
+        }
+
+        #primary-nav a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.95em;
+            font-weight: 500;
+            padding-bottom: 6px;
+            border-bottom: 2px solid transparent;
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+
+        #primary-nav a:hover, #primary-nav a.active {
+            color: #38bdf8;
+            border-bottom: 2px solid #38bdf8;
+        }
+
+        /* --- Interactive Map Layout --- */
+        .main-container {
+            max-width: 1000px; /* Constrained width for a beautiful large map */
+            margin: 40px auto;
+            padding: 0 20px;
+            flex-grow: 1;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .section-header h2 {
+            margin: 0;
+            color: #0f172a;
+            font-size: 1.8em;
+        }
+
+        /* Enlarged Map Viewer */
+        .map-section {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            position: relative;
+            overflow: hidden; 
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+            min-height: 600px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        /* The scalable container for zooming */
+        .map-canvas {
+            position: relative;
+            width: 85%;
+            transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        .map-canvas img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Red Marker Dots */
+        .marker {
+            position: absolute;
+            width: 14px;
+            height: 14px;
+            background-color: #ef4444;
+            border: 2px solid #ffffff;
+            border-radius: 50%;
+            cursor: pointer;
+            transform: translate(-50%, -50%);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+            transition: transform 0.2s, box-shadow 0.2s;
+            z-index: 5;
+        }
+
+        .marker:hover {
+            transform: translate(-50%, -50%) scale(1.4);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+        }
+
+        /* Upgraded Popup Tooltip with full descriptions */
+        .marker-popup {
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            padding: 20px;
+            border-radius: 8px;
+            font-size: 0.85em;
+            width: 260px; /* Wider to accommodate text */
+            display: none; 
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+            z-index: 10;
+            color: #334155;
+            text-align: left;
+            white-space: normal; /* Allows text wrapping */
+        }
+
+        .marker-popup::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-width: 8px 8px 0;
+            border-style: solid;
+            border-color: #ffffff transparent transparent transparent;
+        }
+
+        .marker.active .marker-popup { display: block; }
+        
+        .marker.active {
+            z-index: 20;
+            box-shadow: 0 0 0 6px rgba(239, 68, 68, 0.3);
+        }
+
+        /* Reset Zoom Button overlay */
+        .reset-btn {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            background: #ffffff;
+            border: 1px solid #cbd5e1;
+            padding: 10px 16px;
+            font-size: 0.9em;
+            font-weight: 600;
+            cursor: pointer;
+            border-radius: 6px;
+            z-index: 30;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            display: none;
+            transition: background 0.2s, color 0.2s;
+        }
+        .reset-btn:hover { background: #0f172a; color: #ffffff; }
+
+        /* Footer */
+        footer {
+            background-color: #0f172a;
+            color: #64748b;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.85em;
+            border-top: 1px solid #1e293b;
+        }
+    </style>
 </head>
-<body id="hotspot-page" style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #ffff; color: #333; min-height: 100vh; display: flex; flex-direction: column;">
+<body>
 
-
-    <!-- Main Header with Shared Navigation -->
-    <header id="main-header" style="background-color: #ffff; color: #000; padding: 20px 30px;">
-        <h1 id="system-title" style="margin: 0 0 8px 0; font-size: 1.8em;">
-            Heatwave Intelligence System
-        </h1>
-       
-        <p id="monitoring-season" style="font-size: 0.9em; background-color: #ffff; display: inline-block; padding: 4px 10px; margin: 0 0 15px 0; border-radius: 3px;">
-            Current Monitoring Season: <strong>Monsoon 2026</strong>
-        </p>
-
-
-        <!-- Primary Navigation Menu -->
-        <nav id="primary-navigation">
-            <ul style="list-style-type: none; margin: 0; padding: 0; display: flex; gap: 20px; flex-wrap: wrap;">
-                <li><a href="homepage.html" style="color: #000; text-decoration: none;">Home</a></li>
-                <li><a href="alert-details.html" style="color: #000; text-decoration: none;">Alert Details</a></li>
-                <li><a href="about-system.html" style="color: #000; text-decoration: none;">About System</a></li>
-                <li><a href="sources.html" style="color: #000; text-decoration: none;">Sources & Stakeholders</a></li>
-                <li><a href="navigation.html" style="color: #000; text-decoration: none;">Portal Directory</a></li>
-                <li><a href="hotspot-map.html" style="color: #63b3ed; text-decoration: none; font-weight: bold;">Hotspot Map</a></li>
-                <li><a href="forecast.html" style="color: #000; text-decoration: none;">Forecast Summary</a></li>
-                <li><a href="subscribe.html" style="color: #000; text-decoration: none;">Subscribe</a></li>
-                <li><a href="media.html" style="color: #000; text-decoration: none; font-weight: bold;">Media & Awareness</a></li>
+    <!-- Header & Navigation -->
+    <header id="main-header">
+        <div class="system-branding">
+            <h1 title="Comprehensive Heatwave Monitoring & Early Warning Platform">Heatwave Intelligence System</h1>
+            <p>Current Monitoring Season: <span>Monsoon 2026</span></p>
+        </div>
+        <nav id="primary-nav">
+            <ul>
+                <li><a href="homepage.html">Home</a></li>
+                <li><a href="alert-details.html">Alert Details</a></li>
+                <li><a href="about-system.html">About System</a></li>
+                <li><a href="sources.html">Sources & Stakeholders</a></li>
+                <li><a href="navigation.html">Portal Directory</a></li>
+                <li><a href="hotspot-map.html" class="active">Hotspot Map</a></li>
+                <li><a href="forecast.html">Forecast Summary</a></li>
+                <li><a href="subscribe.html">Subscribe</a></li>
+                <li><a href="media.html">Media & Awareness</a></li>
             </ul>
         </nav>
     </header>
 
+    <!-- Main Content -->
+    <main class="main-container">
+        
+        <div class="section-header">
+            <h2>Tracking India's Climate Hotspots</h2>
+        </div>
 
-    <!-- Main Content Container -->
-    <main id="main-content" style="max-width: 1100px; width: 90%; margin: 25px auto; flex-grow: 1;">
-
-
-        <h2 style="margin: 0 0 10px 0; color: #2c3e50; border-bottom: 2px solid #cbd5e0; padding-bottom: 10px;">
-            Interactive Regional Heatwave Hotspot Map
-        </h2>
-
-
-        <p style="color: #4a5568; margin-bottom: 20px; line-height: 1.5;">
-            Click on any highlighted region on the telemetry map below to view localized atmospheric readings, active risk assessments, and forecast summary parameters.
-        </p>
-
-
-        <!-- Interactive Hotspot Map Container -->
-        <section id="map-container" style="background: #ffffff; border: 1px solid #cbd5e0; padding: 25px; border-radius: 5px; text-align: center; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
-           
-            <!-- Map Image bound to #heatwave-zones using usemap -->
-            <img src="https://www.climate.gov/sites/default/files/styles/full_width_620_alternate_image/public/India_heat_wave_610.png?itok=ouFmvGc7"
-                 alt="Regional Heatwave Hotspot Observation Map"
-                 usemap="#heatwave-zones"
-                 width="800"
-                 height="400"
-                 style="max-width: 100%; height: auto; border: 2px solid #cbd5e0; border-radius: 4px; display: block; margin: 0 auto;">
-
-
-            <!-- HTML5 Image Map Definition -->
-            <map name="heatwave-zones">
-                <!-- Region A: North Zone (Left Rectangular Area: x1=0, y1=0, x2=400, y2=400) -->
-                <area shape="rect"
-                      coords="0,0,400,400"
-                      href="forecast.html#north-zone"
-                      alt="North Zone Heatwave Telemetry"
-                      title="North Zone — Click to view detailed forecast telemetry">
-
-
-                <!-- Region B: Central Zone (Right Rectangular Area: x1=401, y1=0, x2=800, y2=400) -->
-                <area shape="rect"
-                      coords="401,0,800,400"
-                      href="forecast.html#central-zone"
-                      alt="Central Zone Heatwave Telemetry"
-                      title="Central Zone — Click to view detailed forecast telemetry">
-            </map>
-
-
-            <div style="margin-top: 20px; display: flex; justify-content: center; gap: 30px; font-size: 0.9em;">
-                <span style="display: flex; align-items: center; gap: 8px;">
-                    <span style="display: inline-block; width: 15px; height: 15px; background-color: #e53e3e; border-radius: 3px;"></span>
-                    <strong>Region A (Left Half):</strong> North Zone (Red Alert)
-                </span>
-                <span style="display: flex; align-items: center; gap: 8px;">
-                    <span style="display: inline-block; width: 15px; height: 15px; background-color: #dd6b20; border-radius: 3px;"></span>
-                    <strong>Region B (Right Half):</strong> Central Zone (Orange Alert)
-                </span>
+        <!-- Full-Width Interactive Map Container -->
+        <section class="map-section">
+            <button id="reset-btn" class="reset-btn">&larr; Reset View</button>
+            
+            <div class="map-canvas" id="map-canvas">
+                <!-- Replace with your local map image name -->
+                <img src="images/map_cleaned.png" alt="India Base Map">
             </div>
-
-
         </section>
-
 
     </main>
 
-
-    <!-- Page Footer -->
-    <footer id="main-footer" style=" color: #cbd5e0; text-align: center; padding: 15px; font-size: 0.85em;">
-        <p style="margin: 0;">
-            &copy; 2026 Department of Computer Engineering, K. J. Somaiya School of Engineering (Somaiya Vidyavihar University).
-        </p>
+    <!-- Footer -->
+    <footer>
+        &copy; 2026 Department of Computer Engineering, K. J. Somaiya School of Engineering (Somaiya Vidyavihar University).
     </footer>
 
+    <!-- Vanilla JavaScript for Map Interactivity -->
+    <script>
+        // 1. Data Structure defining our hotspots
+        const hotspots = [
+            {
+                id: 1,
+                top: "43%", 
+                left: "45%", 
+                state: "Madhya Pradesh",
+                district: "Panna",
+                event: "Rising Temperature",
+                desc: "Severe dry-bulb temperatures have crossed historical thresholds. Local water scarcity is intensifying thermal distress for citizens."
+            },
+            {
+                id: 2,
+                top: "30%", 
+                left: "28%", 
+                state: "Rajasthan",
+                district: "Jaipur",
+                event: "Severe Heatwave",
+                desc: "Maximum daytime ambient temperatures have crossed 47.5°C in isolated pockets, triggering severe heatwave protocols."
+            },
+            {
+                id: 3,
+                top: "54%", 
+                left: "39%", 
+                state: "Maharashtra",
+                district: "Nagpur",
+                event: "Thermal Anomaly",
+                desc: "Continuous real-time telemetry from automated AWS units indicates severe atmospheric dry spells. Municipal cooling centers have been activated."
+            },
+            {
+                id: 4,
+                top: "20%", 
+                left: "35%", 
+                state: "Delhi",
+                district: "New Delhi",
+                event: "Extreme Heat Risk",
+                desc: "Unprecedented temperatures recorded. Immediate hydration and avoidance of direct sunlight between 11:00 AM and 4:00 PM are strongly recommended."
+            }
+        ];
+
+        // 2. DOM Elements
+        const mapCanvas = document.getElementById('map-canvas');
+        const resetBtn = document.getElementById('reset-btn');
+
+        // 3. Initialize Map Markers
+        hotspots.forEach(spot => {
+            // Create the red dot
+            const marker = document.createElement('div');
+            marker.className = 'marker';
+            marker.style.top = spot.top;
+            marker.style.left = spot.left;
+
+            // Create the newly upgraded popup tooltip
+            const popup = document.createElement('div');
+            popup.className = 'marker-popup';
+            popup.innerHTML = `
+                <strong style="color: #b91c1c; font-size: 1.1em; display: block; margin-bottom: 4px;">${spot.event}</strong>
+                <span style="color: #64748b; font-weight: 600; font-size: 0.9em; display: block; margin-bottom: 12px; border-bottom: 1px solid #e2e8f0; padding-bottom: 8px;">
+                    ${spot.district}, ${spot.state}
+                </span>
+                <p style="margin: 0; color: #475569; line-height: 1.5;">${spot.desc}</p>
+            `;
+            marker.appendChild(popup);
+
+            // Add click listener
+            marker.addEventListener('click', (e) => {
+                e.stopPropagation(); 
+
+                // Reset active states
+                document.querySelectorAll('.marker').forEach(m => m.classList.remove('active'));
+                marker.classList.add('active');
+
+                // Zoom Map
+                mapCanvas.style.transformOrigin = `${spot.left} ${spot.top}`;
+                mapCanvas.style.transform = `scale(2.2)`; // Adjusted zoom for the larger map
+                resetBtn.style.display = 'block';
+            });
+
+            // Append marker to the map
+            mapCanvas.appendChild(marker);
+        });
+
+        // 4. Reset Map Functionality
+        resetBtn.addEventListener('click', () => {
+            // Revert zoom
+            mapCanvas.style.transform = `scale(1)`;
+            mapCanvas.style.transformOrigin = `center center`;
+            resetBtn.style.display = 'none';
+
+            // Remove active states
+            document.querySelectorAll('.marker').forEach(m => m.classList.remove('active'));
+        });
+    </script>
 
 </body>
 </html>

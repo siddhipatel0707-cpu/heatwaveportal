@@ -81,24 +81,79 @@
             border-bottom: 2px solid #38bdf8;
         }
 
-        /* --- Full Width Alert Bar --- */
-        .full-width-alert {
-            background-color: #b91c1c; 
-            color: #ffffff;
-            text-align: center;
-            padding: 12px 20px;
-            font-size: 0.95em;
-            font-weight: 600;
-            letter-spacing: 0.5px;
-        }
+/* --- ENHANCED FULL WIDTH ALERT BAR --- */
+.full-width-alert {
+    /* Subtle moving gradient for a lively feel */
+    background: linear-gradient(90deg, #991b1b 0%, #dc2626 50%, #991b1b 100%);
+    background-size: 200% auto;
+    animation: gradientShift 4s ease infinite;
+    
+    color: #ffffff;
+    padding: 12px 20px;
+    font-size: 0.95em;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 4px 10px rgba(220, 38, 38, 0.3);
+}
 
-        .full-width-alert strong {
-            background-color: #7f1d1d;
-            padding: 2px 8px;
-            border-radius: 4px;
-            margin-right: 10px;
-            font-size: 0.9em;
-        }
+.full-width-alert strong {
+    background-color: #7f1d1d;
+    padding: 4px 12px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    /* Task 10: Glowing effect */
+    box-shadow: 0 0 10px rgba(239, 68, 68, 0.5);
+    border: 1px solid #fca5a5;
+    animation: badgePulse 2s infinite ease-in-out;
+}
+
+/* Pulsing Emergency Dot */
+.pulse-dot {
+    width: 8px;
+    height: 8px;
+    background-color: #fca5a5;
+    border-radius: 50%;
+    display: inline-block;
+    animation: dotBlink 1.2s infinite ease-in-out;
+}
+
+.alert-action-link {
+    color: #fca5a5;
+    text-decoration: none;
+    font-weight: 700;
+    margin-left: 10px;
+    transition: color 0.2s;
+}
+
+.alert-action-link:hover {
+    color: #ffffff;
+    text-decoration: underline;
+}
+
+/* --- ANIMATION KEYFRAMES --- */
+@keyframes gradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes badgePulse {
+    0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
+    70% { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+}
+
+@keyframes dotBlink {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.4; transform: scale(1.3); }
+}
 
         /* --- Main Container --- */
         .main-container {
@@ -112,10 +167,12 @@
         }
 
         /* --- Hero Section (Map + Stats) --- */
+        /* --- Hero Section: Map & Stacked Stats --- */
+        /* --- Hero Section: Map & Stacked Stats --- */
         .hero-section {
             display: flex;
             gap: 40px;
-            align-items: stretch;
+            align-items: stretch; /* Keeps columns equal height */
         }
 
         .map-card {
@@ -138,65 +195,76 @@
             object-fit: contain;
         }
 
-        .stats-card {
+        /* New Stacked Column */
+        .stats-column {
             flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 24px; /* Space between the two stacked cards */
+        }
+
+        .stats-card-half {
             background: #ffffff;
             border: 1px solid #e2e8f0;
             border-radius: 12px;
-            padding: 40px 30px;
+            padding: 35px 30px;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
             display: flex;
             flex-direction: column;
             justify-content: center;
+            flex: 1; /* Makes both cards stretch equally to fill the height */
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
-        .stats-card h2 {
-            margin: 0 0 15px 0;
+        .stats-card-half:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.08);
+        }
+
+        .stats-card-half h2 {
+            margin: 0 0 10px 0;
             color: #0f172a;
-            font-size: 2.2em;
+            font-size: 2.1em;
         }
 
-        .stats-card h3 {
+        .stats-card-half h3 {
             margin: 0 0 12px 0;
-            color: #b45309; 
-            font-size: 1.4em;
+            color: #b45309; /* Original amber */
+            font-size: 1.3em;
         }
 
-        .stats-card p {
-            margin: 0 0 25px 0;
+        .stats-card-half p {
+            margin: 0;
             color: #64748b;
             font-size: 0.95em;
             line-height: 1.6;
         }
 
-        .severity-divider {
-            border-top: 1px solid #e2e8f0;
-            padding-top: 25px;
-        }
-
-        .severity-divider h4 {
-            margin: 0 0 5px 0;
+        .severity-card h4 {
+            margin: 0 0 10px 0;
             color: #94a3b8;
-            font-size: 0.85em;
+            font-size: 0.9em;
             text-transform: uppercase;
             letter-spacing: 1px;
         }
 
-        .severity-divider .level {
-            font-size: 2.2em;
+        .severity-card .level {
+            font-size: 2.6em;
             font-weight: 700;
-            color: #b91c1c; 
+            color: #b91c1c; /* Original crimson */
             display: flex;
             align-items: baseline;
             gap: 12px;
+            line-height: 1;
         }
 
-        .severity-divider .level span {
-            font-size: 0.4em;
-            font-weight: 500;
+        .severity-card .level span {
+            font-size: 0.35em;
+            font-weight: 600;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
+
 
         /* --- Assessment List --- */
         .assessment-list {
@@ -320,9 +388,9 @@
                 <li><a href="#">About System</a></li>
                 <li><a href="#">Sources & Stakeholders</a></li>
                 <li><a href="#">Portal Directory</a></li>
-                <li><a href="#">Hotspot Map</a></li>
+                <li><a href="hotspot-map.html">Hotspot Map</a></li>
                 <li><a href="#">Forecast Summary</a></li>
-                <li><a href="#">Subscribe</a></li>
+                <li><a href="subscribe.html">Subscribe</a></li>
                 <li><a href="#">Media & Awareness</a></li>
             </ul>
         </nav>
@@ -337,23 +405,31 @@
     <main class="main-container">
         
         <!-- Hero Section: Map & Peak Stats -->
+<!-- Hero Section: Map & Stacked Stats -->
         <section class="hero-section">
+            
             <div class="map-card">
-                <!-- Replaced Placeholder with the actual Indian Heatmap -->
-                <img src="image_764102.png" alt="India Regional Thermal Heatmap">
+                <img src="images/heatwave-in-india.jpg" alt="India Regional Thermal Heatmap">
             </div>
 
-            <div class="stats-card">
-                <!-- Updated data to match the provided Indian map telemetry -->
-                <h2>Peak Intensity: 49.0°C</h2>
-                <h3>North & Central Indian Plains</h3>
-                <p>Peak temperature recorded at Agra (49°C) and Delhi NCR (48°C). Extreme thermal distress is forecast across the Indo-Gangetic plains and Central India (MP, Maharashtra) over the coming days.</p>
+            <div class="stats-column">
                 
-                <div class="severity-divider">
+                <!-- Top Half: Temperature Data -->
+                <div class="stats-card-half">
+                    <h2>Peak Intensity: 49.0°C</h2>
+                    <h3>North & Central Indian Plains</h3>
+                    <p>Peak temperature recorded at Agra (49°C) and Delhi NCR (48°C). Extreme thermal distress is forecast across the Indo-Gangetic plains and Central India over the coming days.</p>
+                </div>
+                
+                <!-- Bottom Half: Severity Data -->
+                <div class="stats-card-half severity-card">
                     <h4>Severity Index</h4>
                     <div class="level">Level 4 <span>Extreme Caution Required</span></div>
+                    <p style="margin-top: 15px;">Immediate deployment of urban cooling stations, hydration protocols, and municipal health warnings are recommended.</p>
                 </div>
+
             </div>
+            
         </section>
 
         <!-- Middle Section: Assessment Rows -->
@@ -392,4 +468,10 @@
 
     </main>
 
-    <!--
+    <!-- Footer -->
+    <footer>
+        &copy; 2026 Department of Computer Engineering, K. J. Somaiya School of Engineering (Somaiya Vidyavihar University).
+    </footer>
+
+</body>
+</html>
