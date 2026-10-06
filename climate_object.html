@@ -3,158 +3,243 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 3: Climate Monitoring Object</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f7f9;
-            color: #2d3748;
-            padding: 40px 20px;
-            display: flex;
-            justify-content: center;
-        }
-        
-        .main-container {
-            background-color: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 40px;
-            width: 100%;
-            max-width: 900px;
-            min-height: 450px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
-            text-align: center;
-        }
-
-        h2 {
-            margin-top: 0;
-            color: #2c3e50;
-            font-size: 1.5em;
-        }
-
-        .report-card {
-            background-color: #ffffff;
-            border: 1px solid #cbd5e0;
-            padding: 20px;
-            border-radius: 8px;
-            max-width: 400px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.04);
-            line-height: 1.8;
-            margin: 40px auto 0 auto;
-            font-size: 0.95em;
-            text-align: left;
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-weight: bold;
-            font-size: 0.9em;
-            color: white;
-        }
-        .badge-high { background-color: #c53030; }
-        .badge-active { background-color: #d69e2e; }
-    </style>
+    <title>Task 3: Climate Monitoring Object | Heatwave Intelligence System</title>
+    <link rel="stylesheet" href="portal.css">
 </head>
 <body>
 
-    <div class="main-container">
-        <h2>Climate Monitoring System (Object-Oriented)</h2>
-        
+    <!-- Header & Navigation -->
+    <header id="main-header">
+        <div class="system-branding">
+            <h1 title="Comprehensive Heatwave Monitoring & Early Warning Platform">Heatwave Intelligence System</h1>
+            <p>Current Monitoring Season: <span>Monsoon 2026</span></p>
+        </div>
+        <nav id="primary-nav">
+            <ul>
+                <li><a href="homepage.html">Home</a></li>
+                <li><a href="alert.html">Alert Details</a></li>
+                <li><a href="about-system.html">About System</a></li>
+                <li><a href="sources.html">Sources & Stakeholders</a></li>
+                <li><a href="navigation.html">Portal Directory</a></li>
+                <li><a href="hotspot-map.html">Hotspot Map</a></li>
+                <li><a href="forecast.html">Forecast Summary</a></li>
+                <li><a href="subscribe.html">Subscribe</a></li>
+                <li><a href="media.html">Media & Awareness</a></li>
+            </ul>
+        </nav>
+    </header>
 
-        <div id="object-output"></div>
+    <main class="main-container">
 
-        <script>
-           
-            let climateData = {
-                location: "Tilak Nagar",
-                city: "Mumbai",
-                temperature: 40,
-                humidity: 60,
-                windSpeed: 12,
-                forecastTemperature: 44,
-                riskLevel: "Pending",
-                alertStatus: "Inactive",
-                monitoringDate: "2026-09-27",
-                threshold: 38,
+        <div class="section-header">
+            <h2>Climate Monitoring Object</h2>
+            <p>One JavaScript object holds the readings for a monitored location. Its methods calculate the risk and warning, and use <code>this</code> to read their own properties. Change a reading to see the object react.</p>
+        </div>
 
-                
-                displayData: function() {
-                    return `
-                        <strong>Location:</strong> ${this.location}, ${this.city} <br>
-                        <strong>Monitoring Date:</strong> ${this.monitoringDate} <br>
-                        <strong>Temperature:</strong> ${this.temperature}°C <br>
-                        <strong>Humidity:</strong> ${this.humidity}% <br>
-                        <strong>Wind Speed:</strong> ${this.windSpeed} km/h <br>
-                        <strong>Forecast Temp:</strong> ${this.forecastTemperature}°C <br>
-                    `;
-                },
+        <div class="js-layout">
 
-                
-                calculateDifference: function() {
-                    let diff = this.temperature - this.threshold;
-                    return `<strong>Variance:</strong> ${diff > 0 ? '+' : ''}${diff}°C over threshold (${this.threshold}°C)`;
-                },
+            <!-- Left: inputs that write into the object's properties -->
+            <section class="card panel-left">
+                <h3>Monitoring inputs</h3>
+                <p class="card-sub">Each control updates a property on <code>climateData</code>.</p>
 
-                
-                determineRiskLevel: function() {
-                    if (this.temperature >= 40) {
-                        this.riskLevel = "Severe";
-                    } else if (this.temperature >= 38 && this.humidity >= 60) {
-                        this.riskLevel = "High";
-                    } else if (this.temperature >= 35) {
-                        this.riskLevel = "Moderate";
-                    } else {
-                        this.riskLevel = "Normal";
-                    }
-                    return `<strong>Risk Level:</strong> <span class="badge badge-high">${this.riskLevel}</span>`;
-                },
+                <div class="control">
+                    <label for="preset">Location</label>
+                    <select id="preset">
+                        <option value="0">Tilak Nagar, Mumbai</option>
+                        <option value="1">Kothrud, Pune</option>
+                        <option value="2">Palam, Delhi</option>
+                        <option value="3">Colaba, Mumbai</option>
+                    </select>
+                </div>
+                <div class="control">
+                    <label for="in-temp">Temperature <output id="out-temp"></output></label>
+                    <input type="range" id="in-temp" min="25" max="50" step="1">
+                </div>
+                <div class="control">
+                    <label for="in-hum">Humidity <output id="out-hum"></output></label>
+                    <input type="range" id="in-hum" min="10" max="100" step="1">
+                </div>
+                <div class="control">
+                    <label for="in-wind">Wind speed <output id="out-wind"></output></label>
+                    <input type="range" id="in-wind" min="0" max="40" step="1">
+                </div>
+                <div class="control" style="margin-bottom:0;">
+                    <label for="in-fc">Forecast temperature <output id="out-fc"></output></label>
+                    <input type="range" id="in-fc" min="25" max="50" step="1">
+                </div>
+            </section>
 
-                
-                displayEarlyWarning: function() {
-                    if (this.forecastTemperature >= 40) {
-                        return `<strong>Early Warning:</strong> Prepare for severe heatwave based on forecast.`;
-                    } else {
-                        return `<strong>Early Warning:</strong> Normal forecast conditions.`;
-                    }
-                },
+            <!-- Right: what the object's methods report -->
+            <section class="card panel-right">
+                <div id="risk-banner" class="risk-banner">
+                    <div>
+                        <p class="rb-label">Heatwave risk level</p>
+                        <p class="rb-level" id="rb-level"></p>
+                    </div>
+                    <span class="rb-status" id="rb-status"></span>
+                </div>
 
-               
-                updateAlertStatus: function(newStatus) {
-                    this.alertStatus = newStatus;
-                    return `<strong>System Alert Status:</strong> <span class="badge badge-active">${this.alertStatus}</span>`;
+                <ul class="kv-list" id="object-output"></ul>
+
+                <div id="warning-box" class="warning-box"></div>
+
+                <div class="console-box" id="console-box"></div>
+            </section>
+
+        </div>
+    </main>
+
+    <footer>
+        &copy; 2026 Department of Computer Engineering, K. J. Somaiya School of Engineering (Somaiya Vidyavihar University).
+    </footer>
+
+    <script>
+        // TASK 3: climate monitoring object, written with object-literal syntax
+        let climateData = {
+            // Properties
+            location: "Tilak Nagar",
+            city: "Mumbai",
+            temperature: 40,
+            humidity: 60,
+            windSpeed: 12,
+            forecastTemperature: 44,
+            riskLevel: "Pending",
+            alertStatus: "Inactive",
+            monitoringDate: new Date().toISOString().slice(0, 10),
+            threshold: 38,
+
+            // Method 1: return the complete climate information as label/value pairs
+            displayData: function () {
+                return [
+                    ["Location",        this.location + ", " + this.city],
+                    ["Monitoring date", this.monitoringDate],
+                    ["Temperature",     this.temperature + "°C"],
+                    ["Humidity",        this.humidity + "%"],
+                    ["Wind speed",      this.windSpeed + " km/h"],
+                    ["Forecast temp",   this.forecastTemperature + "°C"]
+                ];
+            },
+
+            // Method 2: difference between the current temperature and the heatwave threshold
+            calculateDifference: function () {
+                return this.temperature - this.threshold;
+            },
+
+            // Method 3: decide the risk level (same rules as Task 2) and store it on the object
+            determineRiskLevel: function () {
+                if (this.temperature >= 40) {
+                    this.riskLevel = "Severe";
+                } else if (this.temperature >= 38 && this.humidity >= 60) {
+                    this.riskLevel = "High";
+                } else if (this.temperature >= 35) {
+                    this.riskLevel = "Moderate";
+                } else {
+                    this.riskLevel = "Normal";
                 }
-            };
+                return this.riskLevel;
+            },
 
-            climateData.determineRiskLevel();
-            if (climateData.riskLevel === "High" || climateData.riskLevel === "Severe") {
+            // Method 4: early-warning status, driven by the forecast temperature
+            displayEarlyWarning: function () {
+                if (this.forecastTemperature >= 40) {
+                    return "Early Warning: prepare for heatwave. Forecast reaches " + this.forecastTemperature + "°C.";
+                }
+                return "Early Warning: none. Forecast stays below 40°C.";
+            },
+
+            // Method 5: update the alert status
+            updateAlertStatus: function (newStatus) {
+                this.alertStatus = newStatus;
+                return this.alertStatus;
+            }
+        };
+
+        // Preset locations (only used by the page controls to set the object's properties)
+        const presets = [
+            { location: "Tilak Nagar", city: "Mumbai", temperature: 40, humidity: 60, windSpeed: 12, forecastTemperature: 44 },
+            { location: "Kothrud",     city: "Pune",   temperature: 39, humidity: 65, windSpeed: 9,  forecastTemperature: 41 },
+            { location: "Palam",       city: "Delhi",  temperature: 44, humidity: 28, windSpeed: 15, forecastTemperature: 47 },
+            { location: "Colaba",      city: "Mumbai", temperature: 34, humidity: 78, windSpeed: 18, forecastTemperature: 35 }
+        ];
+
+        const el = function (id) { return document.getElementById(id); };
+
+        // Run the object's methods and paint the result on the page
+        function render() {
+            const level = climateData.determineRiskLevel();
+
+            // Alert status follows the risk level
+            if (level === "Severe" || level === "High") {
                 climateData.updateAlertStatus("Active - Warning Issued");
+            } else if (level === "Moderate") {
+                climateData.updateAlertStatus("Watch - Monitor Conditions");
+            } else {
+                climateData.updateAlertStatus("Inactive");
             }
 
-       
-            let finalOutput = `
-                <div class="report-card">
-                    ${climateData.displayData()}
-                    <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 12px 0;">
-                    ${climateData.calculateDifference()} <br>
-                    ${climateData.determineRiskLevel()} <br>
-                    ${climateData.displayEarlyWarning()} <br>
-                    ${climateData.updateAlertStatus(climateData.alertStatus)}
-                </div>
-            `;
+            const diff = climateData.calculateDifference();
+            const diffText = (diff > 0 ? "+" : "") + diff + "°C vs threshold (" + climateData.threshold + "°C)";
 
-            
-            document.getElementById("object-output").innerHTML = finalOutput;
+            // Risk banner
+            el("risk-banner").className = "risk-banner risk-" + level;
+            el("rb-level").textContent = level;
+            el("rb-status").textContent = climateData.alertStatus;
 
-            
-            console.log("Climate Object Initialized");
-            console.log("City accessed via dot operator: " + climateData.city);
-            console.log("Risk Level determined via method: " + climateData.riskLevel);
+            // Details list
+            const rows = climateData.displayData().concat([["Threshold difference", diffText]]);
+            el("object-output").innerHTML = rows.map(function (r) {
+                return "<li><span>" + r[0] + "</span><span>" + r[1] + "</span></li>";
+            }).join("");
+
+            // Early warning box
+            const warning = climateData.displayEarlyWarning();
+            const warningOn = climateData.forecastTemperature >= 40;
+            el("warning-box").className = "warning-box " + (warningOn ? "on" : "off");
+            el("warning-box").textContent = warning;
+
+            // Console mirror: the same lines that go to the browser console
+            const lines = [
+                "Location: " + climateData.location,
+                "City (dot operator): " + climateData.city,
+                "Risk Level: " + climateData.riskLevel,
+                "Alert Status: " + climateData.alertStatus
+            ];
+            el("console-box").innerHTML = '<span class="c-title">console.log</span>\n' + lines.join("\n");
+            console.log("Climate Object Updated");
+            lines.forEach(function (l) { console.log(l); });
             console.log(climateData);
 
-        </script>
-    </div>
+            // Slider read-outs
+            el("out-temp").textContent = climateData.temperature + "°C";
+            el("out-hum").textContent  = climateData.humidity + "%";
+            el("out-wind").textContent = climateData.windSpeed + " km/h";
+            el("out-fc").textContent   = climateData.forecastTemperature + "°C";
+        }
+
+        // Controls write into the object, then the methods run again
+        function loadPreset(p) {
+            climateData.location = p.location;
+            climateData.city = p.city;
+            climateData.temperature = p.temperature;
+            climateData.humidity = p.humidity;
+            climateData.windSpeed = p.windSpeed;
+            climateData.forecastTemperature = p.forecastTemperature;
+            el("in-temp").value = p.temperature;
+            el("in-hum").value  = p.humidity;
+            el("in-wind").value = p.windSpeed;
+            el("in-fc").value   = p.forecastTemperature;
+            render();
+        }
+
+        el("preset").addEventListener("change", function () { loadPreset(presets[this.value]); });
+        el("in-temp").addEventListener("input", function () { climateData.temperature = Number(this.value); render(); });
+        el("in-hum").addEventListener("input",  function () { climateData.humidity = Number(this.value); render(); });
+        el("in-wind").addEventListener("input", function () { climateData.windSpeed = Number(this.value); render(); });
+        el("in-fc").addEventListener("input",   function () { climateData.forecastTemperature = Number(this.value); render(); });
+
+        loadPreset(presets[0]);
+    </script>
 
 </body>
 </html>

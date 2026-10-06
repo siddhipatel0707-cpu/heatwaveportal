@@ -3,139 +3,248 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Task 4: Temperature Analysis Using Arrays</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f7f9;
-            color: #2d3748;
-            padding: 40px 20px;
-            display: flex;
-            justify-content: center;
-        }
-        
-        .main-container {
-            background-color: #ffffff;
-            border: 1px solid #e2e8f0;
-            border-radius: 8px;
-            padding: 40px;
-            width: 100%;
-            max-width: 900px;
-            min-height: 450px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
-            text-align: center;
-        }
-
-        h2 {
-            margin-top: 0;
-            color: #2c3e50;
-            font-size: 1.5em;
-        }
-
-        .report-card {
-            background-color: #ffffff;
-            border: 1px solid #cbd5e0;
-            padding: 20px 25px;
-            border-radius: 8px;
-            max-width: 450px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.04);
-            line-height: 1.8;
-            margin: 40px auto 0 auto;
-            font-size: 0.95em;
-            text-align: left;
-        }
-
-        .data-row {
-            border-bottom: 1px dashed #e2e8f0;
-            padding-bottom: 8px;
-            margin-bottom: 8px;
-        }
-        
-        .data-row:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-        }
-    </style>
+    <title>Task 4: Temperature Analysis Using Arrays | Heatwave Intelligence System</title>
+    <link rel="stylesheet" href="portal.css">
 </head>
 <body>
 
-    <div class="main-container">
-        <h2>Array-Based Temperature Analysis</h2>
-        
-       
-        <div id="array-output"></div>
+    <!-- Header & Navigation -->
+    <header id="main-header">
+        <div class="system-branding">
+            <h1 title="Comprehensive Heatwave Monitoring & Early Warning Platform">Heatwave Intelligence System</h1>
+            <p>Current Monitoring Season: <span>Monsoon 2026</span></p>
+        </div>
+        <nav id="primary-nav">
+            <ul>
+                <li><a href="homepage.html">Home</a></li>
+                <li><a href="alert.html">Alert Details</a></li>
+                <li><a href="about-system.html">About System</a></li>
+                <li><a href="sources.html">Sources & Stakeholders</a></li>
+                <li><a href="navigation.html">Portal Directory</a></li>
+                <li><a href="hotspot-map.html">Hotspot Map</a></li>
+                <li><a href="forecast.html">Forecast Summary</a></li>
+                <li><a href="subscribe.html">Subscribe</a></li>
+                <li><a href="media.html">Media & Awareness</a></li>
+            </ul>
+        </nav>
+    </header>
 
-        <script>
-            
-            let temperatureReadings = [34, 36, 38, 39, 41, 40, 37, 35, 39, 42];
+    <main class="main-container">
 
+        <div class="section-header">
+            <h2>Array-Based Temperature Analysis</h2>
+            <p>Readings collected at regular intervals are stored in one array and analysed with loops, array methods and functions. Add a reading to see every result update.</p>
+        </div>
 
-            let minTemp = Math.min(...temperatureReadings);
-            let maxTemp = Math.max(...temperatureReadings);
+        <!-- Result tiles -->
+        <section class="tile-grid" aria-label="Analysis results">
+            <div class="tile"><p class="tile-label">Minimum</p><p class="tile-value" id="t-min"></p><p class="tile-note">Coolest reading</p></div>
+            <div class="tile hot"><p class="tile-label">Maximum</p><p class="tile-value" id="t-max"></p><p class="tile-note">Hottest reading</p></div>
+            <div class="tile"><p class="tile-label">Average</p><p class="tile-value" id="t-avg"></p><p class="tile-note" id="t-count"></p></div>
+            <div class="tile warn"><p class="tile-label">At or above 40°C</p><p class="tile-value" id="t-high"></p><p class="tile-note">High heat condition</p></div>
+        </section>
 
-           
-            let sum = 0;
-            let countAbove40 = 0;
-            let heatwaveReadings = []; 
-            let threshold = 40; 
+        <div class="js-layout">
 
-            for (let i = 0; i < temperatureReadings.length; i++) {
-                let currentReading = temperatureReadings[i];
-                
-                
-                sum += currentReading;
+            <!-- Left: readings and controls -->
+            <section class="card panel-left">
+                <h3>Temperature readings</h3>
+                <p class="card-sub">Stored in <code>temperatureReadings</code>.</p>
 
-                
-                if (currentReading >= threshold) {
-                    countAbove40++;
-                    
-                   
-                    heatwaveReadings.push(currentReading);
-                }
-            }
+                <div class="chip-readings" id="readings-list"></div>
 
-           
-            let avgTemp = sum / temperatureReadings.length;
-
-            
-            let allReadingsStr = temperatureReadings.join(" ");
-            let heatwaveStr = heatwaveReadings.join(", ");
-
-            
-            let finalOutput = `
-                <div class="report-card">
-                    <div class="data-row">
-                        <strong>Temperature Readings:</strong><br>
-                        ${allReadingsStr}
-                    </div>
-                    
-                    <div class="data-row">
-                        <strong>Minimum Temperature:</strong> ${minTemp}°C<br>
-                        <strong>Maximum Temperature:</strong> ${maxTemp}°C<br>
-                        <strong>Average Temperature:</strong> ${avgTemp.toFixed(1)}°C
-                    </div>
-                    
-                    <div class="data-row">
-                        <strong>Readings &ge; 40°C:</strong> ${countAbove40}<br>
-                        <strong>Heatwave Condition Readings:</strong> <span style="color: #e53e3e; font-weight: bold;">${heatwaveStr}</span>
-                    </div>
+                <div class="control" style="margin-top:22px;">
+                    <label for="in-threshold">Heatwave threshold <output id="out-threshold"></output></label>
+                    <input type="range" id="in-threshold" min="30" max="45" step="1" value="37">
                 </div>
-            `;
 
-            
-            document.getElementById("array-output").innerHTML = finalOutput;
+                <div class="control" style="margin-bottom:0;">
+                    <label for="in-new">Add a reading (°C)</label>
+                    <div class="add-row">
+                        <input type="number" id="in-new" min="0" max="60" step="1" placeholder="e.g. 43">
+                        <button type="button" class="btn" id="btn-add">Add</button>
+                        <button type="button" class="btn btn-light" id="btn-reset">Reset</button>
+                    </div>
+                    <p id="add-msg" style="margin:8px 0 0 0; font-size:0.82em; color:#b91c1c; min-height:1.2em;"></p>
+                </div>
+            </section>
 
-           
-            console.log("--- Task 4: Array Analysis Execution ---");
-            console.log("Temperature Readings: \n" + allReadingsStr);
-            console.log("Minimum Temperature: " + minTemp + "°C");
-            console.log("Maximum Temperature: " + maxTemp + "°C");
-            console.log("Average Temperature: " + avgTemp.toFixed(1) + "°C");
-            console.log("Readings >= 40°C: " + countAbove40);
-            console.log("Heatwave Condition Readings: " + heatwaveStr);
+            <!-- Right: chart and summary -->
+            <section class="card panel-right">
+                <h3>Readings against the threshold</h3>
+                <p class="card-sub">Bars above the dashed line cross the heatwave threshold.</p>
 
-        </script>
-    </div>
+                <div class="bar-chart" id="bar-chart"></div>
+                <div class="bar-axis" id="bar-axis"></div>
+
+                <div class="chart-legend">
+                    <span><i style="background:#94a3b8"></i>Below threshold</span>
+                    <span><i style="background:#f59e0b"></i>Above threshold</span>
+                    <span><i style="background:#dc2626"></i>40°C or above</span>
+                </div>
+
+                <ul class="kv-list" style="margin-top:20px;">
+                    <li><span>Readings above threshold</span><span id="s-above"></span></li>
+                    <li><span>Readings at or above 40°C</span><span id="s-high"></span></li>
+                    <li><span>Heatwave condition readings</span><span id="s-list"></span></li>
+                </ul>
+
+                <div class="console-box" id="console-box"></div>
+            </section>
+
+        </div>
+    </main>
+
+    <footer>
+        &copy; 2026 Department of Computer Engineering, K. J. Somaiya School of Engineering (Somaiya Vidyavihar University).
+    </footer>
+
+    <script>
+        // TASK 4: temperature readings stored in an array
+        const originalReadings = [34, 36, 38, 39, 41, 40, 37, 35, 39, 42];
+        let temperatureReadings = originalReadings.slice();
+        let threshold = 37;               // heatwave threshold (°C)
+        const HIGH_HEAT = 40;             // high heat condition (°C)
+
+        // Function: minimum, using a loop
+        function findMinimum(readings) {
+            let min = readings[0];
+            for (let i = 1; i < readings.length; i++) {
+                if (readings[i] < min) { min = readings[i]; }
+            }
+            return min;
+        }
+
+        // Function: maximum, using the Math.max spread form
+        function findMaximum(readings) {
+            return Math.max(...readings);
+        }
+
+        // Function: average, using reduce
+        function findAverage(readings) {
+            const total = readings.reduce(function (sum, value) { return sum + value; }, 0);
+            return total / readings.length;
+        }
+
+        // Function: count readings above a limit, using a loop
+        function countAbove(readings, limit, inclusive) {
+            let count = 0;
+            for (let i = 0; i < readings.length; i++) {
+                if (inclusive ? readings[i] >= limit : readings[i] > limit) { count++; }
+            }
+            return count;
+        }
+
+        // Function: readings that indicate a high heat condition, using filter
+        function highHeatReadings(readings) {
+            return readings.filter(function (value) { return value >= HIGH_HEAT; });
+        }
+
+        const el = function (id) { return document.getElementById(id); };
+
+        function render() {
+            const minTemp   = findMinimum(temperatureReadings);
+            const maxTemp   = findMaximum(temperatureReadings);
+            const avgTemp   = findAverage(temperatureReadings);
+            const aboveThr  = countAbove(temperatureReadings, threshold, false);
+            const highCount = countAbove(temperatureReadings, HIGH_HEAT, true);
+            const highList  = highHeatReadings(temperatureReadings);
+
+            // Tiles
+            el("t-min").textContent   = minTemp + "°C";
+            el("t-max").textContent   = maxTemp + "°C";
+            el("t-avg").textContent   = avgTemp.toFixed(1) + "°C";
+            el("t-count").textContent = temperatureReadings.length + " readings";
+            el("t-high").textContent  = highCount;
+            el("out-threshold").textContent = threshold + "°C";
+
+            // Summary list
+            el("s-above").textContent = aboveThr + " of " + temperatureReadings.length;
+            el("s-high").textContent  = highCount;
+            el("s-list").textContent  = highList.length ? highList.join(", ") : "None";
+
+            // Reading chips (traversal with forEach)
+            el("readings-list").innerHTML = "";
+            temperatureReadings.forEach(function (value) {
+                const chip = document.createElement("span");
+                chip.className = "reading" + (value >= HIGH_HEAT ? " high" : value > threshold ? " above" : "");
+                chip.textContent = value;
+                el("readings-list").appendChild(chip);
+            });
+
+            // Bar chart: scale between a floor below the minimum and the maximum
+            const floor = Math.min(minTemp, threshold) - 4;
+            const top   = Math.max(maxTemp, threshold) + 2;
+            const range = top - floor;
+            const chart = el("bar-chart");
+            chart.innerHTML = "";
+            el("bar-axis").innerHTML = "";
+
+            temperatureReadings.forEach(function (value, i) {
+                const col = document.createElement("div");
+                col.className = "bar-col";
+                const label = document.createElement("div");
+                label.className = "bar-val";
+                label.textContent = value;
+                const bar = document.createElement("div");
+                bar.className = "bar" + (value >= HIGH_HEAT ? " high" : value > threshold ? " above" : "");
+                bar.style.height = ((value - floor) / range * 85) + "%";
+                col.appendChild(label);
+                col.appendChild(bar);
+                chart.appendChild(col);
+
+                const idx = document.createElement("div");
+                idx.className = "bar-idx";
+                idx.textContent = "#" + (i + 1);
+                el("bar-axis").appendChild(idx);
+            });
+
+            // Threshold line (same 85% scale as the bars, measured from the chart bottom)
+            const line = document.createElement("div");
+            line.className = "threshold-line";
+            line.style.bottom = ((threshold - floor) / range * 85) + "%";
+            line.innerHTML = "<span>Threshold " + threshold + "°C</span>";
+            chart.appendChild(line);
+
+            // Console output, mirrored on the page
+            const lines = [
+                "Temperature Readings: " + temperatureReadings.join(" "),
+                "Minimum Temperature: " + minTemp + "°C",
+                "Maximum Temperature: " + maxTemp + "°C",
+                "Average Temperature: " + avgTemp.toFixed(1) + "°C",
+                "Readings above " + threshold + "°C: " + aboveThr,
+                "Readings >= 40°C: " + highCount,
+                "Heatwave Condition Readings: " + (highList.length ? highList.join(", ") : "None")
+            ];
+            el("console-box").innerHTML = '<span class="c-title">console.log</span>\n' + lines.join("\n");
+            console.log("--- Task 4: Array Analysis ---");
+            lines.forEach(function (l) { console.log(l); });
+        }
+
+        el("in-threshold").addEventListener("input", function () { threshold = Number(this.value); render(); });
+
+        el("btn-add").addEventListener("click", function () {
+            const input = el("in-new");
+            const value = Number(input.value);
+            if (input.value === "" || isNaN(value) || value < 0 || value > 60) {
+                el("add-msg").textContent = "Enter a temperature between 0 and 60.";
+                return;
+            }
+            el("add-msg").textContent = "";
+            temperatureReadings.push(value);          // array method: push
+            input.value = "";
+            render();
+        });
+        el("in-new").addEventListener("keydown", function (e) { if (e.key === "Enter") { el("btn-add").click(); } });
+
+        el("btn-reset").addEventListener("click", function () {
+            temperatureReadings = originalReadings.slice();
+            el("add-msg").textContent = "";
+            render();
+        });
+
+        render();
+    </script>
 
 </body>
 </html>
