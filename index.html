@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1>Heading</h1>
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
+
+
+    <script>
+     /*   $("h1").click(function()
+     {
+        alert("Headind clicked!");
+     } ) */
+
+     $(document).ready(function() 
+     {
+        $("h1").text("Hi I am Great");
+     })
+
+     $(document).ready(function() 
+     {
+        $("#msg").text("Good Evening");
+     })
+
+     $(document).ready(function() 
+     {
+        $(".msg").text("Good Good Day");
+     })
+
+     $(document).ready(function() 
+     {
+        $('#bt').click(function()
+        {
+            $(".msg").text("Hi I am Great (using button)");
+        })
+        
+     })
+
+
+     
+     
+
+
+    </script>
+
+    <p id="msg">I am Siddhi</p>
+    <p class="msg">Good Morning</p>
+    <button id="bt">Click me</button>
+
+
+
+</body>
+</html>

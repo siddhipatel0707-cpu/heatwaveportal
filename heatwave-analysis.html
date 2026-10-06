@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 1: Heatwave Temperature Analysis</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f9;
+            color: #2d3748;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .main-container {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 40px;
+            width: 100%;
+            max-width: 900px;
+            min-height: 450px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+            text-align: center; 
+        }
+
+        h2 {
+            margin-top: 0;
+            color: #2c3e50;
+            font-size: 1.5em;
+        }
+
+        .report-card {
+            background-color: #ffffff;
+            border: 1px solid #cbd5e0;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 350px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.04);
+            line-height: 1.6;
+            margin: 40px auto 0 auto; 
+            font-size: 0.95em;
+            text-align: left; 
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-container">
+        
+        <h2>Heatwave Monitoring Report</h2>
+
+        <script>
+            let locationName = prompt("Enter location name:", "Goa");
+            let currentTemp = parseFloat(prompt("Enter current temperature (°C):", "35"));
+            let thresholdTemp = parseFloat(prompt("Enter heatwave threshold temperature (°C):", "32"));
+            let humidity = parseFloat(prompt("Enter humidity (%):", "65"));
+            let monitoringDate = prompt("Enter monitoring date (YYYY-MM-DD):", "2026-09-21");
+
+            let tempDifference = currentTemp - thresholdTemp;
+
+            let statusMessage = "";
+            if (currentTemp > thresholdTemp) {
+                statusMessage = "Heatwave Condition Detected";
+            } else {
+                statusMessage = "Normal Condition";
+            }
+
+            let htmlOutput = `
+                <div class="report-card">
+                    <strong>Location:</strong> ${locationName} <br>
+                    <strong>Current Temperature:</strong> ${currentTemp}°C <br>
+                    <strong>Heatwave Threshold:</strong> ${thresholdTemp}°C <br>
+                    <strong>Temperature Difference:</strong> ${tempDifference}°C <br>
+                    <strong>Status:</strong> <span style="color: ${currentTemp > thresholdTemp ? '#e53e3e' : '#38a169'}; font-weight: bold;">${statusMessage}</span>
+                </div>
+            `;
+
+            let plainTextOutput = `Location: ${locationName}\n` +
+                                  `Current Temperature: ${currentTemp}°C\n` +
+                                  `Heatwave Threshold: ${thresholdTemp}°C\n` +
+                                  `Temperature Difference: ${tempDifference}°C\n` +
+                                  `Status: ${statusMessage}`;
+
+            document.write(htmlOutput);
+
+            console.log("--- Lab Task 1 Execution ---");
+            console.log(plainTextOutput);
+
+            alert("System Status Update: " + statusMessage);
+        </script>
+        
+    </div>
+
+</body>
+</html>

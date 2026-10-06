@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 3: Climate Monitoring Object</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f9;
+            color: #2d3748;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .main-container {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 40px;
+            width: 100%;
+            max-width: 900px;
+            min-height: 450px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+            text-align: center;
+        }
+
+        h2 {
+            margin-top: 0;
+            color: #2c3e50;
+            font-size: 1.5em;
+        }
+
+        .report-card {
+            background-color: #ffffff;
+            border: 1px solid #cbd5e0;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 400px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.04);
+            line-height: 1.8;
+            margin: 40px auto 0 auto;
+            font-size: 0.95em;
+            text-align: left;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: bold;
+            font-size: 0.9em;
+            color: white;
+        }
+        .badge-high { background-color: #c53030; }
+        .badge-active { background-color: #d69e2e; }
+    </style>
+</head>
+<body>
+
+    <div class="main-container">
+        <h2>Climate Monitoring System (Object-Oriented)</h2>
+        
+
+        <div id="object-output"></div>
+
+        <script>
+           
+            let climateData = {
+                location: "Tilak Nagar",
+                city: "Mumbai",
+                temperature: 40,
+                humidity: 60,
+                windSpeed: 12,
+                forecastTemperature: 44,
+                riskLevel: "Pending",
+                alertStatus: "Inactive",
+                monitoringDate: "2026-09-27",
+                threshold: 38,
+
+                
+                displayData: function() {
+                    return `
+                        <strong>Location:</strong> ${this.location}, ${this.city} <br>
+                        <strong>Monitoring Date:</strong> ${this.monitoringDate} <br>
+                        <strong>Temperature:</strong> ${this.temperature}°C <br>
+                        <strong>Humidity:</strong> ${this.humidity}% <br>
+                        <strong>Wind Speed:</strong> ${this.windSpeed} km/h <br>
+                        <strong>Forecast Temp:</strong> ${this.forecastTemperature}°C <br>
+                    `;
+                },
+
+                
+                calculateDifference: function() {
+                    let diff = this.temperature - this.threshold;
+                    return `<strong>Variance:</strong> ${diff > 0 ? '+' : ''}${diff}°C over threshold (${this.threshold}°C)`;
+                },
+
+                
+                determineRiskLevel: function() {
+                    if (this.temperature >= 40) {
+                        this.riskLevel = "Severe";
+                    } else if (this.temperature >= 38 && this.humidity >= 60) {
+                        this.riskLevel = "High";
+                    } else if (this.temperature >= 35) {
+                        this.riskLevel = "Moderate";
+                    } else {
+                        this.riskLevel = "Normal";
+                    }
+                    return `<strong>Risk Level:</strong> <span class="badge badge-high">${this.riskLevel}</span>`;
+                },
+
+                
+                displayEarlyWarning: function() {
+                    if (this.forecastTemperature >= 40) {
+                        return `<strong>Early Warning:</strong> Prepare for severe heatwave based on forecast.`;
+                    } else {
+                        return `<strong>Early Warning:</strong> Normal forecast conditions.`;
+                    }
+                },
+
+               
+                updateAlertStatus: function(newStatus) {
+                    this.alertStatus = newStatus;
+                    return `<strong>System Alert Status:</strong> <span class="badge badge-active">${this.alertStatus}</span>`;
+                }
+            };
+
+            climateData.determineRiskLevel();
+            if (climateData.riskLevel === "High" || climateData.riskLevel === "Severe") {
+                climateData.updateAlertStatus("Active - Warning Issued");
+            }
+
+       
+            let finalOutput = `
+                <div class="report-card">
+                    ${climateData.displayData()}
+                    <hr style="border: 0; border-top: 1px solid #e2e8f0; margin: 12px 0;">
+                    ${climateData.calculateDifference()} <br>
+                    ${climateData.determineRiskLevel()} <br>
+                    ${climateData.displayEarlyWarning()} <br>
+                    ${climateData.updateAlertStatus(climateData.alertStatus)}
+                </div>
+            `;
+
+            
+            document.getElementById("object-output").innerHTML = finalOutput;
+
+            
+            console.log("Climate Object Initialized");
+            console.log("City accessed via dot operator: " + climateData.city);
+            console.log("Risk Level determined via method: " + climateData.riskLevel);
+            console.log(climateData);
+
+        </script>
+    </div>
+
+</body>
+</html>

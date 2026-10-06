@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 6: Climate Intelligence Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f9;
+            color: #2d3748;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .main-container {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 35px 40px;
+            width: 100%;
+            max-width: 850px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+        }
+
+        h2 {
+            margin-top: 0;
+            color: #1a365d;
+            font-size: 1.6em;
+            text-align: center;
+            border-bottom: 2px solid #e2e8f0;
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+        }
+
+        fieldset {
+            border: 1px solid #cbd5e0;
+            border-radius: 6px;
+            padding: 20px;
+            margin-bottom: 25px;
+            background-color: #f8fafc;
+        }
+
+        legend {
+            font-weight: bold;
+            color: #2b6cb0;
+            background: #ffffff;
+            padding: 0 10px;
+            border: 1px solid #cbd5e0;
+            border-radius: 4px;
+        }
+
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 15px;
+        }
+
+        .form-group {
+            flex: 1;
+            min-width: 250px;
+        }
+
+        label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 6px;
+            color: #4a5568;
+            font-size: 0.9em;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="date"],
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #cbd5e0;
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-size: 0.95em;
+        }
+
+        .input-error {
+            border: 2px solid #e53e3e !important;
+            background-color: #fff5f5;
+        }
+
+        .error-message {
+            color: #e53e3e;
+            font-size: 0.85em;
+            font-weight: bold;
+            display: block;
+            margin-top: 5px;
+            min-height: 16px;
+        }
+
+        button[type="submit"] {
+            background-color: #2b6cb0;
+            color: white;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 4px;
+            font-size: 1.05em;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            transition: background-color 0.2s;
+        }
+
+        button[type="submit"]:hover {
+            background-color: #1a365d;
+        }
+
+    
+        #success-panel {
+            display: none;
+            background-color: #f0fdf4;
+            border: 2px solid #22c55e;
+            color: #15803d;
+            padding: 30px;
+            border-radius: 8px;
+            text-align: center;
+            font-size: 1.2em;
+            line-height: 1.6;
+            margin-top: 20px;
+            box-shadow: 0 4px 10px rgba(34, 197, 94, 0.1);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.85em;
+            color: #718096;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-container">
+        <h2>Climate Intelligence Heatwave Early-Warning Registration</h2>
+        
+       
+        <div id="success-panel">
+            <strong>Registration Successful!</strong><br><br>
+            You are registered for Climate Intelligence<br>
+            Heatwave Monitoring and Early-Warning Alerts.
+        </div>
+
+        <form id="climate-registration-form" novalidate>
+            
+            
+            <fieldset>
+                <legend>Personal Information</legend>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="user-name">User Name</label>
+                        <input type="text" id="user-name" placeholder="Enter full name">
+                        <span id="error-user-name" class="error-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="mobile-number">Mobile Number</label>
+                        <input type="text" id="mobile-number" placeholder="10-digit mobile number">
+                        <span id="error-mobile-number" class="error-message"></span>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="email-address">Email Address</label>
+                        <input type="email" id="email-address" placeholder="e.g., user@domain.com">
+                        <span id="error-email-address" class="error-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="age-group">Age Group</label>
+                        <select id="age-group">
+                            <option value="">-- Select Age Group --</option>
+                            <option value="Under 18">Under 18</option>
+                            <option value="18-35">18 - 35</option>
+                            <option value="36-55">36 - 55</option>
+                            <option value="56+">56 and Above (High Risk)</option>
+                        </select>
+                        <span id="error-age-group" class="error-message"></span>
+                    </div>
+                </div>
+            </fieldset>
+
+      
+            <fieldset>
+                <legend>Location Details</legend>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="location-city">Location / City</label>
+                        <input type="text" id="location-city" placeholder="Enter your city">
+                        <span id="error-location-city" class="error-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="pin-code">PIN / Postal Code</label>
+                        <input type="text" id="pin-code" placeholder="6-digit PIN code">
+                        <span id="error-pin-code" class="error-message"></span>
+                    </div>
+                </div>
+            </fieldset>
+
+           
+            <fieldset>
+                <legend>Account & Alert Preferences</legend>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="user-id">User ID (Format: CLM-1234)</label>
+                        <input type="text" id="user-id" placeholder="CLM-1234">
+                        <span id="error-user-id" class="error-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="user-category">User Category</label>
+                        <select id="user-category">
+                            <option value="">-- Select Category --</option>
+                            <option value="General Public">General Public</option>
+                            <option value="Senior Citizen">Senior Citizen</option>
+                            <option value="Student">Student</option>
+                            <option value="Outdoor Worker">Outdoor Worker</option>
+                            <option value="Healthcare Worker">Healthcare Worker</option>
+                            <option value="Government/Disaster Management">Government/Disaster Management</option>
+                            <option value="Other">Other</option>
+                        </select>
+                        <span id="error-user-category" class="error-message"></span>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="alert-channel">Preferred Alert Channel</label>
+                        <select id="alert-channel">
+                            <option value="">-- Select Channel --</option>
+                            <option value="SMS">SMS Notification</option>
+                            <option value="Email">Email Broadcast</option>
+                            <option value="WhatsApp">WhatsApp Alert</option>
+                        </select>
+                        <span id="error-alert-channel" class="error-message"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="registration-date">Registration Date</label>
+                        <input type="date" id="registration-date">
+                        <span id="error-registration-date" class="error-message"></span>
+                    </div>
+                </div>
+            </fieldset>
+
+            <button type="submit">Complete Registration</button>
+        </form>
+
+        <footer>
+            <p>&copy; 2026 Department of Computer Engineering, K. J. Somaiya College of Engineering.</p>
+        </footer>
+    </div>
+
+    
+    <script>
+        function checkEmpty(value) {
+            return value.trim() !== "";
+        }
+
+        function validateName(name) {
+            const regex = /^[A-Za-z ]+$/;
+            return regex.test(name.trim());
+        }
+
+        function validateMobile(mobile) {
+            const regex = /^[0-9]{10}$/;
+            return regex.test(mobile.trim());
+        }
+
+        function validateEmail(email) {
+            const regex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+            return regex.test(email.trim());
+        }
+
+        function validateUserID(id) {
+            const regex = /^CLM-\d{4}$/;
+            return regex.test(id.trim());
+        }
+
+        function validatePIN(pin) {
+            const regex = /^\d{6}$/;
+            return regex.test(pin.trim());
+        }
+
+        function validateFutureDate(dateString) {
+            const inputDate = new Date(dateString);
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            inputDate.setHours(0, 0, 0, 0);
+            return inputDate <= today;
+        }
+
+        function setError(inputId, errorId, message) {
+            document.getElementById(inputId).classList.add("input-error");
+            document.getElementById(errorId).textContent = message;
+        }
+
+        function clearErrors() {
+            const inputs = document.querySelectorAll("input, select");
+            const errors = document.querySelectorAll(".error-message");
+            inputs.forEach(input => input.classList.remove("input-error"));
+            errors.forEach(error => error.textContent = "");
+        }
+
+        document.getElementById("climate-registration-form").addEventListener("submit", function(event) {
+            event.preventDefault();
+            clearErrors();
+
+            let isFormValid = true;
+
+            const name = document.getElementById("user-name").value;
+            const mobile = document.getElementById("mobile-number").value;
+            const email = document.getElementById("email-address").value;
+            const ageGroup = document.getElementById("age-group").value;
+            const location = document.getElementById("location-city").value;
+            const pinCode = document.getElementById("pin-code").value;
+            const userId = document.getElementById("user-id").value;
+            const userCategory = document.getElementById("user-category").value;
+            const alertChannel = document.getElementById("alert-channel").value;
+            const regDate = document.getElementById("registration-date").value;
+
+            if (!checkEmpty(name)) {
+                setError("user-name", "error-user-name", "User name is required.");
+                isFormValid = false;
+            } else if (!validateName(name)) {
+                setError("user-name", "error-user-name", "Only alphabets and spaces allowed.");
+                isFormValid = false;
+            }
+
+            if (!checkEmpty(mobile)) {
+                setError("mobile-number", "error-mobile-number", "Mobile number is required.");
+                isFormValid = false;
+            } else if (!validateMobile(mobile)) {
+                setError("mobile-number", "error-mobile-number", "Must be exactly 10 digits.");
+                isFormValid = false;
+            }
+
+            if (!checkEmpty(email)) {
+                setError("email-address", "error-email-address", "Email is required.");
+                isFormValid = false;
+            } else if (!validateEmail(email)) {
+                setError("email-address", "error-email-address", "Invalid email format.");
+                isFormValid = false;
+            }
+
+            if (!checkEmpty(ageGroup)) {
+                setError("age-group", "error-age-group", "Please select an age group.");
+                isFormValid = false;
+            }
+
+            if (!checkEmpty(location)) {
+                setError("location-city", "error-location-city", "Location cannot be empty.");
+                isFormValid = false;
+            }
+
+            if (!checkEmpty(pinCode)) {
+                setError("pin-code", "error-pin-code", "PIN Code is required.");
+                isFormValid = false;
+            } else if (!validatePIN(pinCode)) {
+                setError("pin-code", "error-pin-code", "Must be exactly 6 digits.");
+                isFormValid = false;
+            }
+
+            if (!checkEmpty(userId)) {
+                setError("user-id", "error-user-id", "User ID is required.");
+                isFormValid = false;
+            } else if (!validateUserID(userId)) {
+                setError("user-id", "error-user-id", "Must follow pattern: CLM-1234.");
+                isFormValid = false;
+            }
+
+            if (!checkEmpty(userCategory)) {
+                setError("user-category", "error-user-category", "Please select a user category.");
+                isFormValid = false;
+            }
+
+            if (!checkEmpty(alertChannel)) {
+                setError("alert-channel", "error-alert-channel", "Please select a preferred channel.");
+                isFormValid = false;
+            }
+
+            if (!checkEmpty(regDate)) {
+                setError("registration-date", "error-registration-date", "Registration date is required.");
+                isFormValid = false;
+            } else if (!validateFutureDate(regDate)) {
+                setError("registration-date", "error-registration-date", "Date cannot be in the future.");
+                isFormValid = false;
+            }
+
+            
+            if (isFormValid) {
+                document.getElementById("climate-registration-form").style.display = "none";
+                document.getElementById("success-panel").style.display = "block";
+                window.scrollTo({ top: 0, behavior: "smooth" });
+            }
+        });
+    </script>
+</body>
+</html>

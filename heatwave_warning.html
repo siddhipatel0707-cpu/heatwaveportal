@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 2: Heatwave Risk and Early-Warning Decision</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f9;
+            color: #2d3748;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .main-container {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 40px;
+            width: 100%;
+            max-width: 900px;
+            min-height: 450px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+            text-align: center;
+        }
+
+        h2 {
+            margin-top: 0;
+            color: #2c3e50;
+            font-size: 1.5em;
+        }
+
+        .report-card {
+            background-color: #ffffff;
+            border: 1px solid #cbd5e0;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 380px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.04);
+            line-height: 1.6;
+            margin: 40px auto 0 auto;
+            font-size: 0.95em;
+            text-align: left;
+        }
+
+        .highlight-risk {
+            font-weight: bold;
+            font-size: 1.05em;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-container">
+        
+        <h2>Heatwave Risk & Early-Warning Assessment</h2>
+
+        <script>
+
+            let locationName = prompt("Enter location name:", "Pune");
+            let temp = parseFloat(prompt("Enter current temperature (°C):", "39"));
+            let humidity = parseFloat(prompt("Enter humidity (%):", "65"));
+            let forecastTemp = parseFloat(prompt("Enter forecast temperature (°C):", "38"));
+            
+
+            let isHeatwaveCondition = confirm("Is a general heatwave condition officially declared? (OK for Yes, Cancel for No)");
+            let vulnerableAlertRequired = confirm("Are vulnerable populations currently at risk? (OK for Yes, Cancel for No)");
+
+            let riskLevel = "";
+            let recommendation = "";
+            let riskColor = "";
+
+            
+            if (temp >= 40) {
+                riskLevel = "SEVERE";
+                recommendation = "Severe Heatwave Warning";
+                riskColor = "#9b2c2c";
+            } 
+            else if (temp >= 38 && humidity >= 60) {
+                riskLevel = "HIGH";
+                recommendation = "Issue Heatwave Warning";
+                riskColor = "#c53030";
+            } 
+            else if (temp >= 35 && temp < 38) {
+                riskLevel = "MODERATE";
+                recommendation = "Moderate Heat Risk – Monitor Conditions";
+                riskColor = "#dd6b20";
+            } 
+            
+            else if (forecastTemp >= 40 || isHeatwaveCondition === true) {
+                riskLevel = "EARLY WARNING";
+                recommendation = "Early Warning – Prepare for Heatwave";
+                riskColor = "#d69e2e";
+            } 
+            else {
+                riskLevel = "NORMAL";
+                recommendation = "Normal – Continue Monitoring";
+                riskColor = "#38a169"; 
+            }
+
+       
+            if (vulnerableAlertRequired === true && (riskLevel === "SEVERE" || riskLevel === "HIGH")) {
+                recommendation += " <br><span style='color: #e53e3e;'><em>* IMMEDIATE VULNERABLE POPULATION PROTOCOLS REQUIRED *</em></span>";
+            }
+
+           
+            let htmlOutput = `
+                <div class="report-card">
+                    <strong>Location:</strong> ${locationName} <br>
+                    <strong>Temperature:</strong> ${temp}°C <br>
+                    <strong>Humidity:</strong> ${humidity}% <br><br>
+                    <strong>Risk Level:</strong> <span class="highlight-risk" style="color: ${riskColor};">${riskLevel}</span> <br>
+                    <strong>Recommendation:</strong> ${recommendation}
+                </div>
+            `;
+
+            let plainTextOutput = `Location: ${locationName}\n` +
+                                  `Temperature: ${temp}°C\n` +
+                                  `Humidity: ${humidity}%\n\n` +
+                                  `Risk Level: ${riskLevel}\n` +
+                                  `Recommendation: ${recommendation.replace(/<[^>]*>?/gm, '')}`; // Strip HTML tags for console
+
+            
+            document.write(htmlOutput);
+            console.log("--- Lab Task 2 Execution ---");
+            console.log(plainTextOutput);
+
+        </script>
+        
+    </div>
+
+</body>
+</html>

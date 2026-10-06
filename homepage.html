@@ -3,115 +3,393 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Heatwave Intelligence System | KJS-CES-01</title>
-    <!-- LINKED TASK 9 LAYOUT STYLESHEET -->
-    <link rel="stylesheet" href="layout.css">
-</head>
-<body id="home-page">
+    <title title="System Dashboard">Heatwave Intelligence System | KJS-CES-01</title>
 
-    <!-- Header Section -->
-    <header id="main-header">
-        <h1 id="system-title">Heatwave Intelligence System</h1>
+    <style>
+        /* --- Base & Typography --- */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            background-color: #f8fafc; 
+            color: #334155;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        /* --- INTERNAL CSS FOR ORIGINAL NAVIGATION --- */
+        #main-header {
+            background-color: #0f172a; 
+            color: #ffffff;
+            padding: 30px 40px 0 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .system-branding h1 {
+            margin: 0 0 5px 0;
+            font-size: 2.2em;
+            color: #f8fafc;
+            letter-spacing: -0.5px;
+        }
+
+        .system-branding p {
+            color: #94a3b8;
+            margin: 0 0 25px 0;
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+        }
+
+        .system-branding span {
+            color: #e2e8f0;
+        }
+
+        #primary-nav {
+            width: 100%;
+            border-top: 1px solid #1e293b;
+            padding: 20px 0;
+        }
+
+        #primary-nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 25px;
+        }
+
+        #primary-nav a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.95em;
+            font-weight: 500;
+            padding-bottom: 6px;
+            border-bottom: 2px solid transparent;
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+
+        #primary-nav a:hover, #primary-nav a.active {
+            color: #38bdf8;
+            border-bottom: 2px solid #38bdf8;
+        }
+
+        /* --- Full Width Alert Bar --- */
+        .full-width-alert {
+            background-color: #b91c1c; 
+            color: #ffffff;
+            text-align: center;
+            padding: 12px 20px;
+            font-size: 0.95em;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+
+        .full-width-alert strong {
+            background-color: #7f1d1d;
+            padding: 2px 8px;
+            border-radius: 4px;
+            margin-right: 10px;
+            font-size: 0.9em;
+        }
+
+        /* --- Main Container --- */
+        .main-container {
+            max-width: 1200px;
+            margin: 40px auto;
+            padding: 0 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 40px;
+            flex-grow: 1;
+        }
+
+        /* --- Hero Section (Map + Stats) --- */
+        .hero-section {
+            display: flex;
+            gap: 40px;
+            align-items: stretch;
+        }
+
+        .map-card {
+            flex: 1.2;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .map-card img {
+            width: 100%;
+            height: auto;
+            border-radius: 8px;
+            object-fit: contain;
+        }
+
+        .stats-card {
+            flex: 1;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 40px 30px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .stats-card h2 {
+            margin: 0 0 15px 0;
+            color: #0f172a;
+            font-size: 2.2em;
+        }
+
+        .stats-card h3 {
+            margin: 0 0 12px 0;
+            color: #b45309; 
+            font-size: 1.4em;
+        }
+
+        .stats-card p {
+            margin: 0 0 25px 0;
+            color: #64748b;
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+
+        .severity-divider {
+            border-top: 1px solid #e2e8f0;
+            padding-top: 25px;
+        }
+
+        .severity-divider h4 {
+            margin: 0 0 5px 0;
+            color: #94a3b8;
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .severity-divider .level {
+            font-size: 2.2em;
+            font-weight: 700;
+            color: #b91c1c; 
+            display: flex;
+            align-items: baseline;
+            gap: 12px;
+        }
+
+        .severity-divider .level span {
+            font-size: 0.4em;
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* --- Assessment List --- */
+        .assessment-list {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .assessment-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 24px 30px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+            transition: box-shadow 0.2s;
+        }
+
+        .assessment-row:hover {
+            box-shadow: 0 6px 12px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .assessment-content h4 {
+            margin: 0 0 6px 0;
+            color: #0f172a;
+            font-size: 1.1em;
+        }
+
+        .assessment-content p {
+            margin: 0;
+            color: #64748b;
+            font-size: 0.95em;
+            max-width: 700px;
+        }
+
+        .assessment-link {
+            color: #2563eb;
+            font-weight: 600;
+            text-decoration: none;
+            font-size: 0.95em;
+            white-space: nowrap;
+            margin-left: 20px;
+        }
         
-        <p id="monitoring-season">
-            Current Monitoring Season: Monsoon 2026
-        </p>
+        .assessment-link:hover { text-decoration: underline; }
 
-        <!-- Primary Navigation Bar -->
-        <nav id="primary-navigation">
+        /* --- Action Cards (Bottom) --- */
+        .action-grid {
+            display: flex;
+            gap: 30px;
+        }
+
+        .action-card {
+            flex: 1;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 35px 30px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+        }
+
+        .action-card h4 {
+            margin: 0 0 15px 0;
+            color: #0f172a;
+            font-size: 1.3em;
+        }
+
+        .action-card p {
+            margin: 0 0 25px 0;
+            color: #475569;
+            font-size: 0.95em;
+        }
+
+        .btn {
+            display: inline-block;
+            text-decoration: none;
+            padding: 10px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            font-size: 0.95em;
+            transition: opacity 0.2s;
+        }
+
+        .btn:hover { opacity: 0.9; text-decoration: none; }
+        .btn-green { background-color: #059669; color: #ffffff; }
+        .btn-blue { background-color: #2563eb; color: #ffffff; border: 1px solid #e2e8f0; }
+
+        /* Footer */
+        footer {
+            background-color: #0f172a;
+            color: #64748b;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.85em;
+            border-top: 1px solid #1e293b;
+        }
+
+        /* Responsive Layout */
+        @media (max-width: 900px) {
+            .hero-section, .action-grid { flex-direction: column; }
+            .assessment-row { flex-direction: column; align-items: flex-start; gap: 15px; }
+            .assessment-link { margin-left: 0; }
+            #primary-nav ul { flex-direction: column; gap: 15px; padding: 15px 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header & Navigation -->
+    <header id="main-header">
+        <div class="system-branding">
+            <h1 title="Comprehensive Heatwave Monitoring & Early Warning Platform">Heatwave Intelligence System</h1>
+            <p>Current Monitoring Season: <span>Monsoon 2026</span></p>
+        </div>
+        <nav id="primary-nav">
             <ul>
-                <li><a href="homepage.html" class="active">Home</a></li>
-                <li><a href="alert-details.html">Alert Details</a></li>
-                <li><a href="about-system.html">About System</a></li>
-                <li><a href="sources.html">Sources & Stakeholders</a></li>
-                <li><a href="navigation.html">Portal Directory</a></li>
-                <li><a href="hotspot-map.html">Hotspot Map</a></li>
-                <li><a href="forecast.html">Forecast Summary</a></li>
-                <li><a href="subscribe.html">Subscribe</a></li>
-                <li><a href="media.html">Media & Awareness</a></li>
+                <li><a href="#" class="active">Home</a></li>
+                <li><a href="#">Alert Details</a></li>
+                <li><a href="#">About System</a></li>
+                <li><a href="#">Sources & Stakeholders</a></li>
+                <li><a href="#">Portal Directory</a></li>
+                <li><a href="#">Hotspot Map</a></li>
+                <li><a href="#">Forecast Summary</a></li>
+                <li><a href="#">Subscribe</a></li>
+                <li><a href="#">Media & Awareness</a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- TASK 9 CONTAINER: SIDEBAR LEFT, CONTENT RIGHT -->
-    <div class="page-layout-container">
-
-        <!-- SIDEBAR (LEFT) -->
-        <aside class="sidebar">
-            <h3>Quick Links</h3>
-            <ul class="sidebar-menu">
-                <li><a href="#status-banner">Red Alert Banner</a></li>
-                <li><a href="#kpi-summary">Real-Time Overview</a></li>
-                <li><a href="#portal-features">Public Services</a></li>
-                <li><a href="alert-details.html">Latest Bulletin</a></li>
-                <li><a href="subscribe.html">Register Alerts</a></li>
-            </ul>
-        </aside>
-
-        <!-- MAIN CONTENT AREA (RIGHT) -->
-        <main class="main-content-area">
-
-            <!-- Red Alert Banner -->
-            <section id="status-banner">
-                <h2>SYSTEM STATUS: RED ALERT — SEVERE HEATWAVE CONDITION</h2>
-                <p>
-                    High thermal distress forecasted across Central & North Regions over the next 48 hours.
-                </p>
-            </section>
-
-            <!-- Real-Time Telemetry Overview -->
-            <section id="kpi-summary">
-                <h3 class="section-heading">Real-Time Regional Overview</h3>
-                
-                <div class="kpi-grid">
-                    <div class="kpi-card">
-                        <h4>Peak Temperature Recorded</h4>
-                        <p class="kpi-value-red">46.8 °C</p>
-                        <p class="kpi-subtext">Station: AWS-102 (North Zone) | Updated 10 mins ago</p>
-                    </div>
-
-                    <div class="kpi-card">
-                        <h4>Highest Risk Region</h4>
-                        <p class="kpi-value-orange">Central Plains & North Urban Belt</p>
-                        <p class="kpi-subtext">Severity Index: Level 4 (Extreme Caution Required)</p>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Decision Support Cards -->
-            <section id="portal-features">
-                <h3 class="section-heading">Decision Support & Public Services</h3>
-
-                <div class="features-grid">
-                    <article class="feature-card officer-card">
-                        <h4>For Disaster Officers & Meteorologists</h4>
-                        <p>
-                            Evaluate real-time surface telemetry, review automated heat-index calculations, and dispatch official bulletins.
-                        </p>
-                        <a href="forecast.html">Access Regional Forecast Table &rarr;</a>
-                    </article>
-
-                    <article class="feature-card public-card">
-                        <h4>For Citizens & General Public</h4>
-                        <p>
-                            Check localized regional hotspots, view hydration advisories, and register for instant SMS warning alerts.
-                        </p>
-                        <a href="subscribe.html">Register for Emergency Alerts &rarr;</a>
-                    </article>
-                </div>
-            </section>
-
-        </main>
-
+    <!-- Full-Width Alert Bar -->
+    <div class="full-width-alert">
+        <strong>SEVERE ALERT</strong> Extreme heatwave conditions across North & Central India for the next 48 hours.
     </div>
 
-    <!-- Page Footer -->
-    <footer id="main-footer">
-        <p>
-            &copy; 2026 Department of Computer Engineering, K. J. Somaiya School of Engineering (Somaiya Vidyavihar University).
-        </p>
-    </footer>
+    <!-- Main Content -->
+    <main class="main-container">
+        
+        <!-- Hero Section: Map & Peak Stats -->
+        <section class="hero-section">
+            <div class="map-card">
+                <!-- Replaced Placeholder with the actual Indian Heatmap -->
+                <img src="image_764102.png" alt="India Regional Thermal Heatmap">
+            </div>
 
-</body>
-</html>
+            <div class="stats-card">
+                <!-- Updated data to match the provided Indian map telemetry -->
+                <h2>Peak Intensity: 49.0°C</h2>
+                <h3>North & Central Indian Plains</h3>
+                <p>Peak temperature recorded at Agra (49°C) and Delhi NCR (48°C). Extreme thermal distress is forecast across the Indo-Gangetic plains and Central India (MP, Maharashtra) over the coming days.</p>
+                
+                <div class="severity-divider">
+                    <h4>Severity Index</h4>
+                    <div class="level">Level 4 <span>Extreme Caution Required</span></div>
+                </div>
+            </div>
+        </section>
 
+        <!-- Middle Section: Assessment Rows -->
+        <section class="assessment-list">
+            <article class="assessment-row">
+                <div class="assessment-content">
+                    <h4>North India Assessment (Delhi, UP, Punjab)</h4>
+                    <p>Critical temperature thresholds breached (48°C+ in Delhi, Lucknow, Kanpur). Immediate emergency action required across the northern urban belt.</p>
+                </div>
+                <a href="#" class="assessment-link">View Sector Data &rarr;</a>
+            </article>
+
+            <article class="assessment-row">
+                <div class="assessment-content">
+                    <h4>Central India Assessment (MP, Maharashtra)</h4>
+                    <p>Severe thermal anomalies detected across Bhopal (46°C) and Nagpur (45°C). High exposure risk for citizens in arid and urban heat island zones.</p>
+                </div>
+                <a href="#" class="assessment-link">View Sector Data &rarr;</a>
+            </article>
+        </section>
+
+        <!-- Bottom Section: Action Cards -->
+        <section class="action-grid">
+            <article class="action-card">
+                <h4>Warning Registration</h4>
+                <p>Localized regional warnings for citizens and the general public. Review health safety advisories and emergency alert availability for your region.</p>
+                <a href="#" class="btn btn-green">Register for Bulletins</a>
+            </article>
+
+            <article class="action-card">
+                <h4>Regional Forecasts</h4>
+                <p>Review the 48-hour advisory for North and Central zones. Downloadable raw IMD data formats available for disaster officers and meteorologists.</p>
+                <a href="#" class="btn btn-blue">Download Forecast Table</a>
+            </article>
+        </section>
+
+    </main>
+
+    <!--

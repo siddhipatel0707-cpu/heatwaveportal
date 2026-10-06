@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 5: Heatwave Validation | KJS-CES-01</title>
+    <style>
+        .error-message {
+            color: #d90429;
+            font-size: 0.85em;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        .input-error {
+            border: 2px solid #d90429 !important;
+            background-color: #fff0f3;
+        }
+        #success-panel {
+            display: none;
+            background-color: #f0fdf4;
+            border: 2px solid #22c55e;
+            color: #15803d;
+            padding: 16px 20px;
+            border-radius: 6px;
+            margin-bottom: 25px;
+            box-shadow: 0 2px 6px rgba(34, 197, 94, 0.15);
+        }
+        #success-panel h3 {
+            margin: 0 0 6px 0;
+            font-size: 1.15em;
+        }
+        #success-panel p {
+            margin: 0;
+            font-size: 0.95em;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Heatwave Intelligence System</h1>
+        <p>Current Monitoring Season: <strong>Monsoon 2026</strong></p>
+    </header>
+
+    <main>
+        <h2>Localized Heatwave Observation Entry</h2>
+        <p>Validate field inputs and dispatch authorized telemetry records to the monitoring database.</p>
+
+        <!-- Dynamic Success Message Container -->
+        <div id="success-panel" role="alert">
+            <h3>Submission Successful!</h3>
+            <p id="success-details"></p>
+        </div>
+
+        <form action="#" method="post" id="heatwave-monitoring-form" novalidate>
+
+            <fieldset>
+                <legend>Observer Information</legend>
+
+                <div>
+                    <label for="observer-name">Observer Name:</label>
+                    <input type="text" id="observer-name" name="observer_name" placeholder="Enter full name">
+                    <span id="name-error" class="error-message"></span>
+                </div>
+                <br>
+
+                <div>
+                    <label for="observer-email">Observer Email:</label>
+                    <input type="email" id="observer-email" name="observer_email" placeholder="observer@domain.gov.in">
+                    <span id="email-error" class="error-message"></span>
+                </div>
+                <br>
+
+                <div>
+                    <label for="observer-mobile">Mobile Number:</label>
+                    <input type="tel" id="observer-mobile" name="observer_mobile" placeholder="10-digit mobile number">
+                    <span id="mobile-error" class="error-message"></span>
+                </div>
+            </fieldset>
+
+            <br>
+
+            <fieldset>
+                <legend>Station & Observation Telemetry</legend>
+
+                <div>
+                    <label for="aws-station-id">AWS Station ID:</label>
+                    <input type="text" id="aws-station-id" name="aws_station_id" placeholder="e.g., AWS001">
+                    <span id="station-error" class="error-message"></span>
+                </div>
+                <br>
+
+                <div>
+                    <label for="location">Location / District:</label>
+                    <input type="text" id="location" name="location" placeholder="e.g., Central Urban Belt">
+                    <span id="location-error" class="error-message"></span>
+                </div>
+                <br>
+
+                <div>
+                    <label for="observation-date">Observation Date:</label>
+                    <input type="date" id="observation-date" name="observation_date">
+                    <span id="date-error" class="error-message"></span>
+                </div>
+                <br>
+
+                <div>
+                    <label for="max-temp">Maximum Temperature (°C):</label>
+                    <input type="text" id="max-temp" name="max_temp" placeholder="e.g., 43.5">
+                    <span id="temp-error" class="error-message"></span>
+                </div>
+                <br>
+
+                <div>
+                    <label for="humidity">Relative Humidity (%):</label>
+                    <input type="text" id="humidity" name="humidity" placeholder="0 to 100">
+                    <span id="humidity-error" class="error-message"></span>
+                </div>
+            </fieldset>
+
+            <br>
+
+            <fieldset>
+                <legend>Heatwave Alert Classification</legend>
+
+                <div>
+                    <label for="alert-level">Select Alert Level:</label>
+                    <select id="alert-level" name="alert_level">
+                        <option value="">-- Select Alert Level --</option>
+                        <option value="Green (Normal / No Action)">Green (Normal / No Action)</option>
+                        <option value="Yellow (Heat Alert / Watch)">Yellow (Heat Alert / Watch)</option>
+                        <option value="Orange (Severe Heat Alert / Prepare)">Orange (Severe Heat Alert / Prepare)</option>
+                        <option value="Red (Extreme Heatwave Warning / Take Action)">Red (Extreme Heatwave Warning / Take Action)</option>
+                    </select>
+                    <span id="alert-error" class="error-message"></span>
+                </div>
+            </fieldset>
+
+            <br>
+
+            <div>
+                <input type="submit" value="Submit Observation">
+                <input type="reset" id="reset-button" value="Clear Form">
+            </div>
+
+        </form>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Department of Computer Engineering, K. J. Somaiya School of Engineering (Somaiya Vidyavihar University).</p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.getElementById("heatwave-monitoring-form");
+            const successPanel = document.getElementById("success-panel");
+            const successDetails = document.getElementById("success-details");
+
+            form.addEventListener("submit", function (event) {
+                event.preventDefault();
+
+                let isValid = true;
+
+               
+                const nameInput = document.getElementById("observer-name");
+                const emailInput = document.getElementById("observer-email");
+                const mobileInput = document.getElementById("observer-mobile");
+                const stationInput = document.getElementById("aws-station-id");
+                const locationInput = document.getElementById("location");
+                const dateInput = document.getElementById("observation-date");
+                const tempInput = document.getElementById("max-temp");
+                const humidityInput = document.getElementById("humidity");
+                const alertInput = document.getElementById("alert-level");
+
+                
+                const nameError = document.getElementById("name-error");
+                const emailError = document.getElementById("email-error");
+                const mobileError = document.getElementById("mobile-error");
+                const stationError = document.getElementById("station-error");
+                const locationError = document.getElementById("location-error");
+                const dateError = document.getElementById("date-error");
+                const tempError = document.getElementById("temp-error");
+                const humidityError = document.getElementById("humidity-error");
+                const alertError = document.getElementById("alert-error");
+
+                
+                successPanel.style.display = "none";
+                const errorSpans = [nameError, emailError, mobileError, stationError, locationError, dateError, tempError, humidityError, alertError];
+                const inputFields = [nameInput, emailInput, mobileInput, stationInput, locationInput, dateInput, tempInput, humidityInput, alertInput];
+
+                errorSpans.forEach(span => span.textContent = "");
+                inputFields.forEach(input => input.classList.remove("input-error"));
+
+                // Values
+                const nameVal = nameInput.value.trim();
+                const emailVal = emailInput.value.trim();
+                const mobileVal = mobileInput.value.trim();
+                const stationVal = stationInput.value.trim();
+                const locationVal = locationInput.value.trim();
+                const dateVal = dateInput.value.trim();
+                const tempVal = tempInput.value.trim();
+                const humidityVal = humidityInput.value.trim();
+                const alertVal = alertInput.value;
+
+               
+                const nameRegex = /^[A-Za-z ]{3,}$/;
+                if (nameVal === "") {
+                    nameError.textContent = "Observer name cannot be blank.";
+                    nameInput.classList.add("input-error");
+                    isValid = false;
+                } else if (!nameRegex.test(nameVal)) {
+                    nameError.textContent = "Name must contain only alphabets and spaces (min 3 chars).";
+                    nameInput.classList.add("input-error");
+                    isValid = false;
+                }
+
+            
+                const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+                if (emailVal === "") {
+                    emailError.textContent = "Email address cannot be blank.";
+                    emailInput.classList.add("input-error");
+                    isValid = false;
+                } else if (!emailRegex.test(emailVal)) {
+                    emailError.textContent = "Enter a valid email address.";
+                    emailInput.classList.add("input-error");
+                    isValid = false;
+                }
+
+              
+                const mobileRegex = /^[6-9]\d{9}$/;
+                if (mobileVal === "") {
+                    mobileError.textContent = "Mobile number cannot be blank.";
+                    mobileInput.classList.add("input-error");
+                    isValid = false;
+                } else if (!mobileRegex.test(mobileVal)) {
+                    mobileError.textContent = "Enter a valid 10-digit Indian mobile number (starts with 6, 7, 8, or 9).";
+                    mobileInput.classList.add("input-error");
+                    isValid = false;
+                }
+
+               
+                const stationRegex = /^AWS\d{3,}$/i;
+                if (stationVal === "") {
+                    stationError.textContent = "AWS Station ID cannot be blank.";
+                    stationInput.classList.add("input-error");
+                    isValid = false;
+                } else if (!stationRegex.test(stationVal)) {
+                    stationError.textContent = "Station ID must match format like 'AWS001'.";
+                    stationInput.classList.add("input-error");
+                    isValid = false;
+                }
+
+               
+                if (locationVal === "") {
+                    locationError.textContent = "Location cannot be blank.";
+                    locationInput.classList.add("input-error");
+                    isValid = false;
+                }
+
+                
+                if (dateVal === "") {
+                    dateError.textContent = "Observation date cannot be blank.";
+                    dateInput.classList.add("input-error");
+                    isValid = false;
+                }
+
+            
+                if (tempVal === "") {
+                    tempError.textContent = "Temperature cannot be blank.";
+                    tempInput.classList.add("input-error");
+                    isValid = false;
+                } else if (isNaN(tempVal)) {
+                    tempError.textContent = "Temperature must be a valid number.";
+                    tempInput.classList.add("input-error");
+                    isValid = false;
+                }
+
+                
+                if (humidityVal === "") {
+                    humidityError.textContent = "Humidity cannot be blank.";
+                    humidityInput.classList.add("input-error");
+                    isValid = false;
+                } else if (isNaN(humidityVal)) {
+                    humidityError.textContent = "Humidity must be numeric.";
+                    humidityInput.classList.add("input-error");
+                    isValid = false;
+                } else {
+                    const humNumber = parseFloat(humidityVal);
+                    if (humNumber < 0 || humNumber > 100) {
+                        humidityError.textContent = "Humidity must be between 0 and 100 percent.";
+                        humidityInput.classList.add("input-error");
+                        isValid = false;
+                    }
+                }
+
+                
+                if (alertVal === "") {
+                    alertError.textContent = "Please select an alert level.";
+                    alertInput.classList.add("input-error");
+                    isValid = false;
+                }
+
+               
+                if (isValid) {
+                    successDetails.innerHTML = `Observation for Station <strong>${stationVal.toUpperCase()}</strong> submitted by <strong>${nameVal}</strong> logged with status: <strong>${alertVal}</strong>.`;
+                    successPanel.style.display = "block";
+                    window.scrollTo({ top: 0, behavior: "smooth" });
+                }
+            });
+
+            
+            document.getElementById("reset-button").addEventListener("click", function () {
+                successPanel.style.display = "none";
+                const errorSpans = document.querySelectorAll(".error-message");
+                const errorInputs = document.querySelectorAll(".input-error");
+                errorSpans.forEach(span => span.textContent = "");
+                errorInputs.forEach(input => input.classList.remove("input-error"));
+            });
+        });
+    </script>
+</body>
+</html>

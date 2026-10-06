@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 4: Temperature Analysis Using Arrays</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f9;
+            color: #2d3748;
+            padding: 40px 20px;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .main-container {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 40px;
+            width: 100%;
+            max-width: 900px;
+            min-height: 450px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+            text-align: center;
+        }
+
+        h2 {
+            margin-top: 0;
+            color: #2c3e50;
+            font-size: 1.5em;
+        }
+
+        .report-card {
+            background-color: #ffffff;
+            border: 1px solid #cbd5e0;
+            padding: 20px 25px;
+            border-radius: 8px;
+            max-width: 450px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.04);
+            line-height: 1.8;
+            margin: 40px auto 0 auto;
+            font-size: 0.95em;
+            text-align: left;
+        }
+
+        .data-row {
+            border-bottom: 1px dashed #e2e8f0;
+            padding-bottom: 8px;
+            margin-bottom: 8px;
+        }
+        
+        .data-row:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="main-container">
+        <h2>Array-Based Temperature Analysis</h2>
+        
+       
+        <div id="array-output"></div>
+
+        <script>
+            
+            let temperatureReadings = [34, 36, 38, 39, 41, 40, 37, 35, 39, 42];
+
+
+            let minTemp = Math.min(...temperatureReadings);
+            let maxTemp = Math.max(...temperatureReadings);
+
+           
+            let sum = 0;
+            let countAbove40 = 0;
+            let heatwaveReadings = []; 
+            let threshold = 40; 
+
+            for (let i = 0; i < temperatureReadings.length; i++) {
+                let currentReading = temperatureReadings[i];
+                
+                
+                sum += currentReading;
+
+                
+                if (currentReading >= threshold) {
+                    countAbove40++;
+                    
+                   
+                    heatwaveReadings.push(currentReading);
+                }
+            }
+
+           
+            let avgTemp = sum / temperatureReadings.length;
+
+            
+            let allReadingsStr = temperatureReadings.join(" ");
+            let heatwaveStr = heatwaveReadings.join(", ");
+
+            
+            let finalOutput = `
+                <div class="report-card">
+                    <div class="data-row">
+                        <strong>Temperature Readings:</strong><br>
+                        ${allReadingsStr}
+                    </div>
+                    
+                    <div class="data-row">
+                        <strong>Minimum Temperature:</strong> ${minTemp}°C<br>
+                        <strong>Maximum Temperature:</strong> ${maxTemp}°C<br>
+                        <strong>Average Temperature:</strong> ${avgTemp.toFixed(1)}°C
+                    </div>
+                    
+                    <div class="data-row">
+                        <strong>Readings &ge; 40°C:</strong> ${countAbove40}<br>
+                        <strong>Heatwave Condition Readings:</strong> <span style="color: #e53e3e; font-weight: bold;">${heatwaveStr}</span>
+                    </div>
+                </div>
+            `;
+
+            
+            document.getElementById("array-output").innerHTML = finalOutput;
+
+           
+            console.log("--- Task 4: Array Analysis Execution ---");
+            console.log("Temperature Readings: \n" + allReadingsStr);
+            console.log("Minimum Temperature: " + minTemp + "°C");
+            console.log("Maximum Temperature: " + maxTemp + "°C");
+            console.log("Average Temperature: " + avgTemp.toFixed(1) + "°C");
+            console.log("Readings >= 40°C: " + countAbove40);
+            console.log("Heatwave Condition Readings: " + heatwaveStr);
+
+        </script>
+    </div>
+
+</body>
+</html>

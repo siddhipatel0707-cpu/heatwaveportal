@@ -4,7 +4,7 @@
     margin: 25px auto;
     padding: 24px 30px;
     background-color: #7f1d1d;
-    color: #ffffff;
+    color: hsl(0, 0%, 100%);
     border: 2px solid blue;
     border-radius: 8px;
     text-align: center;
