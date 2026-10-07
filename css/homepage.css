@@ -356,3 +356,162 @@
             #primary-nav ul { flex-direction: column; gap: 15px; padding: 15px 0; }
         }
     
+        /* === Unified Navigation Styles === */
+        #main-header {
+            background-color: #0f172a;
+            color: #ffffff;
+            padding: 30px 40px 0 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .system-branding h1 {
+            margin: 0 0 5px 0;
+            font-size: 2.2em;
+            color: #f8fafc;
+            letter-spacing: -0.5px;
+        }
+        .system-branding p {
+            color: #94a3b8;
+            margin: 0 0 25px 0;
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+        }
+        .system-branding span { color: #e2e8f0; }
+        #primary-nav {
+            width: 100%;
+            border-top: 1px solid #1e293b;
+            padding: 20px 0;
+        }
+        #primary-nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 25px;
+        }
+        #primary-nav a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.95em;
+            font-weight: 500;
+            padding-bottom: 6px;
+            border-bottom: 2px solid transparent;
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+        #primary-nav a:hover, #primary-nav a.active {
+            color: #38bdf8;
+            border-bottom: 2px solid #38bdf8;
+        }
+        @media (max-width: 900px) {
+            #primary-nav ul { flex-direction: column; gap: 15px; padding: 15px 0; }
+        }
+</style>
+</head>
+<body>
+
+    <!-- Header & Navigation -->
+    <header id="main-header">
+        <div class="system-branding">
+            <h1 title="Comprehensive Heatwave Monitoring &amp; Early Warning Platform">Heatwave Intelligence System</h1>
+            <p>Current Monitoring Season: <span>Monsoon 2026</span></p>
+        </div>
+        <nav id="primary-nav">
+            <ul>
+                <li><a href="homepage.html" class="active">Home</a></li>
+                <li><a href="alert.html">Alert Details</a></li>
+                <li><a href="about-system.html">About System</a></li>
+                <li><a href="sources.html">Sources & Stakeholders</a></li>
+                <li><a href="navigation.html">Portal Directory</a></li>
+                <li><a href="hotspot-map.html">Hotspot Map</a></li>
+                <li><a href="forecast.html">Forecast Summary</a></li>
+                <li><a href="subscribe.html">Subscribe</a></li>
+                <li><a href="media.html">Media & Awareness</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Full-Width Alert Bar -->
+    <div class="full-width-alert">
+        <strong>SEVERE ALERT</strong> Extreme heatwave conditions across North & Central India for the next 48 hours.
+    </div>
+
+    <!-- Main Content -->
+    <main class="main-container">
+        
+        <!-- Hero Section: Map & Peak Stats -->
+<!-- Hero Section: Map & Stacked Stats -->
+        <section class="hero-section">
+            
+            <div class="map-card">
+                <img src="images/heatwave-in-india.jpg" alt="India Regional Thermal Heatmap">
+            </div>
+
+            <div class="stats-column">
+                
+                <!-- Top Half: Temperature Data -->
+                <div class="stats-card-half">
+                    <h2>Peak Intensity: 49.0°C</h2>
+                    <h3>North & Central Indian Plains</h3>
+                    <p>Peak temperature recorded at Agra (49°C) and Delhi NCR (48°C). Extreme thermal distress is forecast across the Indo-Gangetic plains and Central India over the coming days.</p>
+                </div>
+                
+                <!-- Bottom Half: Severity Data -->
+                <div class="stats-card-half severity-card">
+                    <h4>Severity Index</h4>
+                    <div class="level">Level 4 <span>Extreme Caution Required</span></div>
+                    <p style="margin-top: 15px;">Immediate deployment of urban cooling stations, hydration protocols, and municipal health warnings are recommended.</p>
+                </div>
+
+            </div>
+            
+        </section>
+
+        <!-- Middle Section: Assessment Rows -->
+        <section class="assessment-list">
+            <article class="assessment-row">
+                <div class="assessment-content">
+                    <h4>North India Assessment (Delhi, UP, Punjab)</h4>
+                    <p>Critical temperature thresholds breached (48°C+ in Delhi, Lucknow, Kanpur). Immediate emergency action required across the northern urban belt.</p>
+                </div>
+                <a href="#" class="assessment-link">View Sector Data &rarr;</a>
+            </article>
+
+            <article class="assessment-row">
+                <div class="assessment-content">
+                    <h4>Central India Assessment (MP, Maharashtra)</h4>
+                    <p>Severe thermal anomalies detected across Bhopal (46°C) and Nagpur (45°C). High exposure risk for citizens in arid and urban heat island zones.</p>
+                </div>
+                <a href="#" class="assessment-link">View Sector Data &rarr;</a>
+            </article>
+        </section>
+
+        <!-- Bottom Section: Action Cards -->
+        <section class="action-grid">
+            <article class="action-card">
+                <h4>Warning Registration</h4>
+                <p>Localized regional warnings for citizens and the general public. Review health safety advisories and emergency alert availability for your region.</p>
+                <a href="#" class="btn btn-green">Register for Bulletins</a>
+            </article>
+
+            <article class="action-card">
+                <h4>Regional Forecasts</h4>
+                <p>Review the 48-hour advisory for North and Central zones. Downloadable raw IMD data formats available for disaster officers and meteorologists.</p>
+                <a href="#" class="btn btn-blue">Download Forecast Table</a>
+            </article>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        &copy; 2026 Department of Computer Engineering, K. J. Somaiya School of Engineering (Somaiya Vidyavihar University).
+    </footer>
+
+</body>
+</html>

@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 2: Heatwave Risk and Early-Warning Decision</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f7f9;
+            color: #2d3748;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .main-container {
+            background-color: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 40px;
+            width: 100%;
+            max-width: 900px;
+            min-height: 450px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.03);
+            text-align: center;
+        }
+
+        h2 {
+            margin-top: 0;
+            color: #2c3e50;
+            font-size: 1.5em;
+        }
+
+        .report-card {
+            background-color: #ffffff;
+            border: 1px solid #cbd5e0;
+            padding: 20px;
+            border-radius: 8px;
+            max-width: 380px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.04);
+            line-height: 1.6;
+            margin: 40px auto 0 auto;
+            font-size: 0.95em;
+            text-align: left;
+        }
+
+        .highlight-risk {
+            font-weight: bold;
+            font-size: 1.05em;
+        }
+
+        /* === Unified Navigation Styles === */
+        #main-header {
+            background-color: #0f172a;
+            color: #ffffff;
+            padding: 30px 40px 0 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .system-branding h1 {
+            margin: 0 0 5px 0;
+            font-size: 2.2em;
+            color: #f8fafc;
+            letter-spacing: -0.5px;
+        }
+        .system-branding p {
+            color: #94a3b8;
+            margin: 0 0 25px 0;
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+        }
+        .system-branding span { color: #e2e8f0; }
+        #primary-nav {
+            width: 100%;
+            border-top: 1px solid #1e293b;
+            padding: 20px 0;
+        }
+        #primary-nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 25px;
+        }
+        #primary-nav a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.95em;
+            font-weight: 500;
+            padding-bottom: 6px;
+            border-bottom: 2px solid transparent;
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+        #primary-nav a:hover, #primary-nav a.active {
+            color: #38bdf8;
+            border-bottom: 2px solid #38bdf8;
+        }
+        @media (max-width: 900px) {
+            #primary-nav ul { flex-direction: column; gap: 15px; padding: 15px 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header & Navigation -->
+    <header id="main-header">
+        <div class="system-branding">
+            <h1 title="Comprehensive Heatwave Monitoring &amp; Early Warning Platform">Heatwave Intelligence System</h1>
+            <p>Current Monitoring Season: <span>Monsoon 2026</span></p>
+        </div>
+        <nav id="primary-nav">
+            <ul>
+                <li><a href="homepage.html">Home</a></li>
+                <li><a href="alert.html">Alert Details</a></li>
+                <li><a href="about-system.html">About System</a></li>
+                <li><a href="sources.html">Sources &amp; Stakeholders</a></li>
+                <li><a href="navigation.html">Portal Directory</a></li>
+                <li><a href="hotspot-map.html">Hotspot Map</a></li>
+                <li><a href="forecast.html">Forecast Summary</a></li>
+                <li><a href="subscribe.html">Subscribe</a></li>
+                <li><a href="media.html">Media &amp; Awareness</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div style="padding: 40px 20px; display: flex; justify-content: center;">
+    <div class="main-container">
+        
+        <h2>Heatwave Risk & Early-Warning Assessment</h2>
+
+        <script>
+
+            let locationName = prompt("Enter location name:", "Pune");
+            let temp = parseFloat(prompt("Enter current temperature (°C):", "39"));
+            let humidity = parseFloat(prompt("Enter humidity (%):", "65"));
+            let forecastTemp = parseFloat(prompt("Enter forecast temperature (°C):", "38"));
+            
+
+            let isHeatwaveCondition = confirm("Is a general heatwave condition officially declared? (OK for Yes, Cancel for No)");
+            let vulnerableAlertRequired = confirm("Are vulnerable populations currently at risk? (OK for Yes, Cancel for No)");
+
+            let riskLevel = "";
+            let recommendation = "";
+            let riskColor = "";
+
+            
+            if (temp >= 40) {
+                riskLevel = "SEVERE";
+                recommendation = "Severe Heatwave Warning";
+                riskColor = "#9b2c2c";
+            } 
+            else if (temp >= 38 && humidity >= 60) {
+                riskLevel = "HIGH";
+                recommendation = "Issue Heatwave Warning";
+                riskColor = "#c53030";
+            } 
+            else if (temp >= 35 && temp < 38) {
+                riskLevel = "MODERATE";
+                recommendation = "Moderate Heat Risk – Monitor Conditions";
+                riskColor = "#dd6b20";
+            } 
+            
+            else if (forecastTemp >= 40 || isHeatwaveCondition === true) {
+                riskLevel = "EARLY WARNING";
+                recommendation = "Early Warning – Prepare for Heatwave";
+                riskColor = "#d69e2e";
+            } 
+            else {
+                riskLevel = "NORMAL";
+                recommendation = "Normal – Continue Monitoring";
+                riskColor = "#38a169"; 
+            }
+
+       
+            if (vulnerableAlertRequired === true && (riskLevel === "SEVERE" || riskLevel === "HIGH")) {
+                recommendation += " <br><span style='color: #e53e3e;'><em>* IMMEDIATE VULNERABLE POPULATION PROTOCOLS REQUIRED *</em></span>";
+            }
+
+           
+            let htmlOutput = `
+                <div class="report-card">
+                    <strong>Location:</strong> ${locationName} <br>
+                    <strong>Temperature:</strong> ${temp}°C <br>
+                    <strong>Humidity:</strong> ${humidity}% <br><br>
+                    <strong>Risk Level:</strong> <span class="highlight-risk" style="color: ${riskColor};">${riskLevel}</span> <br>
+                    <strong>Recommendation:</strong> ${recommendation}
+                </div>
+            `;
+
+            let plainTextOutput = `Location: ${locationName}\n` +
+                                  `Temperature: ${temp}°C\n` +
+                                  `Humidity: ${humidity}%\n\n` +
+                                  `Risk Level: ${riskLevel}\n` +
+                                  `Recommendation: ${recommendation.replace(/<[^>]*>?/gm, '')}`; // Strip HTML tags for console
+
+            
+            document.write(htmlOutput);
+            console.log("--- Lab Task 2 Execution ---");
+            console.log(plainTextOutput);
+
+        </script>
+        
+    </div>
+
+    </div>
+</body>
+</html>

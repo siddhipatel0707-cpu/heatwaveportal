@@ -7,21 +7,74 @@
     
     <!-- LINKED EXTERNAL NAV.CSS STYLESHEET -->
     <link rel="stylesheet" href="nav.css">
+<style>
+        /* === Unified Navigation Styles === */
+        #main-header {
+            background-color: #0f172a;
+            color: #ffffff;
+            padding: 30px 40px 0 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .system-branding h1 {
+            margin: 0 0 5px 0;
+            font-size: 2.2em;
+            color: #f8fafc;
+            letter-spacing: -0.5px;
+        }
+        .system-branding p {
+            color: #94a3b8;
+            margin: 0 0 25px 0;
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+        }
+        .system-branding span { color: #e2e8f0; }
+        #primary-nav {
+            width: 100%;
+            border-top: 1px solid #1e293b;
+            padding: 20px 0;
+        }
+        #primary-nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 25px;
+        }
+        #primary-nav a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.95em;
+            font-weight: 500;
+            padding-bottom: 6px;
+            border-bottom: 2px solid transparent;
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+        #primary-nav a:hover, #primary-nav a.active {
+            color: #38bdf8;
+            border-bottom: 2px solid #38bdf8;
+        }
+        @media (max-width: 900px) {
+            #primary-nav ul { flex-direction: column; gap: 15px; padding: 15px 0; }
+        }
+</style>
 </head>
 <body id="navigation-page" style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #ffffff; color: #333; min-height: 100vh; display: flex; flex-direction: column;">
 
     <!-- Main Header with Shared Navigation -->
-    <header id="main-header" style="background-color: #2c3e50; color: #ffffff; padding: 20px 30px; border-bottom: 1px solid #e2e8f0; box-shadow: 0 2px 5px rgba(0,0,0,0.05);">
-        <h1 id="system-title" style="margin: 0 0 8px 0; font-size: 1.8em; color: #ffffff;">
-            Heatwave Intelligence System
-        </h1>
-        
-        <p id="monitoring-season" style="font-size: 0.9em; background-color: #edf2f7; color: #2d3748; display: inline-block; padding: 4px 10px; margin: 0 0 15px 0; border-radius: 3px;">
-            Current Monitoring Season: <strong>Monsoon 2026</strong>
-        </p>
-
-        <!-- Primary Navigation Menu (Styled via nav.css) -->
-        <nav id="primary-navigation">
+    <!-- Header & Navigation -->
+    <header id="main-header">
+        <div class="system-branding">
+            <h1 title="Comprehensive Heatwave Monitoring &amp; Early Warning Platform">Heatwave Intelligence System</h1>
+            <p>Current Monitoring Season: <span>Monsoon 2026</span></p>
+        </div>
+        <nav id="primary-nav">
             <ul>
                 <li><a href="homepage.html">Home</a></li>
                 <li><a href="alert.html">Alert Details</a></li>
