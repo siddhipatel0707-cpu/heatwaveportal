@@ -292,6 +292,42 @@
             color: #94a3b8;
         }
 
+        .validation-status {
+            display: none;
+            padding: 12px;
+            border-radius: 6px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .validation-status.invalid {
+            display: block;
+            background-color: #fff5f5;
+            border: 1px solid #feb2b2;
+            color: #c53030;
+        }
+
+        .validation-status.verified {
+            display: block;
+            background-color: #f0fdf4;
+            border: 1px solid #9ae6b4;
+            color: #276749;
+        }
+
+        .input-error {
+            border-color: #e53e3e !important;
+            background-color: #fff5f5;
+        }
+
+        .error-message {
+            display: block;
+            color: #c53030;
+            font-size: 0.8em;
+            font-weight: 600;
+            margin-top: 5px;
+        }
+
         /* Footer */
         footer {
             background-color: #0f172a;
@@ -393,6 +429,7 @@
                 <li><a href="hotspot-map.html">Hotspot Map</a></li>
                 <li><a href="forecast.html">Forecast Summary</a></li>
                 <li><a href="subscribe.html" class="active">Subscribe</a></li>
+                <li><a href="climate_registration.html">Climate Registration</a></li>
                 <li><a href="media.html">Media & Awareness</a></li>
             </ul>
         </nav>
@@ -427,22 +464,27 @@
                 <h3>Register for alerts</h3>
             </div>
 
-            <form action="#" method="post" id="advisory-form">
+            <div id="validation-status" class="validation-status" role="alert"></div>
+
+            <form action="#" method="post" id="advisory-form" novalidate>
                 
                 <div class="form-group">
                     <label for="fullname">Full name</label>
                     <input type="text" id="fullname" name="fullname" placeholder="e.g. Aditi Sharma" required>
+                    <span id="fullname-error" class="error-message"></span>
                 </div>
 
                 <div class="form-group">
                     <label for="email">Email address</label>
                     <input type="email" id="email" name="email" placeholder="you@example.com" required>
+                    <span id="email-error" class="error-message"></span>
                 </div>
 
                 <div class="form-group">
                     <label for="mobile">Mobile Phone Number</label>
                     <input type="tel" id="mobile" name="mobile" pattern="[0-9]{10}" placeholder="10-digit mobile number" required>
                     <span class="hint">Format: 10 digits without country code (e.g., 9876543210)</span>
+                    <span id="mobile-error" class="error-message"></span>
                 </div>
 
                 <div class="form-group">
@@ -454,6 +496,7 @@
                         <option value="coastal_zone">Coastal Zone (e.g., Mumbai Metropolitan Area)</option>
                         <option value="south_zone">South Zone (Peninsular Sector)</option>
                     </select>
+                    <span id="region-error" class="error-message"></span>
                 </div>
 
                 <!-- Combined Preferences Section -->
@@ -494,4 +537,74 @@
     </footer>
 
 </body>
+<script>
+    document.getElementById("advisory-form").addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const form = event.currentTarget;
+        const status = document.getElementById("validation-status");
+        const fields = [
+            { input: document.getElementById("fullname"), error: document.getElementById("fullname-error") },
+            { input: document.getElementById("email"), error: document.getElementById("email-error") },
+            { input: document.getElementById("mobile"), error: document.getElementById("mobile-error") },
+            { input: document.getElementById("region"), error: document.getElementById("region-error") }
+        ];
+        const name = document.getElementById("fullname").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const mobile = document.getElementById("mobile").value.trim();
+        const region = document.getElementById("region").value;
+        let isValid = true;
+
+        fields.forEach(field => {
+            field.input.classList.remove("input-error");
+            field.error.textContent = "";
+        });
+        status.className = "validation-status";
+        status.textContent = "";
+
+        if (name === "") {
+            fields[0].error.textContent = "Full name is required.";
+            isValid = false;
+        } else if (!/^[A-Za-z ]+$/.test(name)) {
+            fields[0].error.textContent = "Name must contain only alphabets and spaces.";
+            isValid = false;
+        }
+
+        if (email === "") {
+            fields[1].error.textContent = "Email address is required.";
+            isValid = false;
+        } else if (!/^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/.test(email)) {
+            fields[1].error.textContent = "Enter a valid email address.";
+            isValid = false;
+        }
+
+        if (mobile === "") {
+            fields[2].error.textContent = "Mobile number is required.";
+            isValid = false;
+        } else if (!/^[6-9][0-9]{9}$/.test(mobile)) {
+            fields[2].error.textContent = "Mobile number must be exactly 10 digits and start with 6-9.";
+            isValid = false;
+        }
+
+        if (region === "") {
+            fields[3].error.textContent = "Please select a monitoring region.";
+            isValid = false;
+        }
+
+        fields.forEach(field => {
+            if (field.error.textContent !== "") {
+                field.input.classList.add("input-error");
+            }
+        });
+
+        if (isValid) {
+            form.style.display = "none";
+            status.className = "validation-status verified";
+            status.textContent = "Verified: your subscription details are valid.";
+        } else {
+            status.className = "validation-status invalid";
+            status.textContent = "Invalid details. Please correct the highlighted fields.";
+        }
+    });
+</script>
 </html>

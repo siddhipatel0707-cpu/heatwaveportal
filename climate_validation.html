@@ -67,6 +67,22 @@
             margin-top: 5px;
         }
 
+        #validation-status {
+            display: none;
+            padding: 12px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        #validation-status.invalid {
+            display: block;
+            background-color: #fff5f5;
+            border: 1px solid #feb2b2;
+            color: #c53030;
+        }
+
         .submit-btn {
             background-color: #2b6cb0;
             color: white;
@@ -107,6 +123,7 @@
             text-align: left;
             display: inline-block;
             margin-top: 10px;
+            white-space: pre-line;
         }
 
         /* === Unified Navigation Styles === */
@@ -147,6 +164,7 @@
                 <li><a href="hotspot-map.html">Hotspot Map</a></li>
                 <li><a href="forecast.html">Forecast Summary</a></li>
                 <li><a href="subscribe.html">Subscribe</a></li>
+                <li><a href="climate_registration.html">Climate Registration</a></li>
                 <li><a href="media.html">Media &amp; Awareness</a></li>
             </ul>
         </nav>
@@ -155,10 +173,12 @@
     <div style="padding: 40px 20px; display: flex; justify-content: center;">
     <div class="main-container">
         <h2>Climate Intelligence Heatwave Early-Warning System</h2>
+
+        <div id="validation-status" role="alert"></div>
         
         <div id="success-panel">
-            <h3>Registration Successful!</h3>
-            <p>Your details have been validated and recorded in the system.</p>
+            <h3>Verified</h3>
+            <p>All registration details are valid.</p>
             <div class="user-summary" id="summary-data"></div>
         </div>
 
@@ -233,6 +253,9 @@
             allInputs.forEach(input => input.classList.remove("input-error"));
             allErrors.forEach(error => error.textContent = "");
             document.getElementById("success-panel").style.display = "none";
+            const status = document.getElementById("validation-status");
+            status.className = "";
+            status.textContent = "";
 
            
             const nameVal = nameInput.value.trim();
@@ -320,16 +343,17 @@
                 document.getElementById("registration-form").style.display = "none";
                 
                 const summaryDiv = document.getElementById("summary-data");
-                summaryDiv.innerHTML = `
-                    <strong>Name:</strong> ${nameVal} <br>
-                    <strong>Mobile:</strong> ${mobileVal} <br>
-                    <strong>Email:</strong> ${emailVal} <br>
-                    <strong>Location:</strong> ${locationVal} <br>
-                    <strong>User ID:</strong> ${idVal} <br>
-                    <strong>PIN Code:</strong> ${pinVal}
-                `;
+                summaryDiv.textContent = `Name: ${nameVal}
+Mobile: ${mobileVal}
+Email: ${emailVal}
+Location: ${locationVal}
+User ID: ${idVal}
+PIN Code: ${pinVal}`;
                 
                 document.getElementById("success-panel").style.display = "block";
+            } else {
+                status.className = "invalid";
+                status.textContent = "Invalid details. Please correct the highlighted fields.";
             }
         });
     </script>

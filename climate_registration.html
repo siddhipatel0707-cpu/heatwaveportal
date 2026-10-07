@@ -51,6 +51,7 @@
         }
 
         .form-row {
+            display: flex;
             flex-wrap: wrap;
             gap: 20px;
             margin-bottom: 15px;
@@ -171,6 +172,7 @@
                 <li><a href="hotspot-map.html">Hotspot Map</a></li>
                 <li><a href="forecast.html">Forecast Summary</a></li>
                 <li><a href="subscribe.html">Subscribe</a></li>
+                <li><a href="climate_registration.html" class="active">Climate Registration</a></li>
                 <li><a href="media.html">Media &amp; Awareness</a></li>
             </ul>
         </nav>
@@ -195,19 +197,19 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label for="user-name">User Name</label>
-                        <input type="text" id="user-name" placeholder="Enter full name">
+                        <input type="text" id="user-name" placeholder="Enter full name" required>
                         <span id="error-user-name" class="error-message"></span>
                     </div>
                     <div class="form-group">
                         <label for="mobile-number">Mobile Number</label>
-                        <input type="text" id="mobile-number" placeholder="10-digit mobile number">
+                        <input type="text" id="mobile-number" placeholder="10-digit mobile number" required>
                         <span id="error-mobile-number" class="error-message"></span>
                     </div>
                 </div>
                 <div class="form-row">
                     <div class="form-group">
                         <label for="email-address">Email Address</label>
-                        <input type="email" id="email-address" placeholder="e.g., user@domain.com">
+                        <input type="email" id="email-address" placeholder="e.g., user@domain.com" required>
                         <span id="error-email-address" class="error-message"></span>
                     </div>
                     <div class="form-group">
@@ -230,12 +232,12 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label for="location-city">Location / City</label>
-                        <input type="text" id="location-city" placeholder="Enter your city">
+                        <input type="text" id="location-city" placeholder="Enter your city" required>
                         <span id="error-location-city" class="error-message"></span>
                     </div>
                     <div class="form-group">
                         <label for="pin-code">PIN / Postal Code</label>
-                        <input type="text" id="pin-code" placeholder="6-digit PIN code">
+                        <input type="text" id="pin-code" placeholder="6-digit PIN code" required>
                         <span id="error-pin-code" class="error-message"></span>
                     </div>
                 </div>
@@ -247,7 +249,7 @@
                 <div class="form-row">
                     <div class="form-group">
                         <label for="user-id">User ID (Format: CLM-1234)</label>
-                        <input type="text" id="user-id" placeholder="CLM-1234">
+                        <input type="text" id="user-id" placeholder="CLM-1234" required>
                         <span id="error-user-id" class="error-message"></span>
                     </div>
                     <div class="form-group">
