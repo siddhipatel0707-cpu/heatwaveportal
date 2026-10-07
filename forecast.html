@@ -5,34 +5,84 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Forecast Summary | Heatwave Intelligence System</title>
     <link rel="stylesheet" href="table.css">
+<style>
+        /* === Unified Navigation Styles === */
+        #main-header {
+            background-color: #0f172a;
+            color: #ffffff;
+            padding: 30px 40px 0 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+        .system-branding h1 {
+            margin: 0 0 5px 0;
+            font-size: 2.2em;
+            color: #f8fafc;
+            letter-spacing: -0.5px;
+        }
+        .system-branding p {
+            color: #94a3b8;
+            margin: 0 0 25px 0;
+            font-size: 0.85em;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            font-weight: 600;
+        }
+        .system-branding span { color: #e2e8f0; }
+        #primary-nav {
+            width: 100%;
+            border-top: 1px solid #1e293b;
+            padding: 20px 0;
+        }
+        #primary-nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 25px;
+        }
+        #primary-nav a {
+            color: #94a3b8;
+            text-decoration: none;
+            font-size: 0.95em;
+            font-weight: 500;
+            padding-bottom: 6px;
+            border-bottom: 2px solid transparent;
+            transition: color 0.3s ease, border-color 0.3s ease;
+        }
+        #primary-nav a:hover, #primary-nav a.active {
+            color: #38bdf8;
+            border-bottom: 2px solid #38bdf8;
+        }
+        @media (max-width: 900px) {
+            #primary-nav ul { flex-direction: column; gap: 15px; padding: 15px 0; }
+        }
+</style>
 </head>
 <body id="forecast-page" style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #ffff; color: #333; min-height: 100vh; display: flex; flex-direction: column;">
 
     <!-- Main Header with Shared Navigation -->
-    <header id="main-header" style="background-color: #1a365d; color: #ffffff; padding: 25px 30px; border-bottom: 4px solid #e53e3e; box-shadow: 0 2px 5px rgba(0,0,0,0.2);">
-        
-        <!-- Met: Changed text color of System Name & Center Aligned -->
-        <h1 id="system-title" style="color: #63b3ed; text-align: center; margin: 0 0 8px 0; font-size: 2em; letter-spacing: -0.5px;">
-            Heatwave Intelligence System
-        </h1>
-        
-        <!-- Met: Center Aligned Slogan / Season Text & Color -->
-        <p id="monitoring-season" style="color: #fbd38d; text-align: center; font-size: 1em; margin: 0 0 20px 0; font-weight: bold;">
-            Current Monitoring Season: Monsoon 2026
-        </p>
-
-        <!-- Navigation Links -->
-        <nav id="primary-navigation">
-            <ul style="list-style-type: none; margin: 0; padding: 0; display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
-                <li><a href="homepage.html" style="color: #63b3ed; text-decoration: none; font-weight: bold;">Home</a></li>
-                <li><a href="alert.html" style="color: #ffffff; text-decoration: none;">Alert Details</a></li>
-                <li><a href="about-system.html" style="color: #ffffff; text-decoration: none;">About System</a></li>
-                <li><a href="sources.html" style="color: #ffffff; text-decoration: none;">Sources & Stakeholders</a></li>
-                <li><a href="navigation.html" style="color: #ffffff; text-decoration: none;">Portal Directory</a></li>
-                <li><a href="hotspot-map.html" style="color: #ffffff; text-decoration: none;">Hotspot Map</a></li>
-                <li><a href="forecast.html" style="color: #ffffff; text-decoration: none;">Forecast Summary</a></li>
-                <li><a href="subscribe.html" style="color: #ffffff; text-decoration: none;">Subscribe</a></li>
-                <li><a href="media.html" style="color: #ffffff; text-decoration: none; font-weight: bold;">Media & Awareness</a></li>
+    <!-- Header & Navigation -->
+    <header id="main-header">
+        <div class="system-branding">
+            <h1 title="Comprehensive Heatwave Monitoring &amp; Early Warning Platform">Heatwave Intelligence System</h1>
+            <p>Current Monitoring Season: <span>Monsoon 2026</span></p>
+        </div>
+        <nav id="primary-nav">
+            <ul>
+                <li><a href="homepage.html">Home</a></li>
+                <li><a href="alert.html">Alert Details</a></li>
+                <li><a href="about-system.html">About System</a></li>
+                <li><a href="sources.html">Sources & Stakeholders</a></li>
+                <li><a href="navigation.html">Portal Directory</a></li>
+                <li><a href="hotspot-map.html">Hotspot Map</a></li>
+                <li><a href="forecast.html" class="active">Forecast Summary</a></li>
+                <li><a href="subscribe.html">Subscribe</a></li>
+                <li><a href="media.html">Media & Awareness</a></li>
             </ul>
         </nav>
     </header>
