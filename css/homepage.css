@@ -1,11 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title title="System Dashboard">Heatwave Intelligence System | KJS-CES-01</title>
 
-    <style>
         /* --- Base & Typography --- */
         body {
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
@@ -144,16 +137,6 @@
     100% { background-position: 0% 50%; }
 }
 
-@keyframes badgePulse {
-    0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.7); }
-    70% { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
-}
-
-@keyframes dotBlink {
-    0%, 100% { opacity: 1; transform: scale(1); }
-    50% { opacity: 0.4; transform: scale(1.3); }
-}
 
         /* --- Main Container --- */
         .main-container {
@@ -167,8 +150,6 @@
         }
 
         /* --- Hero Section (Map + Stats) --- */
-        /* --- Hero Section: Map & Stacked Stats --- */
-        /* --- Hero Section: Map & Stacked Stats --- */
         .hero-section {
             display: flex;
             gap: 40px;
@@ -326,6 +307,9 @@
             border-radius: 12px;
             padding: 35px 30px;
             box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    height: 100%; 
         }
 
         .action-card h4 {

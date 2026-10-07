@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Heatwave Temperature Analysis | Heatwave Intelligence System</title>
+    <style>
+        /* --- Base & Typography --- */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background: #f3f5f8;
+            color: #1f2933;
+        }
+
+        * { box-sizing: border-box; }
+        a { color: #0b5394; }
+
+        /* --- Restored Navy Portal Header --- */
+        #main-header {
+            background-color: #0f172a;
+            color: #ffffff;
+            padding: 30px 40px 0 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .system-branding h1 { margin: 0 0 5px 0; font-size: 2.2em; color: #f8fafc; letter-spacing: -0.5px; }
+        .system-branding p { color: #94a3b8; margin: 0 0 25px 0; font-size: 0.85em; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600; }
+        .system-branding span { color: #e2e8f0; }
+
+        #primary-nav { width: 100%; border-top: 1px solid #1e293b; padding: 20px 0; }
+        #primary-nav ul { list-style-type: none; margin: 0; padding: 0; display: flex; justify-content: center; flex-wrap: wrap; gap: 25px; }
+        #primary-nav a { color: #94a3b8; text-decoration: none; font-size: 0.95em; font-weight: 500; padding-bottom: 6px; border-bottom: 2px solid transparent; transition: all 0.3s ease; }
+        #primary-nav a:hover, #primary-nav a.active { color: #38bdf8; border-bottom: 2px solid #38bdf8; }
+
+        /* --- Breadcrumb Navigation --- */
+        .breadcrumb { background: #ffffff; border-bottom: 1px solid #e1e6ec; }
+        .breadcrumb .wrap { padding: 10px 24px; font-size: 0.9rem; color: #52606d; max-width: 960px; margin: 0 auto; }
+        .breadcrumb .sep { margin: 0 8px; color: #9aa5b1; }
+
+        /* --- Main Layout --- */
+        .wrap { width: 100%; max-width: 960px; margin: 0 auto; padding: 0 24px; }
+        main { flex: 1; padding: 32px 0 56px; }
+        h1 { margin: 0 0 6px; font-size: 1.7rem; font-weight: 600; color: #14304f; }
+        .lead { margin: 0 0 24px; color: #52606d; max-width: 70ch; }
+
+        .back-link { 
+            display: inline-block; 
+            margin-bottom: 24px; 
+            font-weight: 600; 
+            text-decoration: none; 
+            background: #ffffff; 
+            padding: 8px 16px; 
+            border: 1px solid #c9d1db; 
+            border-radius: 6px; 
+            color: #52606d; 
+            box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+            transition: all 0.2s;
+        }
+        .back-link:hover { color: #0f172a; border-color: #94a3b8; box-shadow: 0 4px 6px rgba(0,0,0,0.05); }
+
+        /* --- Premium Status Banner --- */
+        .status-banner {
+            background-color: #ffffff;
+            border-radius: 8px;
+            padding: 24px 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.04);
+            border: 1px solid #e1e6ec;
+            border-top: 4px solid;
+            position: relative;
+        }
+        
+        .status-banner.alert { border-top-color: #dc2626; background: #fffcfc;}
+        .status-banner.normal { border-top-color: #16a34a; background: #fcfdfc;}
+
+        .status-banner .label { 
+            margin: 0 0 4px 0; 
+            font-size: 0.8rem; 
+            font-weight: 700; 
+            letter-spacing: 0.08em; 
+            text-transform: uppercase; 
+            color: #52606d; 
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Pulsing indicator for alerts */
+        .status-dot { width: 10px; height: 10px; border-radius: 50%; display: inline-block; }
+        .status-banner.alert .status-dot { background-color: #ef4444; animation: pulse 2s infinite ease-in-out; }
+        .status-banner.normal .status-dot { background-color: #22c55e; }
+
+        .status-banner .title { margin: 0 0 8px 0; font-size: 1.4rem; font-weight: 700; }
+        .status-banner.alert .title { color: #b91c1c; }
+        .status-banner.normal .title { color: #15803d; }
+        .status-banner .text { margin: 0; font-size: 0.95em; color: #475569; }
+
+        @keyframes pulse {
+            0% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0.4); }
+            70% { box-shadow: 0 0 0 6px rgba(239, 68, 68, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(239, 68, 68, 0); }
+        }
+
+        /* --- Data Panel --- */
+        .panel { background: #ffffff; border: 1px solid #c9d1db; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.03); }
+        .panel-head { padding: 15px 24px; background: #f8fafc; border-bottom: 1px solid #c9d1db; }
+        .panel-head h2 { margin: 0; font-size: 1.05rem; font-weight: 600; color: #14304f; }
+
+        table.data { width: 100%; border-collapse: collapse; }
+        table.data th, table.data td { padding: 15px 24px; text-align: left; border-bottom: 1px solid #e1e6ec; vertical-align: top; }
+        table.data tr:last-child th, table.data tr:last-child td { border-bottom: 0; }
+        table.data th { width: 40%; font-weight: 600; color: #52606d; background: #ffffff; }
+        table.data td { font-weight: 500; color: #1f2933; }
+
+        /* --- Footer --- */
+        footer { background: #0e2339; color: #b9c6d6; font-size: 0.85rem; text-align: center; }
+        footer .wrap { padding: 20px 24px; }
+    </style>
+</head>
+<body>
+
+    <!-- Restored Navy Header -->
+    <header id="main-header">
+        <div class="system-branding">
+            <h1>Heatwave Intelligence System</h1>
+            <p>Current Monitoring Season: <span>Monsoon 2026</span></p>
+        </div>
+    </header>
+
+
+    <main>
+        <div class="wrap">
+            
+            <a href="homepage.html" class="back-link">&larr; Back to Homepage</a>
+            
+            <h1>Heatwave Monitoring Report</h1>
+            <p class="lead">Comparison of the current recorded temperature against the configured heatwave threshold for the selected location.</p>
+
+            <!-- JAVASCRIPT BLOCK WITH USER INPUT -->
+            <script>
+                // 1. Interactive Variable Declarations
+                let locationName = prompt("Enter location name:", "Mumbai") || "Mumbai";
+                let currentTemp = parseFloat(prompt("Enter current temperature (°C):", "39"));
+                let thresholdTemp = parseFloat(prompt("Enter heatwave threshold temperature (°C):", "37"));
+                let humidity = parseFloat(prompt("Enter humidity (%):", "65"));
+                let monitoringDate = prompt("Enter monitoring date (YYYY-MM-DD):", "2026-10-07") || "2026-10-07";
+
+                if (isNaN(currentTemp)) currentTemp = 39;
+                if (isNaN(thresholdTemp)) thresholdTemp = 37;
+                if (isNaN(humidity)) humidity = 65;
+
+                // 2. Arithmetic Operations
+                let tempDifference = currentTemp - thresholdTemp;
+
+                // 3. Conditional Statement
+                let status;
+                let statusClass;
+                if (currentTemp > thresholdTemp) {
+                    status = "Heatwave Condition Detected";
+                    statusClass = "alert";
+                } else {
+                    status = "Normal Conditions";
+                    statusClass = "normal";
+                }
+
+                // Method A: Console Logging
+                console.log("--- Lab Task 1 Execution ---");
+                console.log("Location Data Loaded: " + locationName);
+                console.log("Current Humidity: " + humidity + "%");
+                console.log("Monitoring Date: " + monitoringDate);
+                console.log("Temperature Difference: " + tempDifference + "°C");
+                console.log("Status: " + status);
+
+                // Method B: Alert popup
+                alert("System Alert: " + status + " in " + locationName);
+
+                // Helpers for presentation
+                const escapeHTML = (s) => String(s).replace(/[&<>"']/g, (c) => ({
+                    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+                }[c]));
+
+                const absDiff = Math.abs(tempDifference).toFixed(1).replace(/\.0$/, "");
+                const sign = tempDifference > 0 ? "+" : tempDifference < 0 ? "\u2212" : "";
+                const diffText = sign + absDiff + "\u00B0C";
+                const summary = tempDifference > 0
+                    ? `The current temperature of ${currentTemp}\u00B0C is ${absDiff}\u00B0C above the heatwave threshold of ${thresholdTemp}\u00B0C.`
+                    : tempDifference < 0
+                        ? `The current temperature of ${currentTemp}\u00B0C is ${absDiff}\u00B0C below the heatwave threshold of ${thresholdTemp}\u00B0C.`
+                        : `The current temperature of ${currentTemp}\u00B0C is equal to the heatwave threshold of ${thresholdTemp}\u00B0C.`;
+
+                // Method C: Document.write generating the premium status banner
+                let htmlOutput = `
+                    <div class="status-banner ${statusClass}" role="status">
+                        <p class="label"><span class="status-dot"></span> Status Assessment</p>
+                        <p class="title">${status}</p>
+                        <p class="text">${summary}</p>
+                    </div>
+
+                    <section class="panel" aria-labelledby="details-heading">
+                        <div class="panel-head"><h2 id="details-heading">Monitoring Details</h2></div>
+                        <table class="data">
+                            <tbody>
+                                <tr><th scope="row">Location</th><td>${escapeHTML(locationName)}</td></tr>
+                                <tr><th scope="row">Monitoring date</th><td>${escapeHTML(monitoringDate)}</td></tr>
+                                <tr><th scope="row">Current temperature</th><td>${currentTemp}&deg;C</td></tr>
+                                <tr><th scope="row">Heatwave threshold</th><td>${thresholdTemp}&deg;C</td></tr>
+                                <tr><th scope="row">Temperature difference</th><td>${diffText}</td></tr>
+                                <tr><th scope="row">Relative humidity</th><td>${humidity}%</td></tr>
+                            </tbody>
+                        </table>
+                    </section>
+                `;
+                document.write(htmlOutput);
+            </script>
+
+        </div>
+    </main>
+
+    <footer>
+        <div class="wrap">&copy; 2026 Department of Computer Engineering, K. J. Somaiya School of Engineering.</div>
+    </footer>
+
+</body>
+</html>

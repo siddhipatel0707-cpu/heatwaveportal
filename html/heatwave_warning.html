@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task 2: Heatwave Risk and Early-Warning Decision</title>
+    <style>
+        /* --- Inherited Portal Navigation Styles --- */
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background: var(--bg);
+            color: var(--text);
+        }
+
+        #main-header {
+            background-color: #0f172a;
+            color: #ffffff;
+            padding: 30px 40px 0 40px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .system-branding h1 { margin: 0 0 5px 0; font-size: 2.2em; color: #f8fafc; letter-spacing: -0.5px; }
+        .system-branding p { color: #94a3b8; margin: 0 0 25px 0; font-size: 0.85em; text-transform: uppercase; letter-spacing: 1.5px; font-weight: 600; }
+        .system-branding span { color: #e2e8f0; }
+
+        #primary-nav { width: 100%; border-top: 1px solid #1e293b; padding: 20px 0; }
+        #primary-nav ul { list-style-type: none; margin: 0; padding: 0; display: flex; justify-content: center; flex-wrap: wrap; gap: 25px; }
+        #primary-nav a { color: #94a3b8; text-decoration: none; font-size: 0.95em; font-weight: 500; padding-bottom: 6px; border-bottom: 2px solid transparent; transition: all 0.3s ease; }
+        #primary-nav a:hover, #primary-nav a.active { color: #38bdf8; border-bottom: 2px solid #38bdf8; }
+
+        /* --- Your Custom Task 2 UI Styles --- */
+        :root {
+            --navy: #14304f;
+            --surface: #ffffff;
+            --line: #c9d1db;
+            --line-soft: #e1e6ec;
+            --text: #1f2933;
+            --muted: #52606d;
+            --bg: #f3f5f8;
+        }
+
+        .wrap { width: 100%; max-width: 960px; margin: 0 auto; padding: 0 24px; }
+        main { flex: 1; padding: 32px 0 56px; }
+        h1 { margin: 0 0 6px; font-size: 1.7rem; font-weight: 600; color: var(--navy); }
+        .lead { margin: 0 0 24px; color: var(--muted); max-width: 70ch; }
+
+        .back-btn {
+            display: inline-flex; align-items: center; gap: 8px; color: #64748b;
+            text-decoration: none; font-weight: 600; font-size: 1.05em; margin-bottom: 30px;
+            padding: 8px 16px; background-color: #ffffff; border: 1px solid #cbd5e1;
+            border-radius: 6px; transition: all 0.2s ease; box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+        }
+        .back-btn:hover { color: #0f172a; border-color: #94a3b8; }
+
+        /* Notices */
+        .notice {
+            padding: 16px 20px; margin-bottom: 16px; background: var(--surface);
+            border: 1px solid var(--line); border-left-width: 6px;
+            border-color: var(--risk, var(--line)); background: var(--risk-bg, var(--surface));
+        }
+        .notice .label { margin: 0; font-size: 0.78rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+        .notice .title { margin: 2px 0 6px; font-size: 1.35rem; font-weight: 700; color: var(--risk, var(--text)); }
+        .notice .text { margin: 0; font-weight: 500; }
+        .notice .text + .label { margin-top: 12px; }
+
+        .notice.protocol { --risk: #0284c7; --risk-bg: #f0f9ff; margin-bottom: 24px; }
+        .notice.protocol .title { font-size: 1.15rem; margin-bottom: 2px; }
+
+        /* Data panel */
+        .panel { background: var(--surface); border: 1px solid var(--line); }
+        .panel-head { padding: 12px 20px; background: #eaeff4; border-bottom: 1px solid var(--line); }
+        .panel-head h2 { margin: 0; font-size: 1.05rem; font-weight: 600; color: var(--navy); }
+
+        table.data { width: 100%; border-collapse: collapse; }
+        table.data th, table.data td { padding: 13px 20px; text-align: left; border-bottom: 1px solid var(--line-soft); vertical-align: top; }
+        table.data tr:last-child th, table.data tr:last-child td { border-bottom: 0; }
+        table.data th { width: 40%; font-weight: 600; color: var(--muted); background: #f8fafc; }
+        table.data td { font-weight: 500; }
+    </style>
+</head>
+<body>
+
+         <div class="system-branding">
+            <h1 title="Comprehensive Heatwave Monitoring & Early Warning Platform">Heatwave Intelligence System</h1>
+            <p>Current Monitoring Season: <span>Monsoon 2026</span></p>
+        </div>
+        <nav id="primary-nav">
+          
+        </nav>
+    </header>
+
+    <main>
+        <div class="wrap">
+            <a href="homepage.html" class="back-btn">&larr; Back to Home</a>
+            
+            <h1>Heatwave Risk &amp; Early-Warning Assessment</h1>
+            <p class="lead">Risk classification and recommended action based on current conditions, forecast temperature and declared status.</p>
+
+            <script>
+                // 1. Accept climate values using JavaScript variables
+                let locationName = prompt("Enter location name:", "Pune") || "Pune";
+                let temp = parseFloat(prompt("Enter current temperature (°C):", "39"));
+                let humidity = parseFloat(prompt("Enter humidity (%):", "65"));
+                let forecastTemp = parseFloat(prompt("Enter forecast temperature (°C):", "41"));
+                
+                // Extra parameters specified in the lab problem statement
+                let heatwaveCondition = prompt("Is a heatwave condition currently active? (yes/no):", "no").toLowerCase();
+                let vulnerablePop = prompt("Vulnerable population alert requirement? (yes/no):", "yes").toLowerCase();
+
+                // Fallbacks if user leaves prompts blank
+                if (isNaN(temp)) temp = 39;
+                if (isNaN(humidity)) humidity = 65;
+                if (isNaN(forecastTemp)) forecastTemp = 41;
+
+                let riskLevel = "";
+                let recommendation = "";
+                let riskColor = "";
+                let riskBg = "";
+
+                // 2 & 3 & 4. Evaluate Current Conditions (Decision Rules Table)
+                if (temp >= 40) {
+                    riskLevel = "SEVERE";
+                    recommendation = "Severe Heatwave Warning";
+                    riskColor = "#7f1d1d"; riskBg = "#fbeeee";
+                }
+                else if (temp >= 38 && humidity >= 60) {
+                    riskLevel = "HIGH";
+                    recommendation = "High Heat Risk – Issue Warning";
+                    riskColor = "#a61b1b"; riskBg = "#fdf1f1";
+                }
+                else if (temp >= 35 && temp < 38) {
+                    riskLevel = "MODERATE";
+                    recommendation = "Moderate Heat Risk – Monitor Conditions";
+                    riskColor = "#8a4b08"; riskBg = "#fdf5ea";
+                }
+                else {
+                    riskLevel = "NORMAL";
+                    recommendation = "Normal – Continue Monitoring";
+                    riskColor = "#1e6b3a"; riskBg = "#f0f8f3";
+                }
+
+                // 6. Display an early-warning recommendation (Evaluated Independently!)
+                let earlyWarningMsg = "";
+                let showEarlyWarning = false;
+                
+                // Using logical OR (||) to satisfy the lab requirement creatively
+                if (forecastTemp >= 40 || heatwaveCondition === "yes") {
+                    earlyWarningMsg = "Early Warning – Prepare for Heatwave";
+                    showEarlyWarning = true;
+                }
+
+                // Vulnerable Population check using logical AND (&&)
+                let showVulnerableNotice = false;
+                if (vulnerablePop === "yes" && (riskLevel === "SEVERE" || riskLevel === "HIGH")) {
+                    showVulnerableNotice = true;
+                }
+
+                const escapeHTML = (s) => String(s).replace(/[&<>"']/g, (c) => ({
+                    "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;"
+                }[c]));
+                const assessedOn = new Date().toLocaleDateString("en-IN", { day: "2-digit", month: "short", year: "numeric" });
+
+                // Generate UI
+                let htmlOutput = `
+                    <div class="notice" style="--risk: ${riskColor}; --risk-bg: ${riskBg};" role="status">
+                        <p class="label">Current Risk Level</p>
+                        <p class="title">${riskLevel}</p>
+                        <p class="label">Recommended Action</p>
+                        <p class="text">${recommendation}</p>
+                    </div>
+
+                    ${showEarlyWarning ? `
+                    <div class="notice protocol" role="alert">
+                        <p class="label">Predictive Outlook</p>
+                        <p class="title">${earlyWarningMsg}</p>
+                        <p class="text">Forecast temperature is ${forecastTemp}&deg;C.</p>
+                    </div>` : ""}
+
+                    ${showVulnerableNotice ? `
+                    <div class="notice" style="--risk: #a61b1b; --risk-bg: #fff;" role="alert">
+                        <p class="label">Priority Notice</p>
+                        <p class="title" style="font-size: 1.05rem;">Immediate vulnerable population protocols required.</p>
+                    </div>` : ""}
+
+                    <section class="panel" aria-labelledby="inputs-heading">
+                        <div class="panel-head"><h2 id="inputs-heading">Assessment Inputs</h2></div>
+                        <table class="data">
+                            <tbody>
+                                <tr><th scope="row">Location</th><td>${escapeHTML(locationName)}</td></tr>
+                                <tr><th scope="row">Assessment date</th><td>${assessedOn}</td></tr>
+                                <tr><th scope="row">Current temperature</th><td>${temp}&deg;C</td></tr>
+                                <tr><th scope="row">Forecast temperature</th><td>${forecastTemp}&deg;C</td></tr>
+                                <tr><th scope="row">Relative humidity</th><td>${humidity}%</td></tr>
+                                <tr><th scope="row">Heatwave condition active</th><td>${heatwaveCondition}</td></tr>
+                                <tr><th scope="row">Vulnerable population alert</th><td>${vulnerablePop}</td></tr>
+                            </tbody>
+                        </table>
+                    </section>
+                `;
+
+                // 5. Message Printing Requirements for Grading
+                let plainTextOutput = `Location: ${locationName}\n` +
+                                      `Temperature: ${temp}°C\n` +
+                                      `Humidity: ${humidity}%\n` +
+                                      `Forecast: ${forecastTemp}°C\n\n` +
+                                      `Risk Level: ${riskLevel}\n` +
+                                      `Recommendation: ${recommendation}\n` +
+                                      (showEarlyWarning ? `Alert: ${earlyWarningMsg}` : "");
+
+                document.write(htmlOutput);
+                
+                console.log("--- Lab Task 2 Execution ---");
+                console.log(plainTextOutput);
+                alert(`Risk Level: ${riskLevel}\nRecommendation: ${recommendation}`);
+
+            </script>
+
+        </div>
+    </main>
+</body>
+</html>
