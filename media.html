@@ -4,71 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Media & Awareness | Heatwave Intelligence System</title>
-<style>
-        /* === Unified Navigation Styles === */
-        #main-header {
-            background-color: #0f172a;
-            color: #ffffff;
-            padding: 30px 40px 0 40px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-        .system-branding h1 {
-            margin: 0 0 5px 0;
-            font-size: 2.2em;
-            color: #f8fafc;
-            letter-spacing: -0.5px;
-        }
-        .system-branding p {
-            color: #94a3b8;
-            margin: 0 0 25px 0;
-            font-size: 0.85em;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            font-weight: 600;
-        }
-        .system-branding span { color: #e2e8f0; }
-        #primary-nav {
-            width: 100%;
-            border-top: 1px solid #1e293b;
-            padding: 20px 0;
-        }
-        #primary-nav ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 25px;
-        }
-        #primary-nav a {
-            color: #94a3b8;
-            text-decoration: none;
-            font-size: 0.95em;
-            font-weight: 500;
-            padding-bottom: 6px;
-            border-bottom: 2px solid transparent;
-            transition: color 0.3s ease, border-color 0.3s ease;
-        }
-        #primary-nav a:hover, #primary-nav a.active {
-            color: #38bdf8;
-            border-bottom: 2px solid #38bdf8;
-        }
-        @media (max-width: 900px) {
-            #primary-nav ul { flex-direction: column; gap: 15px; padding: 15px 0; }
-        }
-</style>
+    <link rel="stylesheet" href="portal.css">
 </head>
-<body id="media-page" style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #ffff; color: #333; min-height: 100vh; display: flex; flex-direction: column;">
+<body id="media-page">
 
-    <!-- Main Header with Shared Navigation -->
     <!-- Header & Navigation -->
     <header id="main-header">
         <div class="system-branding">
-            <h1 title="Comprehensive Heatwave Monitoring &amp; Early Warning Platform">Heatwave Intelligence System</h1>
+            <h1 title="Comprehensive Heatwave Monitoring & Early Warning Platform">Heatwave Intelligence System</h1>
             <p>Current Monitoring Season: <span>Monsoon 2026</span></p>
         </div>
         <nav id="primary-nav">
@@ -87,46 +30,123 @@
         </nav>
     </header>
 
-    <!-- Main Content Container -->
-    <main id="main-content" style="max-width: 1100px; width: 90%; margin: 25px auto; flex-grow: 1;">
+    <main id="main-content" class="main-container">
 
-        <h2 style="margin: 0 0 10px 0; color: #2c3e50; border-bottom: 2px solid #cbd5e0; padding-bottom: 10px;">
-            Heatwave Awareness & External Live Telemetry
-        </h2>
+        <div class="section-header">
+            <h2>Heatwave Awareness &amp; Live IMD Feeds</h2>
+            <p>Public safety video, live satellite and radar imagery from the India Meteorological Department, a radio advisory, and the IMD national weather portal.</p>
+        </div>
 
-        <p style="color: #4a5568; margin-bottom: 20px; line-height: 1.5;">
-            Access instructional public safety videos, regional audio briefings, and live external meteorological feeds.
-        </p>
-
-        <!-- REQUIREMENT 4: <noscript> Fallback Warning -->
+        <!-- REQUIREMENT: <noscript> fallback -->
         <noscript>
-            <div style="background-color: #fff5f5; border-left: 4px solid #e53e3e; border: 1px solid #feb2b2; border-left-width: 4px; padding: 15px; border-radius: 4px; margin-bottom: 20px; color: #9b2c2c;">
-                <strong>JavaScript Disabled Notice:</strong> Your web browser currently has JavaScript disabled. While static HTML text and embedded video/audio controls remain functional, live interactive mapping streams inside embedded frames may require JavaScript enabled.
+            <div class="alert-note">
+                <strong>JavaScript is disabled.</strong> The live IMD images refresh automatically only with JavaScript enabled. Video, audio and the embedded IMD portal still work, and each live image has an "Open on IMD" link.
             </div>
         </noscript>
 
-        <!-- REQUIREMENT 1: Video Awareness Section (<video>) -->
-        <section id="video-section" style="background: #ffffff; border: 1px solid #cbd5e0; padding: 25px; border-radius: 5px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
-            <h3 style="margin-top: 0; color: #2b6cb0;">Public Safety Awareness Broadcast</h3>
-            <p style="color: #4a5568; margin-bottom: 15px;">Watch key guidelines on recognizing heat exhaustion signs and immediate first-aid protocols:</p>
+        <!-- 1. VIDEO -->
+        <section id="video-section" class="card">
+            <h3>Public Safety Awareness Video</h3>
+            <p class="card-sub">NDMA discussion on summer advisories: heatwave preparedness and safety.</p>
 
-            <div style="text-align: center;">
-                <video controls width="100%" style="max-width: 700px; height: auto; border: 1px solid #cbd5e0; border-radius: 4px;">
-                    <source src="heatwave-awareness.mp4" type="video/mp4">
-                    <source src="heatwave-awareness.webm" type="video/webm">
-                    Your browser does not support the HTML5 video element.
-                </video>
+            <div class="video-layout">
+                <div class="video-main">
+                    <div class="video-frame">
+                        <iframe src="https://www.youtube-nocookie.com/embed/UiZwldBYz1U"
+                                title="NDMA Summer Advisories: Preparedness for Heatwaves and Safety"
+                                loading="lazy"
+                                allow="accelerometer; encrypted-media; picture-in-picture; fullscreen"
+                                referrerpolicy="strict-origin-when-cross-origin"
+                                allowfullscreen></iframe>
+                    </div>
+                </div>
+                <aside class="video-side">
+                    <h4>Quick safety checklist</h4>
+                    <ul class="tip-list">
+                        <li>Drink water often, even if you are not thirsty.</li>
+                        <li>Avoid direct sun between 11:00 AM and 4:00 PM.</li>
+                        <li>Wear light, loose, cotton clothing and cover your head.</li>
+                        <li>Check on seniors, children and outdoor workers.</li>
+                    </ul>
+                    <p style="margin:14px 0 0 0;">
+                        <a class="btn btn-light" href="https://www.youtube.com/watch?v=UiZwldBYz1U" target="_blank" rel="noopener">Watch on YouTube</a>
+                    </p>
+                </aside>
+            </div>
+
+            <!-- REQUIREMENT: HTML5 <video> element (offline copy, plays if the files are added to the project) -->
+            <details style="margin-top:20px;">
+                <summary style="cursor:pointer; font-weight:600; color:#475569;">Offline copy (HTML5 video)</summary>
+                <div style="margin-top:14px; text-align:center;">
+                    <video controls preload="none" width="100%" style="max-width:700px; height:auto; border:1px solid #e2e8f0; border-radius:8px;">
+                        <source src="heatwave-awareness.mp4" type="video/mp4">
+                        <source src="heatwave-awareness.webm" type="video/webm">
+                        Your browser does not support the HTML5 video element.
+                    </video>
+                </div>
+            </details>
+        </section>
+
+        <!-- 2. LIVE IMD IMAGES -->
+        <section id="live-imd-section" class="card">
+            <div class="live-head">
+                <div>
+                    <h3 style="margin-bottom:2px;">Live IMD Satellite &amp; Radar</h3>
+                    <p class="card-sub" style="margin:0;">Images load straight from the India Meteorological Department. Click an image to enlarge.</p>
+                </div>
+                <div style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+                    <span class="live-pill">Live</span>
+                    <span class="refresh-meta" id="refresh-meta">Loading&hellip;</span>
+                    <button type="button" class="btn btn-light" id="refresh-btn">Refresh now</button>
+                </div>
+            </div>
+
+            <div class="feed-grid">
+                <article class="feed" data-src="https://mausam.imd.gov.in/Satellite/3Dasiasec_ir1.jpg">
+                    <div class="feed-img">
+                        <img alt="IMD INSAT infrared satellite image of the Asia sector" referrerpolicy="no-referrer">
+                        <div class="feed-fallback">Image unavailable right now.<br>Use the link below to view it on IMD.</div>
+                    </div>
+                    <div class="feed-body">
+                        <h4>Satellite &ndash; Infrared (Asia sector)</h4>
+                        <p>Cloud cover and surface heating across the region.</p>
+                        <a href="https://mausam.imd.gov.in/imd_latest/contents/satellite.php" target="_blank" rel="noopener">Open on IMD &rarr;</a>
+                    </div>
+                </article>
+
+                <article class="feed" data-src="https://mausam.imd.gov.in/Radar/caz_delhi.gif">
+                    <div class="feed-img">
+                        <img alt="IMD Delhi Doppler radar maximum reflectivity" referrerpolicy="no-referrer">
+                        <div class="feed-fallback">Image unavailable right now.<br>Use the link below to view it on IMD.</div>
+                    </div>
+                    <div class="feed-body">
+                        <h4>Delhi Radar &ndash; Max (Z)</h4>
+                        <p>Covers the North Zone hotspot around Palam.</p>
+                        <a href="https://mausam.imd.gov.in/imd_latest/contents/index_radar.php" target="_blank" rel="noopener">Open on IMD &rarr;</a>
+                    </div>
+                </article>
+
+                <article class="feed" data-src="https://mausam.imd.gov.in/lightning/delhi.gif">
+                    <div class="feed-img">
+                        <img alt="IMD Delhi lightning and radar composite" referrerpolicy="no-referrer">
+                        <div class="feed-fallback">Image unavailable right now.<br>Use the link below to view it on IMD.</div>
+                    </div>
+                    <div class="feed-body">
+                        <h4>Delhi &ndash; Lightning Watch</h4>
+                        <p>Thunderstorm activity that can break a heat spell.</p>
+                        <a href="https://mausam.imd.gov.in/imd_latest/contents/index_mosaic.php" target="_blank" rel="noopener">Open on IMD &rarr;</a>
+                    </div>
+                </article>
             </div>
         </section>
 
-        <!-- REQUIREMENT 2: Audio Advisory Section (<audio>) -->
-        <section id="audio-section" style="background: #ffffff; border: 1px solid #cbd5e0; padding: 25px; border-radius: 5px; margin-bottom: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
-            <h3 style="margin-top: 0; color: #c05621;">Background Radio Audio Advisory</h3>
-            <p style="color: #4a5568; margin-bottom: 15px;">Listen to the official regional bulletin audio clip broadcast across disaster management stations:</p>
-
-            <div style="background-color: #ffff;  padding: 15px; border-radius: 0 4px 4px 0;">
-                <p style="margin: 0 0 10px 0; font-weight: bold; ">Official Audio Briefing (Bulletin v2.1):</p>
-                <audio controls style="width: 100%; max-width: 500px;">
+        <!-- 3. AUDIO -->
+        <section id="audio-section" class="card">
+            <h3>Radio Audio Advisory</h3>
+            <p class="card-sub">The regional bulletin clip broadcast across disaster management stations.</p>
+            <div class="audio-box">
+                <p>Official Audio Briefing (Bulletin v2.1)</p>
+                <audio controls preload="none">
                     <source src="audio-advisory.mp3" type="audio/mpeg">
                     <source src="audio-advisory.ogg" type="audio/ogg">
                     Your browser does not support the HTML5 audio element.
@@ -134,31 +154,64 @@
             </div>
         </section>
 
-        <!-- REQUIREMENT 3: Frame Section (<iframe>) -->
-        <section id="iframe-section" style="background: #ffffff; border: 1px solid #cbd5e0; padding: 25px; border-radius: 5px; margin-bottom: 25px; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
-            <h3 style="margin-top: 0; color: #2c3e50;">Live IMD National Weather Portal Frame</h3>
-            <p style="color: #4a5568; margin-bottom: 15px;">Direct portal integration displaying live radar observations and national meteorological bulletins:</p>
-
-            <div style="border: 1px solid #cbd5e0; border-radius: 4px; overflow: hidden;">
-                <iframe src="https://mausam.imd.gov.in/" 
-                        title="India Meteorological Department Live Data Feed" 
-                        width="100%" 
-                        height="450" 
-                        style="border: none;" 
+        <!-- 4. IFRAME -->
+        <section id="iframe-section" class="card">
+            <h3>IMD National Weather Portal</h3>
+            <p class="card-sub">The live IMD site, embedded for quick reference.</p>
+            <div class="iframe-shell">
+                <iframe src="https://mausam.imd.gov.in/"
+                        title="India Meteorological Department live portal"
                         loading="lazy">
-                    Your browser does not support inline frames (iframes). <a href="https://mausam.imd.gov.in/" target="_blank">Click here to visit the IMD site directly.</a>
+                    Your browser does not support inline frames.
+                    <a href="https://mausam.imd.gov.in/" target="_blank" rel="noopener">Open the IMD site directly.</a>
                 </iframe>
             </div>
+            <p class="iframe-note">If the frame stays blank, IMD may be blocking embedding. <a href="https://mausam.imd.gov.in/" target="_blank" rel="noopener">Open mausam.imd.gov.in in a new tab &rarr;</a></p>
         </section>
 
     </main>
 
-    <!-- Page Footer -->
-    <footer id="main-footer" style="background-color: #ffff; color: #cbd5e0; text-align: center; padding: 15px; font-size: 0.85em;">
-        <p style="margin: 0;">
-            &copy; 2026 Department of Computer Engineering, K. J. Somaiya School of Engineering (Somaiya Vidyavihar University).
-        </p>
+    <!-- Lightbox for enlarged IMD images -->
+    <div class="lightbox" id="lightbox" role="dialog" aria-label="Enlarged image"><img alt=""></div>
+
+    <footer>
+        &copy; 2026 Department of Computer Engineering, K. J. Somaiya School of Engineering (Somaiya Vidyavihar University).
     </footer>
+
+    <script>
+        var REFRESH_MS = 5 * 60 * 1000;                 // reload live images every 5 minutes
+        var feeds      = document.querySelectorAll('.feed');
+        var meta       = document.getElementById('refresh-meta');
+        var lightbox   = document.getElementById('lightbox');
+
+        function loadFeed(feed) {
+            var img = feed.querySelector('img');
+            feed.classList.remove('failed');
+            img.onerror = function () { feed.classList.add('failed'); };
+            // the timestamp forces the browser to fetch the newest image instead of a cached one
+            img.src = feed.getAttribute('data-src') + '?t=' + Date.now();
+        }
+
+        function refreshAll() {
+            feeds.forEach(loadFeed);
+            meta.textContent = 'Last refreshed ' + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+        }
+
+        document.getElementById('refresh-btn').addEventListener('click', refreshAll);
+
+        feeds.forEach(function (feed) {
+            feed.querySelector('.feed-img').addEventListener('click', function () {
+                if (feed.classList.contains('failed')) { return; }
+                lightbox.querySelector('img').src = feed.querySelector('img').src;
+                lightbox.classList.add('open');
+            });
+        });
+        lightbox.addEventListener('click', function () { lightbox.classList.remove('open'); });
+        document.addEventListener('keydown', function (e) { if (e.key === 'Escape') { lightbox.classList.remove('open'); } });
+
+        refreshAll();
+        setInterval(refreshAll, REFRESH_MS);
+    </script>
 
 </body>
 </html>
