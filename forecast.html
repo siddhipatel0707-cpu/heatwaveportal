@@ -4,72 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Forecast Summary | Heatwave Intelligence System</title>
-    <link rel="stylesheet" href="table.css">
-<style>
-        /* === Unified Navigation Styles === */
-        #main-header {
-            background-color: #0f172a;
-            color: #ffffff;
-            padding: 30px 40px 0 40px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-        }
-        .system-branding h1 {
-            margin: 0 0 5px 0;
-            font-size: 2.2em;
-            color: #f8fafc;
-            letter-spacing: -0.5px;
-        }
-        .system-branding p {
-            color: #94a3b8;
-            margin: 0 0 25px 0;
-            font-size: 0.85em;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            font-weight: 600;
-        }
-        .system-branding span { color: #e2e8f0; }
-        #primary-nav {
-            width: 100%;
-            border-top: 1px solid #1e293b;
-            padding: 20px 0;
-        }
-        #primary-nav ul {
-            list-style-type: none;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 25px;
-        }
-        #primary-nav a {
-            color: #94a3b8;
-            text-decoration: none;
-            font-size: 0.95em;
-            font-weight: 500;
-            padding-bottom: 6px;
-            border-bottom: 2px solid transparent;
-            transition: color 0.3s ease, border-color 0.3s ease;
-        }
-        #primary-nav a:hover, #primary-nav a.active {
-            color: #38bdf8;
-            border-bottom: 2px solid #38bdf8;
-        }
-        @media (max-width: 900px) {
-            #primary-nav ul { flex-direction: column; gap: 15px; padding: 15px 0; }
-        }
-</style>
+    <link rel="stylesheet" href="portal.css">
 </head>
-<body id="forecast-page" style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #ffff; color: #333; min-height: 100vh; display: flex; flex-direction: column;">
+<body id="forecast-page">
 
-    <!-- Main Header with Shared Navigation -->
     <!-- Header & Navigation -->
     <header id="main-header">
         <div class="system-branding">
-            <h1 title="Comprehensive Heatwave Monitoring &amp; Early Warning Platform">Heatwave Intelligence System</h1>
+            <h1 title="Comprehensive Heatwave Monitoring & Early Warning Platform">Heatwave Intelligence System</h1>
             <p>Current Monitoring Season: <span>Monsoon 2026</span></p>
         </div>
         <nav id="primary-nav">
@@ -88,99 +30,204 @@
         </nav>
     </header>
 
-    <!-- Main Content Container -->
-    <main id="main-content" style="max-width: 1100px; width: 90%; margin: 25px auto; flex-grow: 1;">
+    <main id="main-content" class="main-container">
 
-        <h2 style="margin: 0 0 10px 0; color: #2c3e50; border-bottom: 2px solid #cbd5e0; padding-bottom: 10px;">
-            Region-Wise Temperature & Forecast Summary
-        </h2>
+        <div class="section-header">
+            <h2>Region-Wise Temperature &amp; Forecast Summary</h2>
+            <p>Station observations and 72-hour outlook across monitored zones. Severity is assigned from the heatwave decision rules: 40&nbsp;°C or above is a heatwave, and 38&nbsp;°C with high humidity is high heat risk.</p>
+        </div>
 
-        <p style="color: #4a5568; margin-bottom: 20px; line-height: 1.5;">
-            Granular observations collected across terrestrial station networks. Severity levels are categorized based on baseline temperature departures.
-        </p>
+        <!-- Quick-glance tiles (filled from the table below by the script at the bottom) -->
+        <section class="tile-grid" aria-label="Forecast highlights">
+            <div class="tile hot">
+                <p class="tile-label">Peak forecast</p>
+                <p class="tile-value" id="tile-peak">47.2 °C</p>
+                <p class="tile-note" id="tile-peak-note">North Zone &middot; 48h</p>
+            </div>
+            <div class="tile warn">
+                <p class="tile-label">Zones in heatwave</p>
+                <p class="tile-value" id="tile-count">3 of 5</p>
+                <p class="tile-note">Severe or Heatwave level</p>
+            </div>
+            <div class="tile">
+                <p class="tile-label">Average current max</p>
+                <p class="tile-value" id="tile-avg">40.3 °C</p>
+                <p class="tile-note">Across all stations</p>
+            </div>
+        </section>
 
-        <!-- Forecast Data Table Container -->
-        <section id="table-container" style="background: #ffffff; border: 1px solid #cbd5e0; padding: 25px; border-radius: 5px; box-shadow: 0 1px 3px rgba(0,0,0,0.05); overflow-x: auto;">
-            
-            <table border="1" style="width: 100%; border-collapse: collapse; text-align: left; border-color: #cbd5e0;">
-                
+        <!-- Forecast Data Table -->
+        <section id="table-container" class="card">
+
+            <div class="chip-row" role="group" aria-label="Filter by severity">
+                <button type="button" class="chip on" data-filter="all">All zones</button>
+                <button type="button" class="chip" data-filter="severe">Severe</button>
+                <button type="button" class="chip" data-filter="heatwave">Heatwave</button>
+                <button type="button" class="chip" data-filter="high">High risk</button>
+                <button type="button" class="chip" data-filter="normal">Normal</button>
+            </div>
+
+            <div class="table-wrap">
+            <table class="forecast-table">
+
                 <!-- REQUIREMENT: <caption> -->
-                <caption style="font-weight: bold; margin-bottom: 15px; color: #2c3e50; font-size: 1.05em;">
-                    Table 1: 24-Hour Regional Temperature Observations & Risk Severity Metrics
+                <caption>
+                    Table 1: Regional Temperature Observations &amp; 72-Hour Forecast
+                    <small>Temperatures in &deg;C &middot; Source: IMD AWS network</small>
                 </caption>
 
                 <!-- REQUIREMENT: <thead> with merged header using colspan -->
-                <thead style="background-color: #2c3e50; color: #ffffff;">
+                <thead>
                     <tr>
-                        <th rowspan="2" style="padding: 12px; border: 1px solid #4a5568;">Region Zone</th>
-                        <th rowspan="2" style="padding: 12px; border: 1px solid #4a5568;">Monitoring Station</th>
-                        <!-- colspan merging 2 columns for "Temperature Metrics" -->
-                        <th colspan="2" style="padding: 12px; border: 1px solid #4a5568; text-align: center;">Temperature Metrics (°C)</th>
-                        <th rowspan="2" style="padding: 12px; border: 1px solid #4a5568;">Severity Level</th>
+                        <th rowspan="2" scope="col">Region Zone</th>
+                        <th rowspan="2" scope="col">Monitoring Station</th>
+                        <th rowspan="2" scope="col">Current Max</th>
+                        <!-- colspan merges the three forecast columns under one "Forecast" heading -->
+                        <th colspan="3" scope="colgroup" class="forecast-group">Forecast</th>
+                        <th rowspan="2" scope="col">Trend</th>
+                        <th rowspan="2" scope="col">Severity Level</th>
                     </tr>
-                    <tr>
-                        <th style="padding: 10px; border: 1px solid #4a5568; background-color: #34495e;">Current Max</th>
-                        <th style="padding: 10px; border: 1px solid #4a5568; background-color: #34495e;">24h Forecast</th>
+                    <tr class="sub-head">
+                        <th scope="col">24 h</th>
+                        <th scope="col">48 h</th>
+                        <th scope="col">72 h</th>
                     </tr>
                 </thead>
 
                 <!-- REQUIREMENT: <tbody> -->
-                <tbody style="color: #2d3748;">
-                    <!-- Region A: North Zone (Targets anchor from hotspot-map.html) -->
-                    <tr id="north-zone" style="background-color: #fff5f5;">
-                        <td style="padding: 12px; border: 1px solid #e2e8f0; font-weight: bold; color: #c53030;">North Zone</td>
-                        <td style="padding: 12px; border: 1px solid #e2e8f0;">AWS-102 (Palam Station)</td>
-                        <td style="padding: 12px; border: 1px solid #e2e8f0; font-weight: bold;">44.8 °C</td>
-                        <td style="padding: 12px; border: 1px solid #e2e8f0; font-weight: bold; color: #c53030;">46.8 °C</td>
-                        <td style="padding: 12px; border: 1px solid #e2e8f0;">
-                            <span style="background-color: #e53e3e; color: #ffffff; padding: 4px 8px; border-radius: 3px; font-size: 0.85em; font-weight: bold;">Severe Heatwave</span>
-                        </td>
+                <tbody>
+                    <!-- Region A: North Zone (anchor target from hotspot-map.html) -->
+                    <tr id="north-zone" data-sev="severe">
+                        <td><span class="zone-tag"><i class="zone-dot" style="background:#dc2626"></i>North Zone</span></td>
+                        <td>Palam Station<span class="station-id">AWS-102</span></td>
+                        <td class="num">44.8</td>
+                        <td class="num">46.8</td>
+                        <td class="num peak">47.2</td>
+                        <td class="num">45.9</td>
+                        <td><span class="trend up">&#9650; Rising</span></td>
+                        <td><span class="sev sev-severe">Severe Heatwave</span></td>
                     </tr>
 
-                    <!-- Region B: Central Zone (Targets anchor from hotspot-map.html) -->
-                    <tr id="central-zone" style="background-color: #fffaf0;">
-                        <td style="padding: 12px; border: 1px solid #e2e8f0; font-weight: bold; color: #c05621;">Central Zone</td>
-                        <td style="padding: 12px; border: 1px solid #e2e8f0;">AWS-204 (Nagpur Station)</td>
-                        <td style="padding: 12px; border: 1px solid #e2e8f0; font-weight: bold;">42.5 °C</td>
-                        <td style="padding: 12px; border: 1px solid #e2e8f0; font-weight: bold; color: #dd6b20;">44.1 °C</td>
-                        <td style="padding: 12px; border: 1px solid #e2e8f0;">
-                            <span style="background-color: #dd6b20; color: #ffffff; padding: 4px 8px; border-radius: 3px; font-size: 0.85em; font-weight: bold;">Heatwave</span>
-                        </td>
+                    <!-- Region B: Central Zone (anchor target from hotspot-map.html) -->
+                    <tr id="central-zone" data-sev="heatwave">
+                        <td><span class="zone-tag"><i class="zone-dot" style="background:#ea580c"></i>Central Zone</span></td>
+                        <td>Nagpur Station<span class="station-id">AWS-204</span></td>
+                        <td class="num">42.5</td>
+                        <td class="num">44.1</td>
+                        <td class="num peak">44.6</td>
+                        <td class="num">43.8</td>
+                        <td><span class="trend up">&#9650; Rising</span></td>
+                        <td><span class="sev sev-heatwave">Heatwave</span></td>
                     </tr>
 
-                    <!-- Coastal Zone -->
-                    <tr id="coastal-zone">
-                        <td style="padding: 12px; border: 1px solid #e2e8f0; font-weight: bold; color: #2b6cb0;">Coastal Zone</td>
-                        <td style="padding: 12px; border: 1px solid #e2e8f0;">AWS-309 (Colaba Station)</td>
-                        <td style="padding: 12px; border: 1px solid #e2e8f0; font-weight: bold;">34.2 °C</td>
-                        <td style="padding: 12px; border: 1px solid #e2e8f0; font-weight: bold; color: #319795;">35.0 °C</td>
-                        <td style="padding: 12px; border: 1px solid #e2e8f0;">
-                            <span style="background-color: #319795; color: #ffffff; padding: 4px 8px; border-radius: 3px; font-size: 0.85em; font-weight: bold;">Normal / Humid</span>
-                        </td>
+                    <tr id="west-zone" data-sev="heatwave">
+                        <td><span class="zone-tag"><i class="zone-dot" style="background:#f59e0b"></i>West Zone</span></td>
+                        <td>Ahmedabad Station<span class="station-id">AWS-157</span></td>
+                        <td class="num">41.3</td>
+                        <td class="num">42.0</td>
+                        <td class="num peak">42.6</td>
+                        <td class="num">41.9</td>
+                        <td><span class="trend flat">&#9644; Steady</span></td>
+                        <td><span class="sev sev-heatwave">Heatwave</span></td>
+                    </tr>
+
+                    <tr id="east-zone" data-sev="high">
+                        <td><span class="zone-tag"><i class="zone-dot" style="background:#eab308"></i>East Zone</span></td>
+                        <td>Bhubaneswar Station<span class="station-id">AWS-231</span></td>
+                        <td class="num">38.6</td>
+                        <td class="num">39.4</td>
+                        <td class="num peak">39.9</td>
+                        <td class="num">38.8</td>
+                        <td><span class="trend flat">&#9644; Steady</span></td>
+                        <td><span class="sev sev-high">High Heat Risk</span></td>
+                    </tr>
+
+                    <tr id="coastal-zone" data-sev="normal">
+                        <td><span class="zone-tag"><i class="zone-dot" style="background:#0d9488"></i>Coastal Zone</span></td>
+                        <td>Colaba Station<span class="station-id">AWS-309</span></td>
+                        <td class="num">34.2</td>
+                        <td class="num">35.0</td>
+                        <td class="num peak">35.3</td>
+                        <td class="num">34.6</td>
+                        <td><span class="trend down">&#9660; Easing</span></td>
+                        <td><span class="sev sev-normal">Normal / Humid</span></td>
                     </tr>
                 </tbody>
 
                 <!-- REQUIREMENT: <tfoot> -->
-                <tfoot style="background-color: #edf2f7; color: #4a5568; font-size: 0.85em;">
+                <tfoot>
+                    <tr class="avg-row">
+                        <th colspan="2" scope="row">Zonal average (&deg;C)</th>
+                        <td>40.3</td>
+                        <td>41.5</td>
+                        <td>41.9</td>
+                        <td>41.0</td>
+                        <td colspan="2">&mdash;</td>
+                    </tr>
                     <tr>
-                        <td colspan="5" style="padding: 10px 12px; border: 1px solid #cbd5e0;">
-                            <strong>Data Quality Note:</strong> Telemetry updated every 15 minutes from IMD database feeds. Forecast metrics reflect peak anticipated dry bulb ambient values.
+                        <td colspan="8" class="note">
+                            <strong>Data quality note:</strong> Telemetry is updated every 15 minutes from IMD database feeds. Forecast values show the peak expected dry-bulb temperature for each window and are subject to revision.
                         </td>
                     </tr>
                 </tfoot>
 
             </table>
+            </div>
 
+            <div class="legend">
+                <span><span class="sev sev-severe">Severe Heatwave</span> 45&nbsp;°C and above</span>
+                <span><span class="sev sev-heatwave">Heatwave</span> 40&nbsp;°C and above</span>
+                <span><span class="sev sev-high">High Heat Risk</span> 38&nbsp;°C and above, humid</span>
+                <span><span class="sev sev-normal">Normal</span> below 35&nbsp;°C</span>
+            </div>
         </section>
 
     </main>
 
-    <!-- Page Footer -->
-    <footer id="main-footer" style="background-color: #ffff; color: #cbd5e0; text-align: center; padding: 15px; font-size: 0.85em;">
-        <p style="margin: 0;">
-            &copy; 2026 Department of Computer Engineering, K. J. Somaiya School of Engineering (Somaiya Vidyavihar University).
-        </p>
+    <footer>
+        &copy; 2026 Department of Computer Engineering, K. J. Somaiya School of Engineering (Somaiya Vidyavihar University).
     </footer>
+
+    <script>
+        // 1. Severity filter chips
+        var chips = document.querySelectorAll('.chip[data-filter]');
+        var rows  = document.querySelectorAll('#table-container tbody tr');
+
+        chips.forEach(function (chip) {
+            chip.addEventListener('click', function () {
+                var wanted = chip.getAttribute('data-filter');
+                chips.forEach(function (c) { c.classList.toggle('on', c === chip); });
+                rows.forEach(function (row) {
+                    var show = wanted === 'all' || row.getAttribute('data-sev') === wanted;
+                    row.classList.toggle('hidden-row', !show);
+                });
+            });
+        });
+
+        // 2. Highlight tiles computed from the table itself, so they never disagree with it
+        var peak = { value: -Infinity, zone: '', window: '' };
+        var windows = ['24h', '48h', '72h'];
+        var sumCurrent = 0;
+        var heatCount = 0;
+
+        rows.forEach(function (row) {
+            var cells = row.querySelectorAll('td.num');           // current, 24h, 48h, 72h
+            sumCurrent += parseFloat(cells[0].textContent);
+            for (var i = 1; i < cells.length; i++) {
+                var v = parseFloat(cells[i].textContent);
+                if (v > peak.value) {
+                    peak = { value: v, zone: row.querySelector('.zone-tag').textContent.trim(), window: windows[i - 1] };
+                }
+            }
+            var sev = row.getAttribute('data-sev');
+            if (sev === 'severe' || sev === 'heatwave') { heatCount++; }
+        });
+
+        document.getElementById('tile-peak').textContent = peak.value.toFixed(1) + ' °C';
+        document.getElementById('tile-peak-note').textContent = peak.zone + ' · ' + peak.window;
+        document.getElementById('tile-count').textContent = heatCount + ' of ' + rows.length;
+        document.getElementById('tile-avg').textContent = (sumCurrent / rows.length).toFixed(1) + ' °C';
+    </script>
 
 </body>
 </html>
